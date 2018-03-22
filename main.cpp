@@ -1,6 +1,6 @@
 #include <iostream>
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    std::cout << "why is it called C++ and not ++C...?!" << std::endl;
     return 0;
 }
