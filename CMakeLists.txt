@@ -3,4 +3,4 @@ project(CS_TAU_C_Plus_Plus_First_Exercise)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(CS_TAU_C_Plus_Plus_First_Exercise main.cpp)
+add_executable(CS_TAU_C_Plus_Plus_First_Exercise main.cpp Auxiliary.cpp)

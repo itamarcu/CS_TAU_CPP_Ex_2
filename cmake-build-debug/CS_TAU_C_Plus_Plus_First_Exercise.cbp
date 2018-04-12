@@ -8,82 +8,88 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
+				<Option working_dir="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="CS_TAU_C_Plus_Plus_First_Exercise">
-				<Option output="/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/CS_TAU_C_Plus_Plus_First_Exercise" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
+				<Option output="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/CS_TAU_C_Plus_Plus_First_Exercise.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include/c++"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include/c++/backward"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include-fixed"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 CS_TAU_C_Plus_Plus_First_Exercise"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 CS_TAU_C_Plus_Plus_First_Exercise"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="CS_TAU_C_Plus_Plus_First_Exercise/fast">
-				<Option output="/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/CS_TAU_C_Plus_Plus_First_Exercise" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
+				<Option output="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/CS_TAU_C_Plus_Plus_First_Exercise.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
-					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include/c++"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include/c++/i686-w64-mingw32"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include/c++/backward"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/include-fixed"/>
+					<Add directory="C:/Program Files (x86)/mingw-w64/i686-7.2.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/7.2.0/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 CS_TAU_C_Plus_Plus_First_Exercise/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 CS_TAU_C_Plus_Plus_First_Exercise/fast"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-7~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/main.cpp">
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/Auxiliary.cpp">
 			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
 		</Unit>
-		<Unit filename="/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/CMakeLists.txt">
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/Auxiliary.h">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/main.cpp">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

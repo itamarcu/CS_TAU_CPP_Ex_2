@@ -4,9 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/main.cpp" "/Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/main.cpp.o"
+  "C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/Auxiliary.cpp" "C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Auxiliary.cpp.obj"
+  "C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/main.cpp" "C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/main.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

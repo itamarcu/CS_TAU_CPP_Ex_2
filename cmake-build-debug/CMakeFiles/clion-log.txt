@@ -1,4 +1,4 @@
-/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise
+"C:\Program Files\JetBrains\CLion 2017.3.4\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise"
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/meltzer/Documents/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug
+-- Build files have been written to: C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug
