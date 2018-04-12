@@ -86,6 +86,30 @@
 		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/Auxiliary.h">
 			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
 		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/Board.cpp">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/Board.h">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/BoardIO.cpp">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/BoardIO.h">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/Game.cpp">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/Game.h">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/GameLogic.cpp">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
+		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/GameLogic.h">
+			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
+		</Unit>
 		<Unit filename="C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/main.cpp">
 			<Option target="CS_TAU_C_Plus_Plus_First_Exercise"/>
 		</Unit>

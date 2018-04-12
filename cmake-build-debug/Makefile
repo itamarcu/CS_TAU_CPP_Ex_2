@@ -149,6 +149,114 @@ Auxiliary.cpp.s:
 	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Auxiliary.cpp.s
 .PHONY : Auxiliary.cpp.s
 
+Board.obj: Board.cpp.obj
+
+.PHONY : Board.obj
+
+# target to build an object file
+Board.cpp.obj:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj
+.PHONY : Board.cpp.obj
+
+Board.i: Board.cpp.i
+
+.PHONY : Board.i
+
+# target to preprocess a source file
+Board.cpp.i:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.i
+.PHONY : Board.cpp.i
+
+Board.s: Board.cpp.s
+
+.PHONY : Board.s
+
+# target to generate assembly for a file
+Board.cpp.s:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.s
+.PHONY : Board.cpp.s
+
+BoardIO.obj: BoardIO.cpp.obj
+
+.PHONY : BoardIO.obj
+
+# target to build an object file
+BoardIO.cpp.obj:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj
+.PHONY : BoardIO.cpp.obj
+
+BoardIO.i: BoardIO.cpp.i
+
+.PHONY : BoardIO.i
+
+# target to preprocess a source file
+BoardIO.cpp.i:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.i
+.PHONY : BoardIO.cpp.i
+
+BoardIO.s: BoardIO.cpp.s
+
+.PHONY : BoardIO.s
+
+# target to generate assembly for a file
+BoardIO.cpp.s:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.s
+.PHONY : BoardIO.cpp.s
+
+Game.obj: Game.cpp.obj
+
+.PHONY : Game.obj
+
+# target to build an object file
+Game.cpp.obj:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj
+.PHONY : Game.cpp.obj
+
+Game.i: Game.cpp.i
+
+.PHONY : Game.i
+
+# target to preprocess a source file
+Game.cpp.i:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.i
+.PHONY : Game.cpp.i
+
+Game.s: Game.cpp.s
+
+.PHONY : Game.s
+
+# target to generate assembly for a file
+Game.cpp.s:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.s
+.PHONY : Game.cpp.s
+
+GameLogic.obj: GameLogic.cpp.obj
+
+.PHONY : GameLogic.obj
+
+# target to build an object file
+GameLogic.cpp.obj:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj
+.PHONY : GameLogic.cpp.obj
+
+GameLogic.i: GameLogic.cpp.i
+
+.PHONY : GameLogic.i
+
+# target to preprocess a source file
+GameLogic.cpp.i:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.i
+.PHONY : GameLogic.cpp.i
+
+GameLogic.s: GameLogic.cpp.s
+
+.PHONY : GameLogic.s
+
+# target to generate assembly for a file
+GameLogic.cpp.s:
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.s
+.PHONY : GameLogic.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -188,6 +296,18 @@ help:
 	@echo ... Auxiliary.obj
 	@echo ... Auxiliary.i
 	@echo ... Auxiliary.s
+	@echo ... Board.obj
+	@echo ... Board.i
+	@echo ... Board.s
+	@echo ... BoardIO.obj
+	@echo ... BoardIO.i
+	@echo ... BoardIO.s
+	@echo ... Game.obj
+	@echo ... Game.i
+	@echo ... Game.s
+	@echo ... GameLogic.obj
+	@echo ... GameLogic.i
+	@echo ... GameLogic.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

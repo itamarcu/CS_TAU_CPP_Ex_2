@@ -1,10 +1,10 @@
 //
 // Created by itamar on 2018-04-12.
 //
-#include <iostream>
 #include "Auxiliary.h"
+#include <iostream>
 
-void printline(char *str)
+void print_line(string *str)
 {
     std::cout << str << std::endl;
 }

@@ -1,11 +1,14 @@
 #include <iostream>
 #include "Auxiliary.h"
+#include <fstream>
 
 using std::cout;
 using std::endl;
 
+
 int main() {
-    cout << "---Program started---" << endl;
-    cout << M << endl;
-    return 0;
+    print_line("---Program started---");
+    std::ifstream p_1_board("player1.rps_board");
+
+
 }

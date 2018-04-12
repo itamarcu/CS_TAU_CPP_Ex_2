@@ -5,6 +5,9 @@
 #ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_AUXILIARY_H
 #define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_AUXILIARY_H
 
+#include <string>
+using std::string
+
 #define M 10  // Rows
 #define N 10  // Columns
 #define R 2  // Rocks
@@ -14,7 +17,7 @@
 #define J 2  // Jokers
 #define F 1  // Flags
 
-void printline(char *str);
+void print_line(string str);
 
 
 #endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_AUXILIARY_H

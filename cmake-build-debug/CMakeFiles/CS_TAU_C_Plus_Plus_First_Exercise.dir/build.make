@@ -104,21 +104,125 @@ CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Auxiliary.cpp.obj.provides: CMa
 CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Auxiliary.cpp.obj.provides.build: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Auxiliary.cpp.obj
 
 
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/flags.make
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj: ../Board.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\Board.cpp.obj -c "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\Board.cpp"
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\Board.cpp" > CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\Board.cpp.i
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\Board.cpp" -o CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\Board.cpp.s
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj.requires:
+
+.PHONY : CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj.requires
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj.provides: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj.provides.build
+.PHONY : CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj.provides
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj.provides.build: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj
+
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/flags.make
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj: ../GameLogic.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\GameLogic.cpp.obj -c "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\GameLogic.cpp"
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\GameLogic.cpp" > CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\GameLogic.cpp.i
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\GameLogic.cpp" -o CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\GameLogic.cpp.s
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj.requires:
+
+.PHONY : CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj.requires
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj.provides: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj.provides.build
+.PHONY : CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj.provides
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj.provides.build: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj
+
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/flags.make
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj: ../Game.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\Game.cpp.obj -c "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\Game.cpp"
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\Game.cpp" > CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\Game.cpp.i
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\Game.cpp" -o CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\Game.cpp.s
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj.requires:
+
+.PHONY : CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj.requires
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj.provides: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj.provides.build
+.PHONY : CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj.provides
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj.provides.build: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj
+
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/flags.make
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj: ../BoardIO.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\BoardIO.cpp.obj -c "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\BoardIO.cpp"
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.i"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\BoardIO.cpp" > CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\BoardIO.cpp.i
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.s"
+	C:\PROGRA~2\MINGW-~1\I686-7~1.0-P\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\BoardIO.cpp" -o CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\BoardIO.cpp.s
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj.requires:
+
+.PHONY : CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj.requires
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj.provides: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\build.make CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj.provides.build
+.PHONY : CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj.provides
+
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj.provides.build: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj
+
+
 # Object files for target CS_TAU_C_Plus_Plus_First_Exercise
 CS_TAU_C_Plus_Plus_First_Exercise_OBJECTS = \
 "CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/main.cpp.obj" \
-"CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Auxiliary.cpp.obj"
+"CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Auxiliary.cpp.obj" \
+"CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj" \
+"CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj" \
+"CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj" \
+"CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj"
 
 # External object files for target CS_TAU_C_Plus_Plus_First_Exercise
 CS_TAU_C_Plus_Plus_First_Exercise_EXTERNAL_OBJECTS =
 
 CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/main.cpp.obj
 CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Auxiliary.cpp.obj
+CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj
+CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj
+CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj
+CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj
 CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/build.make
 CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/linklibs.rsp
 CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/objects1.rsp
 CS_TAU_C_Plus_Plus_First_Exercise.exe: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable CS_TAU_C_Plus_Plus_First_Exercise.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Itamar\Workspace\C and C++\CS_TAU_C_Plus_Plus_First_Exercise\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable CS_TAU_C_Plus_Plus_First_Exercise.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\CS_TAU_C_Plus_Plus_First_Exercise.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -128,6 +232,10 @@ CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/build: CS_TAU_C_Plus_Plus_First
 
 CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/requires: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/main.cpp.obj.requires
 CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/requires: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Auxiliary.cpp.obj.requires
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/requires: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Board.cpp.obj.requires
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/requires: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/GameLogic.cpp.obj.requires
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/requires: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/Game.cpp.obj.requires
+CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/requires: CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/BoardIO.cpp.obj.requires
 
 .PHONY : CMakeFiles/CS_TAU_C_Plus_Plus_First_Exercise.dir/requires
 
