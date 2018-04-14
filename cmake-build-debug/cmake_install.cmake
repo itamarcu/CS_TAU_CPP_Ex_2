@@ -1,8 +1,8 @@
-# Install script for directory: C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise
+# Install script for directory: /Users/daniel/Documents/GitHub/CS_TAU_C_Plus_Plus_First_Exercise
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/CS_TAU_C_Plus_Plus_First_Exercise")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Itamar/Workspace/C and C++/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/daniel/Documents/GitHub/CS_TAU_C_Plus_Plus_First_Exercise/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

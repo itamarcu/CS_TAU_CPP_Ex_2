@@ -7,13 +7,14 @@
 
 
 #include "Board.h"
+#include <vector>
+class BoardIO {
+    public:
+        static Board *parse_file(std::string &path );
 
-Board& parse_both_files()
-{
-    //will parse files:
-    // player1.rps_board
-    // player2.rps_board
-}
+    private:
+        static std::vector<std::string>* split_string_using_delimiter(std::string& stringToSplit,std::string& delimiter);
+};
 
 
 #endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_BOARDIO_H

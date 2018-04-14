@@ -3,3 +3,9 @@
 //
 
 #include "Board.h"
+
+Board::Board(const std::vector<std::vector<GamePiece*>> &board) : board(board) {}
+
+void Board::make_move(GamePiece &firstGamePiece, Cell &destination) {
+
+}
