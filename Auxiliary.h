@@ -7,6 +7,9 @@
 
 #include <string>
 
+#define M 10  // Rows
+#define N 10  // Columns
+
 void print_line(std::string str);
 
 

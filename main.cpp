@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Auxiliary.h"
 #include <fstream>
+#include "BoardIO.h"
 
 using std::cout;
 using std::endl;
@@ -8,8 +9,10 @@ using std::endl;
 
 int main() {
     print_line("---Program started---");
-    std::ifstream p_1_board("player1.rps_board");
 
+    auto game = BoardIO::setup_game();
 
+//    cout << "Address of piece in [1,1] is " << game->board[0][0] << endl;
 
+    print_line("---Program ended---");
 }

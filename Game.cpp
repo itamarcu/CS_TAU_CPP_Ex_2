@@ -3,3 +3,8 @@
 //
 
 #include "Game.h"
+
+
+void Game::make_move(GamePiece &movingPiece, Cell &destination) {
+
+}

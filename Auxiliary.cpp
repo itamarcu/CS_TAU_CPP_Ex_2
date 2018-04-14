@@ -4,7 +4,7 @@
 #include "Auxiliary.h"
 #include <iostream>
 
-void print_line(std::string *str)
+void print_line(std::string str)
 {
     std::cout << str << std::endl;
 }

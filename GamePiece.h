@@ -4,25 +4,23 @@
 
 #ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAMEPIECE_H
 #define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAMEPIECE_H
-#define M 10  // Rows
-#define N 10  // Columns
-#define R 2  // Rocks
-#define P 5  // Papers
-#define S 1  // Scissors
-#define B 2  // Bombs
-#define J 2  // Jokers
-#define F 1  // Flags
-class Cell{
-    int row;
-    int column;
-};
- enum GamePieceType{
-   Rock,Paper,Scissors, Bomb, Flag
+
+
+enum GamePieceType {
+    None, // empty spaces are this type
+    Rock, Paper, Scissors, Bomb, Flag //Jokers have a current type but also the boolean
 };
 
-class GamePiece{
-    Cell gamePieceCell;
+class GamePiece {
+
+public:
+    GamePieceType type;
     bool isJoker;
-    GamePieceType gamePieceType;
+    bool player;
+
+    GamePiece() : type(None), isJoker(false), player(true) {};
+
+    static GamePieceType type_from_char(char c);
 };
+
 #endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAMEPIECE_H
