@@ -20,6 +20,13 @@ enum GameResult {
     NONE, PLAYER_1_VICTORY, PLAYER_2_VICTORY, TIE
 };
 
+class PlannedMove {
+    int from_r, from_c, to_r, to_c;
+    bool has_joker_change;
+    int joker_r, joker_c;
+    GamePieceType new_joker_type;
+};
+
 class Game {
 public:
     std::vector<std::vector<GamePiece *>> board;
