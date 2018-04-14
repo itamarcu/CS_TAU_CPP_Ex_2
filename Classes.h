@@ -1,11 +1,9 @@
+#ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_CLASSES_H
+#define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_CLASSES_H
+
 #include <vector>
 #include "Auxiliary.h"
-#include "GamePiece.h"
 
-#ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAME_H
-#define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAME_H
-
-#endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAME_H
 
 class Cell {
 public:
@@ -21,7 +19,6 @@ enum GamePieceType {
 };
 
 class GamePiece {
-
 public:
     GamePieceType type;
     bool isJoker;
@@ -30,8 +27,6 @@ public:
     GamePiece() : type(None), isJoker(false), player(true) {};
 
 };
-
-GamePieceType type_from_char(char c);
 
 enum GameResult {
     NONE, PLAYER_1_VICTORY, PLAYER_2_VICTORY, TIE
@@ -56,3 +51,7 @@ public:
     void make_move(GamePiece &movingPiece, Cell &destination);
 
 };
+
+GamePieceType type_from_char(char c);
+
+#endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_CLASSES_H

@@ -1,12 +1,12 @@
 #include <iostream>
 #include "GameLogic.h"
 
-static FightResult simulate_fight(const GamePiece &attacker, const GamePiece &defender) {
+FightResult simulate_fight(const GamePiece &attacker, const GamePiece &defender) {
     // TODO fight logic
     return attackerWon;
 }
 
-static void move_piece_from_to(Game &game, Cell from, Cell to) {
+void move_piece_from_to(Game &game, Cell from, Cell to) {
     int r1 = from.row, c1 = from.column, r2 = to.row, c2 = to.column;
     if (game.board[r1][c1] == nullptr) {
         //TODO player attempted to move piece from empty place
@@ -26,7 +26,7 @@ static void move_piece_from_to(Game &game, Cell from, Cell to) {
     game.board[r1][c1] = nullptr;
 }
 
-static void actually_fight(Game &game, GamePiece *attacker, GamePiece *defender, Cell position) {
+void actually_fight(Game &game, GamePiece *attacker, GamePiece *defender, Cell position) {
     int r = position.row;
     int c = position.column;
     auto fightResult = simulate_fight(*attacker, *defender);
@@ -45,7 +45,8 @@ static void actually_fight(Game &game, GamePiece *attacker, GamePiece *defender,
             game.board[r][c] = nullptr;
             break;
         default:
-            std::cout << "ERROR in actually_fight because of weird fight result" << std::endl;
+            std::cout << "ERROR in actually_fight because"
+                    " of weird fight result" << std::endl;
             break;
     }
 }

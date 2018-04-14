@@ -1,13 +1,10 @@
-//
-// Created by itamar on 2018-04-12.
-//
-
 #ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_BOARDIO_H
 #define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_BOARDIO_H
 
 
 #include <vector>
 #include "Classes.h"
+#include "GameLogic.h"
 
 #define R 2  // Rocks
 #define P 5  // Papers
