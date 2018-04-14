@@ -3,3 +3,7 @@
 //
 
 #include "GameLogic.h"
+
+MoveResult movePiece(GamePiece &pieceToMove, GamePiece& piecePreviouslyOccupyingSlot) {
+    return movedPieceLost;
+}
