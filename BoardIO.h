@@ -7,7 +7,7 @@
 
 
 #include <vector>
-#include "Game.h"
+#include "Classes.h"
 
 #define R 2  // Rocks
 #define P 5  // Papers
@@ -20,6 +20,9 @@ class BoardIO {
 public:
     static Game *setup_game();
 
+    static std::vector<PlannedMove> load_moves(bool player);
+
+    static void store_game(Game &game);
 
 private:
     static std::vector<std::string> *split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter);

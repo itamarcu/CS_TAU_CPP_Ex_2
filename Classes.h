@@ -1,7 +1,3 @@
-//
-// Created by itamar on 2018-04-12.
-//
-
 #include <vector>
 #include "Auxiliary.h"
 #include "GamePiece.h"
@@ -12,18 +8,40 @@
 #endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAME_H
 
 class Cell {
+public:
     int row;
     int column;
+
+    Cell(int r, int c) : row(r), column(c) {}
 };
+
+enum GamePieceType {
+    None, // empty spaces are this type
+    Rock, Paper, Scissors, Bomb, Flag //Jokers have a current type but also the boolean
+};
+
+class GamePiece {
+
+public:
+    GamePieceType type;
+    bool isJoker;
+    bool player;
+
+    GamePiece() : type(None), isJoker(false), player(true) {};
+
+};
+
+GamePieceType type_from_char(char c);
 
 enum GameResult {
     NONE, PLAYER_1_VICTORY, PLAYER_2_VICTORY, TIE
 };
 
 class PlannedMove {
-    int from_r, from_c, to_r, to_c;
+    Cell origin;
+    Cell destination;
     bool has_joker_change;
-    int joker_r, joker_c;
+    Cell joker_position;
     GamePieceType new_joker_type;
 };
 

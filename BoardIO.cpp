@@ -2,6 +2,7 @@
 #include <map>
 #include <iostream>
 #include "BoardIO.h"
+#include "GameLogic.h"
 
 bool BoardIO::_add_load_into_board(Game &game, bool player) {
     std::string player_num = player ? "1" : "2";
@@ -31,14 +32,14 @@ bool BoardIO::_add_load_into_board(Game &game, bool player) {
             if ((*contents)[0] != "J")
                 return false; // Bad format
             piece->isJoker = true;
-            piece->type = GamePiece::type_from_char((*contents)[3][0]);
+            piece->type = type_from_char((*contents)[3][0]);
             if (piece->type == None)
                 return false; // Bad format (nonexistent joker piece type)
             remainingJokerCount--;
             if (remainingJokerCount < 0)
                 return false; // Too many of this piece
         } else { // is not a Joker
-            piece->type = GamePiece::type_from_char((*contents)[0][0]);
+            piece->type = type_from_char((*contents)[0][0]);
             if (piece->type == None)
                 return false; // Bad format (nonexistent piece type)
             remainingCounts[piece->type]--;
@@ -59,7 +60,8 @@ bool BoardIO::_add_load_into_board(Game &game, bool player) {
         else if (game.board[r][c]->player == player)
             return false; // Two or more pieces of same player in same position
         else {
-            // TODO Fight before game starts!
+            //This code is here because otherwise we'll have to store 2 boards and merge
+            actually_fight(game, piece, game.board[r][c], Cell(r, c));
         }
     }
 
@@ -103,4 +105,13 @@ std::vector<std::string> *BoardIO::split_string_using_delimiter(std::string &str
 
     return splittedStrings;
 
+}
+
+std::vector<PlannedMove> BoardIO::load_moves(bool player) {
+    // TODO load_moves()
+    return std::vector<PlannedMove>();
+}
+
+void BoardIO::store_game(Game &game) {
+    // TODO store_game()
 }
