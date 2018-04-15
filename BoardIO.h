@@ -12,6 +12,14 @@
 enum LoadBoardResult{
     UnableToOpenPath,BadFormat,NoJokerPieceSpecified,NoPiece,ToManyOfSamePiece,CoordinatesOutOfBound,TwoPiecesOfPlayerInSameColumn,NoEnoughFlags,LoadingSuccses
 };
+enum LoadMovesResult{
+    LoadingSuccses
+};
+struct MoveLoadResult{
+    std::vector<PlannedMove> moves;
+    LoadMovesResult loadMovesResult;
+
+};
 class BoardIO {
 public:
 
@@ -26,7 +34,7 @@ public:
      * @param player player to load data for.true for player 1 , false for 2
      * @return  vector of PlannedMove
      */
-    static std::vector<PlannedMove> load_moves(bool player);
+    static MoveLoadResult load_moves(bool player);
 
     /**
      * store the game

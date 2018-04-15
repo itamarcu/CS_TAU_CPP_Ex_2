@@ -79,9 +79,10 @@ LoadBoardResult BoardIO::_add_load_into_board(Game &game, bool player) {
 
 
 
-std::vector<PlannedMove> BoardIO::load_moves(bool player) {
+MoveLoadResult BoardIO::load_moves(bool player) {
     // TODO load_moves()
-    return std::vector<PlannedMove>();
+    MoveLoadResult moveLoadResult;
+    return moveLoadResult;
 }
 
 void BoardIO::store_game(Game &game) {
