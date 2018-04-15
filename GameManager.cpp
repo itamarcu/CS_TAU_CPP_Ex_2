@@ -14,7 +14,7 @@ void GameManager::run_moves(GameMoves &gameMoves) {
             return;
         }
         if (line_num[curr_p_index] < moves[curr_p_index]->size()) {
-            auto move_result = make_planned_move(
+            MoveResult move_result = make_planned_move(
                     game, (*moves[curr_p_index])[line_num[curr_p_index]]
             );
 

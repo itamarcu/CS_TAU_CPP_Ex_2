@@ -6,7 +6,7 @@ void print_line(std::string str) {
 }
 
 std::vector<std::string> *split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter) {
-    auto splittedStrings = new std::vector<std::string>;
+    auto splittedStrings = new std::vector<std::string>();
     size_t pos = stringToSplit.find(delimiter);
     size_t initialPos = 0;
 

@@ -34,9 +34,9 @@ enum GamePieceType {
 
 class GamePiece {
 public:
+    bool player;
     GamePieceType type;
     bool isJoker;
-    bool player;
 
     /**
      * initalize game piece
