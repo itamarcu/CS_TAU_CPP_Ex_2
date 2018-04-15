@@ -1,32 +1,39 @@
 #include <iostream>
 #include "GameLogic.h"
 
-FightResult simulate_fight(const GamePiece &attacker, const GamePiece &defender) {
+/**
+ * simulate a fight between two pieces and return the result
+ * @param attacker attacker of fight
+ * @param defender piece attacked
+ * @return FightResult case matching the simulation
+ */
+FightResult simulate_fight(const GamePiece &attacker,
+                           const GamePiece &defender){
     // TODO fight logic
     return attackerWon;
 }
 
-void move_piece_from_to(Game &game, Cell from, Cell to) {
-    int r1 = from.row, c1 = from.column, r2 = to.row, c2 = to.column;
-    if (game.board[r1][c1] == nullptr) {
+MoveResult move_piece_from_to(Game &game, Cell from, Cell to) {
+    int sourceRow = from.row, sourceColumn = from.column, destinationRow = to.row, destinationColumn = to.column;
+    if (game.board[sourceRow][sourceColumn] == nullptr) {
         //TODO player attempted to move piece from empty place
-        return;
+        return TriedToMoveEmptySpace;
     }
-    if (r1 == r2 && c1 == c2) {
+    if (sourceRow == destinationRow && sourceColumn == destinationColumn) {
         //TODO player attempted to move piece to same space
-        return;
+        return RegularMove;
     }
-    if (game.board[r2][c2] == nullptr) {
-        game.board[r2][c2] = game.board[r1][c1];
-        game.board[r1][c1] = nullptr;
-        return;
+    if (game.board[destinationRow][destinationColumn] == nullptr) {
+        game.board[destinationRow][destinationColumn] = game.board[sourceRow][sourceColumn];
+        game.board[sourceRow][sourceColumn] = nullptr;
+        return RegularMove;
     }
+    game.board[sourceRow][sourceColumn] = nullptr;
+    return  actually_fight(game, game.board[sourceRow][sourceColumn], game.board[destinationRow][destinationColumn], Cell(destinationRow, destinationColumn));
 
-    actually_fight(game, game.board[r1][c1], game.board[r2][c2], Cell(r2, c2));
-    game.board[r1][c1] = nullptr;
 }
 
-void actually_fight(Game &game, GamePiece *attacker, GamePiece *defender, Cell position) {
+MoveResult actually_fight(Game &game, GamePiece *attacker, GamePiece *defender, Cell position) {
     int r = position.row;
     int c = position.column;
     auto fightResult = simulate_fight(*attacker, *defender);
@@ -45,8 +52,7 @@ void actually_fight(Game &game, GamePiece *attacker, GamePiece *defender, Cell p
             game.board[r][c] = nullptr;
             break;
         default:
-            std::cout << "ERROR in actually_fight because"
-                    " of weird fight result" << std::endl;
+            print_line("ERROR in actually_fight because of weird fight result");
             break;
     }
 }
