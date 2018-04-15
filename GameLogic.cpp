@@ -57,6 +57,7 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
         return TriedToMoveOutOfBorders;
     }
     if (sourceRow == destinationRow && sourceColumn == destinationColumn) {
+        std::cout << game.board[destinationRow][destinationColumn]->to_char() << std::endl;
         return TriedToMoveIntoAlly;
     }
     if (game.board[destinationRow][destinationColumn] == nullptr) {

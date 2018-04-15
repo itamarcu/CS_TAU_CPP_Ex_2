@@ -28,6 +28,8 @@ void GameManager::run_moves(GameMoves &gameMoves) {
 //                }
 //                std::cout << std::endl;
 //            }
+//            std::cout.flush();
+
             switch (move_result) {
                 case SuccessfulMove:
                     line_num[curr_p_index] += 1;
@@ -45,8 +47,8 @@ void GameManager::run_moves(GameMoves &gameMoves) {
                     std::string reason = s.str();
                     game.endGame(curr_p_index ? PLAYER_1_VICTORY : PLAYER_2_VICTORY, reason);
 
-//                    auto x = (*moves[curr_p_index])[line_num[curr_p_index]];
-//                    std::cout << "debug: " << move_result << x.getOrigin().row << x.getDestination().row << std::endl;
+                    auto x = (*moves[curr_p_index])[line_num[curr_p_index]];
+                    std::cout << "debug: " << move_result << x.getOrigin().row << x.getDestination().row << std::endl;
                     return;
             }
         }
