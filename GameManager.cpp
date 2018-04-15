@@ -49,6 +49,9 @@ void GameManager::run_moves(GameMoves &gameMoves) {
 
                     std::cout << "debug: Tried no. " << move_result << std::endl;
                     return;
+                default:
+                    std::cerr << "BUG 58689217038" << std::endl;
+                    break;
             }
         }
         // Check winner

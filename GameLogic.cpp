@@ -95,7 +95,11 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
         case None:
         case Flag:
             return TriedIllegalJokerChange;
+        default:
+            std::cerr << "BUG 7984132547" << std::endl;
+            break;
     }
+    return SuccessfulMove;
 }
 
 MoveResult actually_fight(Game &game, GamePiece *attacker,

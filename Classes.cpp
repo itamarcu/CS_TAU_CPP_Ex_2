@@ -90,5 +90,9 @@ bool GamePiece::canMove() {
         case Bomb:
         case Flag:
             return false;
+        default:
+            std::cerr << "BUG 7952234678123" << std::endl;
+            break;
     }
+    return false;
 }
