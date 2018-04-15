@@ -1,58 +1,53 @@
-//
-// Created by daniel meltzer on 14/04/2018.
-//
-
 #ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_BGAME_H
 #define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_BGAME_H
 
 #include "Classes.h"
-#include "GameLogic.h"
 
+enum MoveResult { // Can't be in GameLogic due to circular dependency
+    SuccessfulMove,
+    TriedToMoveEmptySpace,
+    TriedToMoveUnmovablePiece,
+    TriedToMoveOutOfBorders,
+    TriedToMoveIntoAlly,
+    TriedIllegalJokerChange
+};
 
 class Game {
-    //MARK:public ivars
+    // Fields
 public:
     /**
     * board of game
     */
     std::vector<std::vector<GamePiece *>> board;
-    //MARK:Constructors
+    /**
+     * true = Player 1, false = Player 2
+     */
+    bool currentPlayer;
+private:
+    GameWinner gameWinner;
+    std::string gameEndReason;
+    //MARK: Constructors
 public:
     /**
      * initialize game with default parameters
      */
-    explicit Game() : board(M, std::vector<GamePiece *>(N, nullptr)), currentPlayer(true), gameResult(NONE) {}
-//MARK:Functions
-public:
-    /**
-     * make a move on the board of the game
-     * @param plannedMove the move to make on the board
-     * @return the function returns the move result, with one of the cases in the MoveResultEnum
-     */
-    MoveResult make_move(const PlannedMove& plannedMove);
-
-
-    //MARK: Getters:
-
-public:
-    bool isCurrentPlayerfirstPlayer() const;
-    GameResult getGameResult() const;
-
-    //MARK: Setters:
+    explicit Game() : board(M, std::vector<GamePiece *>(N, nullptr)),
+                      currentPlayer(true), gameWinner(GAME_NOT_ENDED),
+                      gameEndReason("Game did not end yet") {}
+    //MARK: Functions
 public:
     /**
      * set a game result
-     * @param gameResult game result to set
+     * @param gameWinner game winner to set
+     * @param gameEndReason reason for ending
      */
-    void setGameResult(GameResult gameResult);
+    void endGame(GameWinner gameWinner, std::string gameEndReason);
 
-    //MARK:private ivars
-private:
+    //MARK: Getters:
+public:
+    GameWinner getGameWinner() const;
 
-    bool currentPlayer;
-    GameResult gameResult;
-
-
+    std::string getGameEndReason() const;
 };
 
 

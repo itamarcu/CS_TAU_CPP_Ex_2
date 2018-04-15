@@ -6,20 +6,39 @@
 #include "Classes.h"
 #include "GameLogic.h"
 #include "Game.h"
+
 /**
  * result of loading board
  */
-enum LoadBoardResult{
-    UnableToOpenPath,BadFormat,NoJokerPieceSpecified,NoPiece,ToManyOfSamePiece,CoordinatesOutOfBound,TwoPiecesOfPlayerInSameColumn,NoEnoughFlags,LoadingSuccses
+enum LoadBoardResultType {
+    UnableToOpenPath,
+    BadFormat,
+    InvalidJokerPieceType,
+    InvalidPieceType,
+    TooManyOfSamePiece,
+    CoordinatesOutOfBound,
+    TwoPiecesSamePlayerSamePosition,
+    NotAllFlagsWerePlaced,
+    BoardLoadingSuccess
 };
-enum LoadMovesResult{
-    LoadingSuccses
-};
-struct MoveLoadResult{
-    std::vector<PlannedMove> moves;
-    LoadMovesResult loadMovesResult;
 
+struct LoadBoardResult {
+public:
+    LoadBoardResultType type;
+    int line_num;
+
+    explicit LoadBoardResult(int line_number, LoadBoardResultType loadResultType) :
+            type(loadResultType), line_num(line_number) {}
 };
+
+struct GameMoves {
+public:
+    std::vector<PlannedMove> p1_moves;
+    std::vector<PlannedMove> p2_moves;
+
+    explicit GameMoves() : p1_moves(), p2_moves() {}
+};
+
 class BoardIO {
 public:
 
@@ -27,14 +46,13 @@ public:
      * setup a game
      * @param game game to setup
      */
-    static void setup_game(Game& game);
+    static void setup_game(Game &game);
 
     /**
      * load moves from files
-     * @param player player to load data for.true for player 1 , false for 2
-     * @return  vector of PlannedMove
+     * @param moves moves to setup
      */
-    static MoveLoadResult load_moves(bool player);
+    static void load_moves(GameMoves &moves);
 
     /**
      * store the game
@@ -49,8 +67,6 @@ public:
      * @return one of LoadBoardResult cases according to the succes of the function
      */
     static LoadBoardResult _add_load_into_board(Game &game, bool player);
-
-
 
 
 };

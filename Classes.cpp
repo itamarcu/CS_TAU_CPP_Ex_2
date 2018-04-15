@@ -6,9 +6,6 @@
 #include "Classes.h"
 
 
-
-
-
 GamePieceType type_from_char(char c) {
     switch (c) {
         case ROCK_CHAR:
@@ -67,4 +64,35 @@ void PlannedMove::setJoker_position(const Cell &joker_position) {
 
 void PlannedMove::setNew_joker_type(GamePieceType new_joker_type) {
     PlannedMove::new_joker_type = new_joker_type;
+}
+
+char GamePiece::to_char() {
+    char ch;
+    switch (type) {
+        case Rock:
+            ch = ROCK_CHAR;
+            break;
+        case Paper:
+            ch = PAPER_CHAR;
+            break;
+        case Scissors:
+            ch = SCISSORS_CHAR;
+            break;
+        case Bomb:
+            ch = BOMB_CHAR;
+            break;
+        case None:
+            ch = JOKER_CHAR;
+            break; // Notice
+        case Flag:
+            ch = FLAG_CHAR;
+            break;
+        default:;
+            std::cerr << "Unknown type in store_game... cmon guys" << std::endl;
+            ch = '@';
+            break;
+    }
+    if (!player) // player 2
+        ch = std::tolower(ch, std::locale()); // to lowercase
+    return ch;
 }

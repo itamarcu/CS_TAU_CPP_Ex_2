@@ -2,8 +2,6 @@
 #define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_CLASSES_H
 
 
-
-
 #include <vector>
 #include "Auxiliary.h"
 
@@ -24,6 +22,7 @@ public:
      */
     Cell(int cellsRow, int cellsColumn) : row(cellsRow), column(cellsColumn) {}
 };
+
 /**
  * game piece type according doesn't takes to account whether it's a joker
  */
@@ -38,21 +37,57 @@ public:
     GamePieceType type;
     bool isJoker;
     bool player;
+
     /**
      * initalize game piece
      * @param pieceType the type of piece
      * @param pieceIsJoker is the piece a joker - meaning it can change type
      * @param player - true if it's the first false if it's the second
      */
-    GamePiece(GamePieceType pieceType = None,bool pieceIsJoker = false,bool player) : type(pieceType), isJoker(pieceIsJoker), player(player) {};
+    explicit GamePiece(bool player, GamePieceType pieceType = None, bool pieceIsJoker = false) : player(player),
+                                                                                                 type(pieceType),
+                                                                                                 isJoker(pieceIsJoker) {}
 
+    char to_char();
 };
 
-enum GameResult {
-    NONE, PLAYER_1_VICTORY, PLAYER_2_VICTORY, TIE
+enum GameWinner {
+    GAME_NOT_ENDED = 0,
+    PLAYER_1_VICTORY = 1,
+    PLAYER_2_VICTORY = 2,
+    TIE = 3
 };
 
 class PlannedMove {
+    // Fields
+private:
+    bool is_good_format;
+    Cell origin;
+    Cell destination;
+    bool has_joker_changed;
+    Cell joker_position;
+    GamePieceType new_joker_type;
+
+    //Constructors
+public:
+    //For invalid moves:
+    explicit PlannedMove(bool format) : is_good_format(format), origin(0, 0),
+                                        destination(0, 0), has_joker_changed(false),
+                                        joker_position(0, 0), new_joker_type(None) {}
+
+    //For non-joker moves:
+    explicit PlannedMove(int r1, int c1, int r2, int c2)
+            : is_good_format(true), origin(r1, c1),
+              destination(r1, c1), has_joker_changed(false),
+              joker_position(0, 0), new_joker_type(None) {}
+
+    //For joker moves:
+    explicit PlannedMove(int r1, int c1, int r2, int c2,
+                         int jr, int jc, GamePieceType jtype)
+            : is_good_format(true), origin(r1, c1),
+              destination(r1, c1), has_joker_changed(true),
+              joker_position(jr, jc), new_joker_type(jtype) {}
+
     //GETTERS
 public:
     const Cell &getOrigin() const;
@@ -78,17 +113,7 @@ public:
     void setNew_joker_type(GamePieceType new_joker_type);
 
 
-//Private ivars
-private:
-    Cell origin;
-    Cell destination;
-    bool has_joker_changed;
-    Cell joker_position;
-    GamePieceType new_joker_type;
-
-
 };
-
 
 
 GamePieceType type_from_char(char c);

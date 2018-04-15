@@ -3,21 +3,20 @@
 
 #include "Classes.h"
 #include "Game.h"
+
 enum FightResult {
-    attackerWon, defenderWon, bothPiecesLost
-};
-enum MoveResult{
-    RegularMove,atePiece,wasEaten,tiedWithPiece,TriedToMoveEmptySpace,TriedToMoveUnMovablePiece,OutOfBorderMove,DefaultIllegalMove
+    ATTACKER_WON, DEFENDER_WON, BOTH_PIECES_LOST
 };
 
+
 /**
- * move a piece
- * @param game game to move the piece in
- * @param from cell to move from
- * @param to cell to move to
- * @return MoveResult case
+ * Makes a move on the board of the game
+ * @param game the game
+ * @param plannedMove the move to make on the board
+ * @return the move result, being
+ * one of the cases in the MoveResult Enum
  */
-MoveResult move_piece_from_to(Game &game, Cell from, Cell to);
+MoveResult make_planned_move(Game &game, PlannedMove &plannedMove);
 
 /**
  * fight between pieces if needed
@@ -29,6 +28,6 @@ MoveResult move_piece_from_to(Game &game, Cell from, Cell to);
  * @return MoveResult case
  */
 MoveResult actually_fight(Game &game, GamePiece *attacker,
-                    GamePiece *defender, Cell position);
+                          GamePiece *defender, Cell position);
 
 #endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAMELOGIC_H

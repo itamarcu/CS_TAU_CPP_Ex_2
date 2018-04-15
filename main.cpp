@@ -2,6 +2,7 @@
 #include "Auxiliary.h"
 #include <fstream>
 #include "BoardIO.h"
+#include "GameManager.h"
 
 using std::cout;
 using std::endl;
@@ -10,9 +11,12 @@ using std::endl;
 int main() {
     print_line("---Program started---");
 
-    //auto game = BoardIO::setup_game();
-
-//    cout << "Address of piece in [1,1] is " << game->board[0][0] << endl;
-
+    Game game = Game();
+    BoardIO::setup_game(game);
+    GameManager gm = GameManager(game);
+    GameMoves moves = GameMoves();
+    BoardIO::load_moves(moves);
+    gm.run_moves(moves);
+    BoardIO::store_game(game);
     print_line("---Program ended---");
 }

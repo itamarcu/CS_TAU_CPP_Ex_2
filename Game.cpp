@@ -1,23 +1,16 @@
-//
-// Created by daniel meltzer on 14/04/2018.
-//
-
+#include <iostream>
 #include "Game.h"
 
-MoveResult Game::make_move(const PlannedMove& plannedMove){
-    return RegularMove;
+GameWinner Game::getGameWinner() const {
+    return gameWinner;
 }
 
-
-
-bool Game::isCurrentPlayerfirstPlayer() const {
-    return currentPlayer;
+std::string Game::getGameEndReason() const {
+    return gameEndReason;
 }
 
-GameResult Game::getGameResult() const {
-    return gameResult;
+void Game::endGame(const GameWinner gameWinner, const std::string gameEndReason) {
+    Game::gameWinner = gameWinner;
+    Game::gameEndReason = gameEndReason;
 }
 
-void Game::setGameResult(GameResult gameResult) {
-    Game::gameResult = gameResult;
-}
