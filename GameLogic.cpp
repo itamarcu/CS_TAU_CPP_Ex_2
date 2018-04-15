@@ -57,7 +57,6 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
         return TriedToMoveOutOfBorders;
     }
     if (sourceRow == destinationRow && sourceColumn == destinationColumn) {
-        std::cout << game.board[destinationRow][destinationColumn]->to_char() << std::endl;
         return TriedToMoveIntoAlly;
     }
     if (game.board[destinationRow][destinationColumn] == nullptr) {
@@ -97,7 +96,7 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
         case Flag:
             return TriedIllegalJokerChange;
     }
-
+    return SuccessfulMove;
 }
 
 MoveResult actually_fight(Game &game, GamePiece *attacker,
