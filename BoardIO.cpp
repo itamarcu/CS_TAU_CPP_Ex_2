@@ -95,11 +95,13 @@ void _load_player_moves(GameMoves &gameMoves, bool player) {
 
     std::string line;
     while (std::getline(fin, line)) {
-        if (line.empty())
+        if (line.empty() || line.length() <= 1)
             break;
         auto delimiter = std::string(" ");
         auto contents = split_string_using_delimiter(line, delimiter);
         if (contents->size() != 4 && contents->size() != 8) {
+            std::cout << "bad format line:    \"" << line << "\" (was split into " <<
+                      contents->size() << ")" << std::endl;
             moves.push_back(PlannedMove(false));
             continue;
         }

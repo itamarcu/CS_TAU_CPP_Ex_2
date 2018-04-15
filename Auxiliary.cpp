@@ -1,6 +1,3 @@
-//
-// Created by itamar on 2018-04-12.
-//
 #include "Auxiliary.h"
 #include <iostream>
 
@@ -14,9 +11,11 @@ std::vector<std::string> *split_string_using_delimiter(std::string &stringToSpli
     size_t initialPos = 0;
 
     while (pos != std::string::npos) {
-        splittedStrings->push_back(stringToSplit.substr(initialPos, pos - initialPos));
+        auto subst = stringToSplit.substr(initialPos, pos - initialPos);
+        if (!subst.empty()) {
+            splittedStrings->push_back(subst);
+        }
         initialPos = pos + delimiter.length();
-
         pos = stringToSplit.find(delimiter, initialPos);
     }
 

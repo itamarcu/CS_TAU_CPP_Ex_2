@@ -53,6 +53,12 @@ public:
      * @return char representing type and player. Jokers give J always.
      */
     char to_char();
+
+    /**
+     *
+     * @return true if this unit can move (if it is not a flag or a bomb or a bomb-joker)
+     */
+    bool canMove();
 };
 
 enum GameWinner {

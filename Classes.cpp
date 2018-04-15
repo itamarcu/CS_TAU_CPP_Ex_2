@@ -81,3 +81,18 @@ char GamePiece::to_char() {
 
     return ch;
 }
+
+bool GamePiece::canMove() {
+    switch (type) {
+        case None:
+            std::cerr << "BUG 16239817247" << std::endl;
+            return false;
+        case Rock:
+        case Paper:
+        case Scissors:
+            return true;
+        case Bomb:
+        case Flag:
+            return false;
+    }
+}

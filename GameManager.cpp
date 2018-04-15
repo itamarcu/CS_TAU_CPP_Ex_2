@@ -34,21 +34,20 @@ void GameManager::run_moves(GameMoves &gameMoves) {
                 case SuccessfulMove:
                     line_num[curr_p_index] += 1;
                     break;
-                case TriedToMoveEmptySpace:
-                case TriedToMoveEnemy:
-                case TriedToMoveUnmovablePiece:
-                case TriedToMoveOutOfBorders:
-                case TriedToMoveIntoAlly:
-                case TriedIllegalJokerChange:
+                case TriedToMoveEmptySpace: // 1
+                case TriedToMoveUnmovablePiece: // 2
+                case TriedToMoveOutOfBorders: // 3
+                case TriedToMoveIntoAlly: // 4
+                case TriedToMoveEnemy: // 5
+                case TriedIllegalJokerChange: // 6
                     std::stringstream s;
                     s << "Bad Moves input file";
-                    s << " for player " << (curr_p_index ? 1 : 2);
-                    s << " - line " << line_num[curr_p_index];
+                    s << " for player " << (curr_p_index ? 2 : 1);
+                    s << " - line " << (line_num[curr_p_index] + 1);
                     std::string reason = s.str();
                     game.endGame(curr_p_index ? PLAYER_1_VICTORY : PLAYER_2_VICTORY, reason);
 
-                    auto x = (*moves[curr_p_index])[line_num[curr_p_index]];
-                    std::cout << "debug: " << move_result << x.getOrigin().row << x.getDestination().row << std::endl;
+                    std::cout << "debug: Tried no. " << move_result << std::endl;
                     return;
             }
         }

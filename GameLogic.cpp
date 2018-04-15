@@ -38,23 +38,21 @@ FightResult simulate_fight(const GamePiece &attacker,
     return FightResult::BOTH_PIECES_LOST;
 }
 
-MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
+
+MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove) {
     Cell source = plannedMove.getOrigin(), destination = plannedMove.getDestination();
     int sourceRow = source.row, sourceColumn = source.column,
             destinationRow = destination.row, destinationColumn = destination.column;
-
+//    std::cout << "attempting to move " << sourceRow << sourceColumn << " to "
+//              << destinationRow << destinationColumn << std::endl;
     if (game.board[sourceRow][sourceColumn] == nullptr) {
         return TriedToMoveEmptySpace;
     }
-    if (game.board[sourceRow][sourceColumn]->type == Flag) {
+    if (!game.board[sourceRow][sourceColumn]->canMove()) {
         return TriedToMoveUnmovablePiece;
     }
     if (game.board[sourceRow][sourceColumn]->player != game.currentPlayer) {
         return TriedToMoveEnemy;
-    }
-    if (sourceRow < 1 || sourceRow > M || sourceColumn < 1 || sourceColumn > N ||
-        destinationRow < 1 || destinationRow > M || destinationColumn < 1 || destinationColumn > N) {
-        return TriedToMoveOutOfBorders;
     }
     if (sourceRow == destinationRow && sourceColumn == destinationColumn) {
         return TriedToMoveIntoAlly;
@@ -72,16 +70,18 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
 
     game.board[sourceRow][sourceColumn] = nullptr;
 
-    if (!plannedMove.isHas_joker_changed() ||
-        game.board[destinationRow][destinationColumn]->player != game.currentPlayer) {
-        return SuccessfulMove;
-    }
+    return SuccessfulMove;
+}
+
+
+MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
+    MoveResult firstResult = _make_move_part_of_planned_move(game, plannedMove);
+    if (firstResult != SuccessfulMove || !plannedMove.isHas_joker_changed())
+        return firstResult;
 
     Cell jokerPosition = plannedMove.getJoker_position();
     int jr = jokerPosition.row;
     int jc = jokerPosition.column;
-    if (jr < 1 || jr > M || jc < 1 || jc > N)
-        return TriedIllegalJokerChange;
     auto joker = game.board[jr][jc];
     if (joker == nullptr || !joker->isJoker || joker->player != game.currentPlayer)
         return TriedIllegalJokerChange;
@@ -91,12 +91,11 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
         case Paper:
         case Scissors:
         case Bomb:
-            break;
+            return SuccessfulMove;
         case None:
         case Flag:
             return TriedIllegalJokerChange;
     }
-    return SuccessfulMove;
 }
 
 MoveResult actually_fight(Game &game, GamePiece *attacker,
