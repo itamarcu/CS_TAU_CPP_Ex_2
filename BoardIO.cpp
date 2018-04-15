@@ -37,7 +37,7 @@ LoadBoardResult BoardIO::_add_load_into_board(Game &game, bool player) {
                 return LoadBoardResult(line_num, BadFormat);
             piece.isJoker = true;
             piece.type = type_from_char((*contents)[3][0]);
-            if (piece.type == None)
+            if (piece.type == None || piece.type == Flag) // Only allowed: R P S B
                 return LoadBoardResult(line_num, InvalidJokerPieceType);
             remainingJokerCount--;
             if (remainingJokerCount < 0)
@@ -133,7 +133,7 @@ void _load_player_moves(GameMoves &gameMoves, bool player) {
             }
             jr -= 1;
             jc -= 1;
-            GamePieceType jokerType = type_from_char((*contents)[3][0]);
+            GamePieceType jokerType = type_from_char((*contents)[7][0]);
             if (jokerType == None) {
                 moves.push_back(PlannedMove(false));
                 continue;
@@ -182,8 +182,11 @@ void BoardIO::store_game(Game &game) {
     fout << "Winner: " << game.getGameWinner() << std::endl;
     fout << "Reason: " << game.getGameEndReason() << std::endl;
     fout << std::endl;
-    for (int row = 0; row < M; row++) {
-        for (int col = 0; col < N; col++) {
+
+    //Prints transposed
+
+    for (int col = 0; col < N; col++) {
+        for (int row = 0; row < M; row++) {
             char ch = ' ';
             if (game.board[row][col] != nullptr) {
                 ch = game.board[row][col]->to_char();
@@ -192,6 +195,19 @@ void BoardIO::store_game(Game &game) {
         }
         fout << std::endl;
     }
+
+    // Prints normally
+
+    //    for (int row = 0; row < M; row++) {
+    //        for (int col = 0; col < N; col++) {
+    //            char ch = ' ';
+    //            if (game.board[row][col] != nullptr) {
+    //                ch = game.board[row][col]->to_char();
+    //            }
+    //            fout << ch;
+    //        }
+    //        fout << std::endl;
+    //    }
 
     fout.flush();
 }

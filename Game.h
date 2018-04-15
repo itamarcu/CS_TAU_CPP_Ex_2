@@ -9,6 +9,7 @@ enum MoveResult { // Can't be in GameLogic due to circular dependency
     TriedToMoveUnmovablePiece,
     TriedToMoveOutOfBorders,
     TriedToMoveIntoAlly,
+    TriedToMoveEnemy,
     TriedIllegalJokerChange
 };
 
@@ -42,6 +43,12 @@ public:
      * @param gameEndReason reason for ending
      */
     void endGame(GameWinner gameWinner, std::string gameEndReason);
+
+    /**
+     * @return true if a player has lost through inability to move
+     * (changes gameWinner and gameEndReason)
+     */
+    bool checkWin();
 
     //MARK: Getters:
 public:

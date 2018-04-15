@@ -48,14 +48,18 @@ public:
                                                                                                  type(pieceType),
                                                                                                  isJoker(pieceIsJoker) {}
 
+    /**
+     *
+     * @return char representing type and player. Jokers give J always.
+     */
     char to_char();
 };
 
 enum GameWinner {
-    GAME_NOT_ENDED = 0,
+    GAME_NOT_ENDED = 3,
     PLAYER_1_VICTORY = 1,
     PLAYER_2_VICTORY = 2,
-    TIE = 3
+    TIE = 0
 };
 
 class PlannedMove {
@@ -78,14 +82,14 @@ public:
     //For non-joker moves:
     explicit PlannedMove(int r1, int c1, int r2, int c2)
             : is_good_format(true), origin(r1, c1),
-              destination(r1, c1), has_joker_changed(false),
+              destination(r2, c2), has_joker_changed(false),
               joker_position(0, 0), new_joker_type(None) {}
 
     //For joker moves:
     explicit PlannedMove(int r1, int c1, int r2, int c2,
                          int jr, int jc, GamePieceType jtype)
             : is_good_format(true), origin(r1, c1),
-              destination(r1, c1), has_joker_changed(true),
+              destination(r2, c2), has_joker_changed(true),
               joker_position(jr, jc), new_joker_type(jtype) {}
 
     //GETTERS
@@ -99,20 +103,6 @@ public:
     const Cell &getJoker_position() const;
 
     GamePieceType getNew_joker_type() const;
-
-    //SETTERS
-public:
-    void setOrigin(const Cell &origin);
-
-    void setDestination(const Cell &destination);
-
-    void setHas_joker_changed(bool has_joker_changed);
-
-    void setJoker_position(const Cell &joker_position);
-
-    void setNew_joker_type(GamePieceType new_joker_type);
-
-
 };
 
 

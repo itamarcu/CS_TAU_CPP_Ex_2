@@ -39,9 +39,6 @@ FightResult simulate_fight(const GamePiece &attacker,
 }
 
 MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
-    if (game.getGameWinner() != GAME_NOT_ENDED)
-        return SuccessfulMove; // Doesn't matter
-
     Cell source = plannedMove.getOrigin(), destination = plannedMove.getDestination();
     int sourceRow = source.row, sourceColumn = source.column,
             destinationRow = destination.row, destinationColumn = destination.column;
@@ -52,9 +49,13 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
     if (game.board[sourceRow][sourceColumn]->type == Flag) {
         return TriedToMoveUnmovablePiece;
     }
+    if (game.board[sourceRow][sourceColumn]->player != game.currentPlayer) {
+        return TriedToMoveEnemy;
+    }
     if (sourceRow < 1 || sourceRow > M || sourceColumn < 1 || sourceColumn > N ||
-        destinationRow < 1 || destinationRow > M || destinationColumn < 1 || destinationColumn > N)
+        destinationRow < 1 || destinationRow > M || destinationColumn < 1 || destinationColumn > N) {
         return TriedToMoveOutOfBorders;
+    }
     if (sourceRow == destinationRow && sourceColumn == destinationColumn) {
         return TriedToMoveIntoAlly;
     }
@@ -71,12 +72,31 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
 
     game.board[sourceRow][sourceColumn] = nullptr;
 
-    if (plannedMove.isHas_joker_changed())
+    if (!plannedMove.isHas_joker_changed() ||
+        game.board[destinationRow][destinationColumn]->player != game.currentPlayer) {
         return SuccessfulMove;
+    }
 
     Cell jokerPosition = plannedMove.getJoker_position();
+    int jr = jokerPosition.row;
+    int jc = jokerPosition.column;
+    if (jr < 1 || jr > M || jc < 1 || jc > N)
+        return TriedIllegalJokerChange;
+    auto joker = game.board[jr][jc];
+    if (joker == nullptr || !joker->isJoker || joker->player != game.currentPlayer)
+        return TriedIllegalJokerChange;
+    switch (plannedMove.getNew_joker_type()) {
+        // Only R P S B are allowed
+        case Rock:
+        case Paper:
+        case Scissors:
+        case Bomb:
+            break;
+        case None:
+        case Flag:
+            return TriedIllegalJokerChange;
+    }
 
-    return SuccessfulMove;
 }
 
 MoveResult actually_fight(Game &game, GamePiece *attacker,

@@ -21,7 +21,7 @@ GamePieceType type_from_char(char c) {
         case FLAG_CHAR:
             return Flag;
         default:
-            std::cout << "ERROR in GamePiece type_from_char oh no";
+            std::cout << "ERROR 95087216986345: char is " << c << std::endl;
             return None;
     }
 }
@@ -46,53 +46,38 @@ GamePieceType PlannedMove::getNew_joker_type() const {
     return new_joker_type;
 }
 
-void PlannedMove::setOrigin(const Cell &origin) {
-    PlannedMove::origin = origin;
-}
-
-void PlannedMove::setDestination(const Cell &destination) {
-    PlannedMove::destination = destination;
-}
-
-void PlannedMove::setHas_joker_changed(bool has_joker_changed) {
-    PlannedMove::has_joker_changed = has_joker_changed;
-}
-
-void PlannedMove::setJoker_position(const Cell &joker_position) {
-    PlannedMove::joker_position = joker_position;
-}
-
-void PlannedMove::setNew_joker_type(GamePieceType new_joker_type) {
-    PlannedMove::new_joker_type = new_joker_type;
-}
-
 char GamePiece::to_char() {
     char ch;
-    switch (type) {
-        case Rock:
-            ch = ROCK_CHAR;
-            break;
-        case Paper:
-            ch = PAPER_CHAR;
-            break;
-        case Scissors:
-            ch = SCISSORS_CHAR;
-            break;
-        case Bomb:
-            ch = BOMB_CHAR;
-            break;
-        case None:
-            ch = JOKER_CHAR;
-            break; // Notice
-        case Flag:
-            ch = FLAG_CHAR;
-            break;
-        default:;
-            std::cerr << "Unknown type in store_game... cmon guys" << std::endl;
-            ch = '@';
-            break;
-    }
+    if (isJoker)
+        ch = 'J';
+    else
+        switch (type) {
+            case Rock:
+                ch = ROCK_CHAR;
+                break;
+            case Paper:
+                ch = PAPER_CHAR;
+                break;
+            case Scissors:
+                ch = SCISSORS_CHAR;
+                break;
+            case Bomb:
+                ch = BOMB_CHAR;
+                break;
+            case None:
+                ch = JOKER_CHAR;
+                break; // Notice
+            case Flag:
+                ch = FLAG_CHAR;
+                break;
+            default:;
+                std::cerr << "Unknown type in store_game... cmon guys" << std::endl;
+                ch = '@';
+                break;
+        }
+
     if (!player) // player 2
         ch = std::tolower(ch, std::locale()); // to lowercase
+
     return ch;
 }
