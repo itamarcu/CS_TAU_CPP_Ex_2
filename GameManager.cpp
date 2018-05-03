@@ -29,7 +29,8 @@ void GameManager::run_moves(GameMoves &gameMoves) {
 //                std::cout << std::endl;
 //            }
 //            std::cout.flush();
-
+            std::stringstream s;
+            std::string reason;
             switch (move_result) {
                 case SuccessfulMove:
                     line_num[curr_p_index] += 1;
@@ -40,23 +41,23 @@ void GameManager::run_moves(GameMoves &gameMoves) {
                 case TriedToMoveIntoAlly: // 4
                 case TriedToMoveEnemy: // 5
                 case TriedIllegalJokerChange: // 6
-                    std::stringstream s;
                     s << "Bad Moves input file";
                     s << " for player " << (curr_p_index ? 2 : 1);
                     s << " - line " << (line_num[curr_p_index] + 1);
-                    std::string reason = s.str();
+                    reason = s.str();
                     game.endGame(curr_p_index ? PLAYER_1_VICTORY : PLAYER_2_VICTORY, reason);
 
-                    std::cout << "debug: Tried no. " << move_result << std::endl;
+//                    std::cout << "debug: Tried no. " << move_result << std::endl;
                     return;
                 default:
-                    std::cerr << "BUG 58689217038" << std::endl;
+//                    std::cerr << "BUG 58689217038" << std::endl;
                     break;
             }
         }
         // Check winner
-        if (game.checkWin())
+        if (game.checkWin()) {
             return;
+        }
         curr_p_index = !curr_p_index;
         game.currentPlayer = !game.currentPlayer;
     }
