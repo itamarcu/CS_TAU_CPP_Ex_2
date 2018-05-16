@@ -18,11 +18,11 @@ void GameManager::run_moves(GameMoves &gameMoves) {
                     game, (*moves[curr_p_index])[line_num[curr_p_index]]
             );
 
-//            for (int col = 0; col < N; col++) {
-//                for (int row = 0; row < M; row++) {
+//            for (int y = 0; y < N; y++) {
+//                for (int x = 0; x < M; x++) {
 //                    char ch = ' ';
-//                    if (game.board[row][col] != nullptr) {
-//                        ch = game.board[row][col]->to_char();
+//                    if (game.board[x][y] != nullptr) {
+//                        ch = game.board[x][y]->to_char();
 //                    }
 //                    std::cout << ch;
 //                }

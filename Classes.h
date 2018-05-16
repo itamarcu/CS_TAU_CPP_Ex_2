@@ -4,24 +4,24 @@
 
 #include <vector>
 #include "Auxiliary.h"
+#include "Point.h"
 
-/**
- * Cell that represents a position on board
- * @public row: row of cell
- * @public column: column of cell
- */
-class Cell {
+class MyPoint : public Point {
 public:
-    int row;
-    int column;
+    int x;
+    int y;
 
-    /**
-     * constructor for Cell
-     * @param cellsRow the cells row
-     * @param cellsColumn the cells column
-     */
-    Cell(int cellsRow, int cellsColumn) : row(cellsRow), column(cellsColumn) {}
+    MyPoint(int x, int y);
+
+    ~MyPoint() override;
+
+    explicit MyPoint(const Point &p) : x(p.getX()), y(p.getY()) {}
+
+    int getX() const override;
+
+    int getY() const override;
 };
+
 
 /**
  * game piece type according doesn't takes to account whether it's a joker
@@ -72,10 +72,10 @@ class PlannedMove {
     // Fields
 private:
     bool is_good_format;
-    Cell origin;
-    Cell destination;
+    MyPoint origin;
+    MyPoint destination;
     bool has_joker_changed;
-    Cell joker_position;
+    MyPoint joker_position;
     GamePieceType new_joker_type;
 
     //Constructors
@@ -86,27 +86,27 @@ public:
                                         joker_position(0, 0), new_joker_type(None) {}
 
     //For non-joker moves:
-    explicit PlannedMove(int r1, int c1, int r2, int c2)
-            : is_good_format(true), origin(r1, c1),
-              destination(r2, c2), has_joker_changed(false),
+    explicit PlannedMove(int x1, int y1, int x2, int y2)
+            : is_good_format(true), origin(x1, y1),
+              destination(x2, y2), has_joker_changed(false),
               joker_position(0, 0), new_joker_type(None) {}
 
     //For joker moves:
-    explicit PlannedMove(int r1, int c1, int r2, int c2,
-                         int jr, int jc, GamePieceType jtype)
-            : is_good_format(true), origin(r1, c1),
-              destination(r2, c2), has_joker_changed(true),
-              joker_position(jr, jc), new_joker_type(jtype) {}
+    explicit PlannedMove(int x1, int y1, int x2, int y2,
+                         int jx, int jy, GamePieceType jtype)
+            : is_good_format(true), origin(x1, y1),
+              destination(x2, y2), has_joker_changed(true),
+              joker_position(jx, jy), new_joker_type(jtype) {}
 
     //GETTERS
 public:
-    const Cell &getOrigin() const;
+    const Point &getOrigin() const;
 
-    const Cell &getDestination() const;
+    const Point &getDestination() const;
 
     bool isHas_joker_changed() const;
 
-    const Cell &getJoker_position() const;
+    const Point &getJoker_position() const;
 
     GamePieceType getNew_joker_type() const;
 };

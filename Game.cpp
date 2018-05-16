@@ -18,9 +18,9 @@ bool Game::checkWin() {
     int moveable_counts[] = {0, 0};
     int flag_counts[] = {0, 0};
 
-    for (int row = 0; row < M; row++) {
-        for (int col = 0; col < N; col++) {
-            auto piece = board[row][col];
+    for (int x = 0; x < M; x++) {
+        for (int y = 0; y < N; y++) {
+            auto piece = board[x][y];
             if (piece != nullptr) {
                 if (piece->type == Flag) {
                     flag_counts[1 - piece->player] += 1;

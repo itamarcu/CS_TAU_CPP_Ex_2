@@ -28,6 +28,6 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove);
  * @return MoveResult case
  */
 MoveResult actually_fight(Game &game, GamePiece *attacker,
-                          GamePiece *defender, Cell position);
+                          GamePiece *defender, Point &&position);
 
 #endif //CS_TAU_CPP_RPS_GAMELOGIC_H

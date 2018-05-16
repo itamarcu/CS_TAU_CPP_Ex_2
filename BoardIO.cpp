@@ -69,7 +69,7 @@ LoadBoardResult BoardIO::_add_load_into_board(Game &game, bool player) {
             return LoadBoardResult(line_num, TwoPiecesSamePlayerSamePosition);
         } else {
             //This code is here because otherwise we'll have to store 2 boards and merge
-            actually_fight(game, piece_ptr, game.board[r][c], Cell(r, c));
+            actually_fight(game, piece_ptr, game.board[r][c], MyPoint(r, c));
             //if piece lost the fight, pointer was deleted
         }
     }
@@ -102,47 +102,47 @@ void _load_player_moves(GameMoves &gameMoves, bool player) {
         if (contents->size() != 4 && contents->size() != 8) {
             std::cout << "bad format line:    \"" << line << "\" (was split into " <<
                       contents->size() << ")" << std::endl;
-            moves.push_back(PlannedMove(false));
+            moves.emplace_back(PlannedMove(false));
             continue;
         }
 
 
-        int r1 = std::stoi((*contents)[0]);
-        int c1 = std::stoi((*contents)[1]);
-        int r2 = std::stoi((*contents)[2]);
-        int c2 = std::stoi((*contents)[3]);
-        if (r1 < 1 || r1 > M || c1 < 1 || c1 > N ||
-            r2 < 1 || r2 > M || c2 < 1 || c2 > N) {
-            moves.push_back(PlannedMove(false));
+        int x1 = std::stoi((*contents)[0]);
+        int y1 = std::stoi((*contents)[1]);
+        int x2 = std::stoi((*contents)[2]);
+        int y2 = std::stoi((*contents)[3]);
+        if (x1 < 1 || x1 > M || y1 < 1 || y1 > N ||
+            x2 < 1 || x2 > M || y2 < 1 || y2 > N) {
+            moves.emplace_back(PlannedMove(false));
             continue;
         }
-        r1 -= 1; // because 0-indexing
-        c1 -= 1; // ^
-        r2 -= 1; // ^
-        c2 -= 1; // ^
+        x1 -= 1; // because 0-indexing
+        y1 -= 1; // ^
+        x2 -= 1; // ^
+        y2 -= 1; // ^
 
         if (contents->size() == 8) {
             if ((*contents)[4] != "J:") {
-                moves.push_back(PlannedMove(false));
+                moves.emplace_back(PlannedMove(false));
                 continue;
             };
 
-            int jr = std::stoi((*contents)[5]);
-            int jc = std::stoi((*contents)[6]);
-            if (jr < 1 || jr > M || jc < 1 || jc > N) {
-                moves.push_back(PlannedMove(false));
+            int jx = std::stoi((*contents)[5]);
+            int jy = std::stoi((*contents)[6]);
+            if (jx < 1 || jx > M || jy < 1 || jy > N) {
+                moves.emplace_back(PlannedMove(false));
                 continue;
             }
-            jr -= 1;
-            jc -= 1;
+            jx -= 1;
+            jy -= 1;
             GamePieceType jokerType = type_from_char((*contents)[7][0]);
             if (jokerType == None) {
-                moves.push_back(PlannedMove(false));
+                moves.emplace_back(PlannedMove(false));
                 continue;
             }
-            moves.push_back(PlannedMove(r1, c1, r2, c2, jr, jc, jokerType));
+            moves.emplace_back(PlannedMove(x1, y1, x2, y2, jx, jy, jokerType));
         } else
-            moves.push_back(PlannedMove(r1, c1, r2, c2));
+            moves.emplace_back(PlannedMove(x1, y1, x2, y2));
     }
 
 }
@@ -187,11 +187,11 @@ void BoardIO::store_game(Game &game) {
 
     //Prints transposed
 
-    for (int col = 0; col < N; col++) {
-        for (int row = 0; row < M; row++) {
+    for (int y = 0; y < N; y++) {
+        for (int x = 0; x < M; x++) {
             char ch = ' ';
-            if (game.board[row][col] != nullptr) {
-                ch = game.board[row][col]->to_char();
+            if (game.board[x][y] != nullptr) {
+                ch = game.board[x][y]->to_char();
             }
             fout << ch;
         }
@@ -200,11 +200,11 @@ void BoardIO::store_game(Game &game) {
 
     // Prints normally
 
-    //    for (int row = 0; row < M; row++) {
-    //        for (int col = 0; col < N; col++) {
+    //    for (int x = 0; x < M; x++) {
+    //        for (int y = 0; y < N; y++) {
     //            char ch = ' ';
-    //            if (game.board[row][col] != nullptr) {
-    //                ch = game.board[row][col]->to_char();
+    //            if (game.board[x][y] != nullptr) {
+    //                ch = game.board[x][y]->to_char();
     //            }
     //            fout << ch;
     //        }

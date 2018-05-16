@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(CS_TAU_CPP_RPS main.cpp
         Auxiliary.cpp Auxiliary.h GameLogic.cpp GameLogic.h Classes.cpp Classes.h
         BoardIO.cpp BoardIO.h GameManager.cpp GameManager.h Game.cpp Game.h
-        
+
         Board.h
         FightInfo.h
         JokerChange.h

@@ -1,32 +1,31 @@
-#include <iostream>
 #include "Classes.h"
+#include <iostream>
 
+/*
+ * --- MyPoint ---
+ */
 
-GamePieceType type_from_char(char c) {
-    switch (c) {
-        case ROCK_CHAR:
-            return Rock;
-        case PAPER_CHAR:
-            return Paper;
-        case SCISSORS_CHAR:
-            return Scissors;
-        case BOMB_CHAR:
-            return Bomb;
-        case JOKER_CHAR:
-            return None;
-        case FLAG_CHAR:
-            return Flag;
-        default:
-            std::cout << "ERROR 95087216986345: char is " << c << std::endl;
-            return None;
-    }
+MyPoint::MyPoint(int x, int y) : x(x), y(y) {}
+
+int MyPoint::getX() const {
+    return x;
 }
 
-const Cell &PlannedMove::getOrigin() const {
+int MyPoint::getY() const {
+    return y;
+}
+
+MyPoint::~MyPoint() = default;
+
+/*
+ * --- PlannedMove ---
+ */
+
+const Point &PlannedMove::getOrigin() const {
     return origin;
 }
 
-const Cell &PlannedMove::getDestination() const {
+const Point &PlannedMove::getDestination() const {
     return destination;
 }
 
@@ -34,13 +33,17 @@ bool PlannedMove::isHas_joker_changed() const {
     return has_joker_changed;
 }
 
-const Cell &PlannedMove::getJoker_position() const {
+const Point &PlannedMove::getJoker_position() const {
     return joker_position;
 }
 
 GamePieceType PlannedMove::getNew_joker_type() const {
     return new_joker_type;
 }
+
+/*
+ * --- GamePiece ---
+ */
 
 char GamePiece::to_char() {
     char ch;
@@ -95,4 +98,28 @@ bool GamePiece::canMove() {
             break;
     }
     return false;
+}
+
+/*
+ * --- Extras ---
+ */
+
+GamePieceType type_from_char(char c) {
+    switch (c) {
+        case ROCK_CHAR:
+            return Rock;
+        case PAPER_CHAR:
+            return Paper;
+        case SCISSORS_CHAR:
+            return Scissors;
+        case BOMB_CHAR:
+            return Bomb;
+        case JOKER_CHAR:
+            return None;
+        case FLAG_CHAR:
+            return Flag;
+        default:
+            std::cout << "ERROR 95087216986345: char is " << c << std::endl;
+            return None;
+    }
 }

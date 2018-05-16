@@ -40,9 +40,10 @@ FightResult simulate_fight(const GamePiece &attacker,
 
 
 MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove) {
-    Cell source = plannedMove.getOrigin(), destination = plannedMove.getDestination();
-    int sourceRow = source.row, sourceColumn = source.column,
-            destinationRow = destination.row, destinationColumn = destination.column;
+    MyPoint source(plannedMove.getOrigin());
+    MyPoint destination(plannedMove.getDestination());
+    int sourceRow = source.getX(), sourceColumn = source.getY(),
+            destinationRow = destination.getX(), destinationColumn = destination.getY();
 //    std::cout << "attempting to move " << sourceRow << sourceColumn << " to "
 //              << destinationRow << destinationColumn << std::endl;
     if (game.board[sourceRow][sourceColumn] == nullptr) {
@@ -65,7 +66,7 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
                 game,
                 game.board[sourceRow][sourceColumn],
                 game.board[destinationRow][destinationColumn],
-                Cell(destinationRow, destinationColumn));
+                MyPoint(destinationRow, destinationColumn));
     }
 
     game.board[sourceRow][sourceColumn] = nullptr;
@@ -79,10 +80,10 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
     if (firstResult != SuccessfulMove || !plannedMove.isHas_joker_changed())
         return firstResult;
 
-    Cell jokerPosition = plannedMove.getJoker_position();
-    int jr = jokerPosition.row;
-    int jc = jokerPosition.column;
-    auto joker = game.board[jr][jc];
+    MyPoint jokerPosition(plannedMove.getJoker_position());
+    int jx = jokerPosition.getX();
+    int jy = jokerPosition.getY();
+    auto joker = game.board[jx][jy];
     if (joker == nullptr || !joker->isJoker || joker->player != game.currentPlayer)
         return TriedIllegalJokerChange;
     switch (plannedMove.getNew_joker_type()) {
@@ -103,9 +104,9 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
 }
 
 MoveResult actually_fight(Game &game, GamePiece *attacker,
-                          GamePiece *defender, Cell position) {
-    int r = position.row;
-    int c = position.column;
+                          GamePiece *defender, Point &&position) {
+    int r = position.getX();
+    int c = position.getY();
     auto fightResult = simulate_fight(*attacker, *defender);
     switch (fightResult) {
         case ATTACKER_WON:
