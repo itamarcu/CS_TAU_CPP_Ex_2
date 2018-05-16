@@ -1,5 +1,5 @@
-#ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_BGAME_H
-#define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_BGAME_H
+#ifndef CS_TAU_CPP_RPS_BGAME_H
+#define CS_TAU_CPP_RPS_BGAME_H
 
 #include "Classes.h"
 
@@ -58,4 +58,4 @@ public:
 };
 
 
-#endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_BGAME_H
+#endif //CS_TAU_CPP_RPS_BGAME_H

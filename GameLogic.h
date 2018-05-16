@@ -1,5 +1,5 @@
-#ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAMELOGIC_H
-#define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAMELOGIC_H
+#ifndef CS_TAU_CPP_RPS_GAMELOGIC_H
+#define CS_TAU_CPP_RPS_GAMELOGIC_H
 
 #include "Classes.h"
 #include "Game.h"
@@ -30,4 +30,4 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove);
 MoveResult actually_fight(Game &game, GamePiece *attacker,
                           GamePiece *defender, Cell position);
 
-#endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_GAMELOGIC_H
+#endif //CS_TAU_CPP_RPS_GAMELOGIC_H

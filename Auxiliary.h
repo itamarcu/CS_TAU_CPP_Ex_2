@@ -1,5 +1,5 @@
-#ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_AUXILIARY_H
-#define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_AUXILIARY_H
+#ifndef CS_TAU_CPP_RPS_AUXILIARY_H
+#define CS_TAU_CPP_RPS_AUXILIARY_H
 
 #include <string>
 #include <vector>
@@ -32,4 +32,4 @@ void print_line(std::string str);
  * @return vector of strings splited form the original one
  */
 std::vector<std::string>* split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter);
-#endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_AUXILIARY_H
+#endif //CS_TAU_CPP_RPS_AUXILIARY_H

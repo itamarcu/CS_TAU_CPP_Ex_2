@@ -7,7 +7,7 @@
 // abstract class JokerChange should be the base class for your "JokerChange" implementation
 // returned from PlayerAlgorithm to "Game" in the flow:
 // "Game" -> PlayerAlgorithm : virtual unique_ptr<JokerChange> getJokerChange(); // nullptr if no change is requested
-// Note that "Game" is in parantheses because this is your class and you can choose its name
+// Note that "Game" is in parentheses because this is your class and you can choose its name
 
 // @author Amir Kirsh, TAU - Advanced Topics in Programming - 2018 Semester B
 

@@ -1,5 +1,5 @@
-#ifndef CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_CLASSES_H
-#define CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_CLASSES_H
+#ifndef CS_TAU_CPP_RPS_CLASSES_H
+#define CS_TAU_CPP_RPS_CLASSES_H
 
 
 #include <vector>
@@ -114,4 +114,4 @@ public:
 
 GamePieceType type_from_char(char c);
 
-#endif //CS_TAU_C_PLUS_PLUS_FIRST_EXERCISE_CLASSES_H
+#endif //CS_TAU_CPP_RPS_CLASSES_H
