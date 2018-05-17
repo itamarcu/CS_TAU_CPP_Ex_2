@@ -9,7 +9,7 @@ LoadBoardResult BoardIO::_add_load_into_board(Game &game, bool player) {
     std::string player_num = player ? "1" : "2";
     std::string file_path = "player" + player_num + ".rps_board";
     std::ifstream fin(file_path);
-    if (fin.eof()) {
+    if (fin.fail()) {
         std::cerr << "Unable to find/open this file path: " << file_path << std::endl;
         return LoadBoardResult(0, UnableToOpenPath);
     }
