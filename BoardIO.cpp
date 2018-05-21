@@ -62,14 +62,14 @@ LoadBoardResult BoardIO::_add_load_into_board(Game &game, bool player) {
 
         auto *piece_ptr = new GamePiece(piece); // uses implicit Copy Constructor
 
-        if (game.board[r][c] == nullptr)
-            game.board[r][c] = piece_ptr;
-        else if (game.board[r][c]->player == player) {
+        if (game.board.grid[r][c] == nullptr)
+            game.board.grid[r][c] = piece_ptr;
+        else if (game.board.grid[r][c]->player == player) {
             delete piece_ptr;
             return LoadBoardResult(line_num, TwoPiecesSamePlayerSamePosition);
         } else {
             //This code is here because otherwise we'll have to store 2 boards and merge
-            actually_fight(game, piece_ptr, game.board[r][c], MyPoint(r, c));
+            actually_fight(game, piece_ptr, game.board.grid[r][c], MyPoint(r, c));
             //if piece lost the fight, pointer was deleted
         }
     }
@@ -190,8 +190,8 @@ void BoardIO::store_game(Game &game) {
     for (int y = 0; y < N; y++) {
         for (int x = 0; x < M; x++) {
             char ch = ' ';
-            if (game.board[x][y] != nullptr) {
-                ch = game.board[x][y]->to_char();
+            if (game.board.grid[x][y] != nullptr) {
+                ch = game.board.grid[x][y]->to_char();
             }
             fout << ch;
         }
@@ -203,8 +203,8 @@ void BoardIO::store_game(Game &game) {
     //    for (int x = 0; x < M; x++) {
     //        for (int y = 0; y < N; y++) {
     //            char ch = ' ';
-    //            if (game.board[x][y] != nullptr) {
-    //                ch = game.board[x][y]->to_char();
+    //            if (game.board.grid[x][y] != nullptr) {
+    //                ch = game.board.grid[x][y]->to_char();
     //            }
     //            fout << ch;
     //        }

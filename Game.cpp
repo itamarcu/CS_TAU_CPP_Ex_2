@@ -20,7 +20,7 @@ bool Game::checkWin() {
 
     for (int x = 0; x < M; x++) {
         for (int y = 0; y < N; y++) {
-            auto piece = board[x][y];
+            auto piece = board.grid[x][y];
             if (piece != nullptr) {
                 if (piece->type == Flag) {
                     flag_counts[1 - piece->player] += 1;

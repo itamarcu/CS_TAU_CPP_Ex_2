@@ -46,30 +46,30 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
             destinationRow = destination.getX(), destinationColumn = destination.getY();
 //    std::cout << "attempting to move " << sourceRow << sourceColumn << " to "
 //              << destinationRow << destinationColumn << std::endl;
-    if (game.board[sourceRow][sourceColumn] == nullptr) {
+    if (game.board.grid[sourceRow][sourceColumn] == nullptr) {
         return TriedToMoveEmptySpace;
     }
-    if (!game.board[sourceRow][sourceColumn]->canMove()) {
+    if (!game.board.grid[sourceRow][sourceColumn]->canMove()) {
         return TriedToMoveUnmovablePiece;
     }
-    if (game.board[sourceRow][sourceColumn]->player != game.currentPlayer) {
+    if (game.board.grid[sourceRow][sourceColumn]->player != game.currentPlayer) {
         return TriedToMoveEnemy;
     }
     if (sourceRow == destinationRow && sourceColumn == destinationColumn) {
         return TriedToMoveIntoAlly;
     }
-    if (game.board[destinationRow][destinationColumn] == nullptr) {
-        game.board[destinationRow][destinationColumn] =
-                game.board[sourceRow][sourceColumn];
+    if (game.board.grid[destinationRow][destinationColumn] == nullptr) {
+        game.board.grid[destinationRow][destinationColumn] =
+                game.board.grid[sourceRow][sourceColumn];
     } else {
         actually_fight(
                 game,
-                game.board[sourceRow][sourceColumn],
-                game.board[destinationRow][destinationColumn],
+                game.board.grid[sourceRow][sourceColumn],
+                game.board.grid[destinationRow][destinationColumn],
                 MyPoint(destinationRow, destinationColumn));
     }
 
-    game.board[sourceRow][sourceColumn] = nullptr;
+    game.board.grid[sourceRow][sourceColumn] = nullptr;
 
     return SuccessfulMove;
 }
@@ -83,7 +83,7 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
     MyPoint jokerPosition(plannedMove.getJoker_position());
     int jx = jokerPosition.getX();
     int jy = jokerPosition.getY();
-    auto joker = game.board[jx][jy];
+    auto joker = game.board.grid[jx][jy];
     if (joker == nullptr || !joker->isJoker || joker->player != game.currentPlayer)
         return TriedIllegalJokerChange;
     switch (plannedMove.getNew_joker_type()) {
@@ -111,16 +111,16 @@ MoveResult actually_fight(Game &game, GamePiece *attacker,
     switch (fightResult) {
         case ATTACKER_WON:
             delete defender;
-            game.board[r][c] = attacker;
+            game.board.grid[r][c] = attacker;
             return MoveResult::SuccessfulMove;
         case DEFENDER_WON:
             delete attacker;
-            game.board[r][c] = defender;
+            game.board.grid[r][c] = defender;
             return MoveResult::SuccessfulMove;
         case BOTH_PIECES_LOST:
             delete attacker;
             delete defender;
-            game.board[r][c] = nullptr;
+            game.board.grid[r][c] = nullptr;
             return MoveResult::SuccessfulMove;
         default:
             print_line("ERROR in actually_fight because of weird fight result");

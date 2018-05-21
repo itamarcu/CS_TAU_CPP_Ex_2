@@ -19,7 +19,8 @@ public:
     /**
     * board of game
     */
-    std::vector<std::vector<GamePiece *>> board;
+    MyBoard board;
+
     /**
      * true = Player 1, false = Player 2
      */
@@ -32,7 +33,7 @@ public:
     /**
      * initialize game with default parameters
      */
-    explicit Game() : board(M, std::vector<GamePiece *>(N, nullptr)),
+    explicit Game() : board(),
                       currentPlayer(true), gameWinner(GAME_NOT_ENDED),
                       gameEndReason("Game did not end yet") {}
     //MARK: Functions

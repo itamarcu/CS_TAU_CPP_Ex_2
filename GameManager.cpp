@@ -21,8 +21,8 @@ void GameManager::run_moves(GameMoves &gameMoves) {
 //            for (int y = 0; y < N; y++) {
 //                for (int x = 0; x < M; x++) {
 //                    char ch = ' ';
-//                    if (game.board[x][y] != nullptr) {
-//                        ch = game.board[x][y]->to_char();
+//                    if (game.board.grid[x][y] != nullptr) {
+//                        ch = game.board.grid[x][y]->to_char();
 //                    }
 //                    std::cout << ch;
 //                }

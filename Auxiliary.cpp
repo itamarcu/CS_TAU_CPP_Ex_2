@@ -27,3 +27,8 @@ std::vector<std::string> *split_string_using_delimiter(std::string &stringToSpli
 
 }
 
+int bool_to_player(bool player) {
+    return (1 - player) + 1; // 0->2, 1->1
+}
+
+
