@@ -3,9 +3,10 @@
 
 
 #include "Auxiliary.h"
-#include "Classes.h"
+
 #include "GameLogic.h"
 #include "Game.h"
+#include "PlannedMove.h"
 
 /**
  * result of loading board

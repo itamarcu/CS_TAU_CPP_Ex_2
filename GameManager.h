@@ -3,11 +3,11 @@
 
 #include <vector>
 #include "GameManager.h"
-#include "Classes.h"
+
 #include "Game.h"
 #include "BoardIO.h"
 
-//singleton
+
 class GameManager {
 private:
     Game &game;

@@ -1,8 +1,8 @@
 #ifndef CS_TAU_CPP_RPS_GAMELOGIC_H
 #define CS_TAU_CPP_RPS_GAMELOGIC_H
 
-#include "Classes.h"
 #include "Game.h"
+#include "PlannedMove.h"
 
 enum FightResult {
     ATTACKER_WON, DEFENDER_WON, BOTH_PIECES_LOST

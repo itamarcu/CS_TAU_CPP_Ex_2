@@ -1,61 +1,10 @@
-#include "Classes.h"
+//
+// Created by daniel meltzer on 22/05/2018.
+//
+
 #include <iostream>
-
-/*
- * --- MyPoint ---
- */
-
-MyPoint::MyPoint(int x, int y) : x(x), y(y) {}
-
-int MyPoint::getX() const {
-    return x;
-}
-
-int MyPoint::getY() const {
-    return y;
-}
-
-MyPoint::~MyPoint() = default;
-
-/*
- * MyBoard
- */
-int MyBoard::getPlayer(const Point &pos) const {
-    GamePiece *piece = grid[pos.getX()][pos.getY()];
-    if (piece == nullptr)
-        return 0;
-    return bool_to_player(piece->player);
-}
-
-MyBoard::~MyBoard() = default; // vector of vectors is freed on its own
-
-/*
- * --- PlannedMove ---
- */
-
-const Point &PlannedMove::getOrigin() const {
-    return origin;
-}
-
-const Point &PlannedMove::getDestination() const {
-    return destination;
-}
-
-bool PlannedMove::isHas_joker_changed() const {
-    return has_joker_changed;
-}
-
-const Point &PlannedMove::getJoker_position() const {
-    return joker_position;
-}
-
-GamePieceType PlannedMove::getNew_joker_type() const {
-    return new_joker_type;
-}
-
-/*
- * --- GamePiece ---
- */
+#include "GamePiece.h"
+#include "Auxiliary.h"
 
 char GamePiece::to_char() {
     char ch;
@@ -111,11 +60,6 @@ bool GamePiece::canMove() {
     }
     return false;
 }
-
-/*
- * --- Extras ---
- */
-
 GamePieceType type_from_char(char c) {
     switch (c) {
         case ROCK_CHAR:

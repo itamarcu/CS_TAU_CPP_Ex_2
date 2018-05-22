@@ -1,7 +1,8 @@
 #ifndef CS_TAU_CPP_RPS_BGAME_H
 #define CS_TAU_CPP_RPS_BGAME_H
 
-#include "Classes.h"
+
+#include "MyBoard.h"
 
 enum MoveResult { // Can't be in GameLogic due to circular dependency
     SuccessfulMove,
@@ -11,6 +12,13 @@ enum MoveResult { // Can't be in GameLogic due to circular dependency
     TriedToMoveIntoAlly,
     TriedToMoveEnemy,
     TriedIllegalJokerChange
+};
+
+enum GameWinner {
+    GAME_NOT_ENDED = 3,
+    PLAYER_1_VICTORY = 1,
+    PLAYER_2_VICTORY = 2,
+    TIE = 0
 };
 
 class Game {

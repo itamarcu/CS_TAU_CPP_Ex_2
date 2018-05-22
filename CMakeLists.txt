@@ -3,14 +3,22 @@ project(CS_TAU_CPP_Ex_2)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(CS_TAU_CPP_RPS main.cpp
-        Auxiliary.cpp Auxiliary.h GameLogic.cpp GameLogic.h Classes.cpp Classes.h
-        BoardIO.cpp BoardIO.h GameManager.cpp GameManager.h Game.cpp Game.h
-
+add_executable(CS_TAU_CPP_Ex_2
+        Auxiliary.cpp
+        Auxiliary.h
         Board.h
+        BoardIO.cpp
+        BoardIO.h
         FightInfo.h
+        Game.cpp
+        Game.h
+        GameLogic.cpp
+        GameLogic.h
+        GameManager.cpp
+        GameManager.h
         JokerChange.h
+        main.cpp
         Move.h
         PiecePosition.h
         PlayerAlgorithm.h
-        Point.h)
+        Point.h MyPoint.cpp MyPoint.h MyBoard.cpp MyBoard.h GamePiece.cpp GamePiece.h PlannedMove.cpp PlannedMove.h)
