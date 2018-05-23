@@ -16,5 +16,7 @@ MyJokerChange::~MyJokerChange() {
 
 }
 
-MyJokerChange::MyJokerChange(const std::shared_ptr<Point> &positionChange, char newCharRepresentation) : positionChange(
-        positionChange), newJokerRepresntation(newCharRepresentation) {}
+MyJokerChange::MyJokerChange(const MyPoint &positionChange, char jokerRepresntation) : positionChange(
+        positionChange), newJokerRepresntation(jokerRepresntation) {
+
+}

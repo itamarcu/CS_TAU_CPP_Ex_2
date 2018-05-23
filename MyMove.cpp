@@ -5,11 +5,11 @@
 #include "MyMove.h"
 
 const Point &MyMove::getFrom() const {
-    return <#initializer#>;
+    return this->from;
 }
 
 const Point &MyMove::getTo() const {
-    return <#initializer#>;
+    return this->to;
 }
 
 MyMove::~MyMove()  = default;

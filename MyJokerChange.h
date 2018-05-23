@@ -17,6 +17,8 @@ class MyJokerChange: public JokerChange {
 public:
     MyJokerChange(const std::shared_ptr<Point> &positionChange, char newCharRepresentation);
 
+    MyJokerChange(const MyPoint &positionChange, char jokerRepresntation);
+
 /**
      * get new position of joker
      * @return

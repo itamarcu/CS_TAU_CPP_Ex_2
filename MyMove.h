@@ -7,6 +7,7 @@
 
 
 #include "Move.h"
+#include "MyPoint.h"
 
 class MyMove : public Move {
 public:
@@ -15,7 +16,9 @@ public:
     const Point &getTo() const override;
 
     ~MyMove() override;
-
+private:
+    MyPoint from;
+    MyPoint to;
 };
 
 

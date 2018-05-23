@@ -9,11 +9,19 @@ const Point &MyFightInfo::getPosition() const {
 }
 
 char MyFightInfo::getPiece(int player) const {
+    if (player == FIRST_PLAYER_CONST) {
+        return firstPlayerPiece;
+    }else if(player == SECOND_PLAYER_CONST){
+        return secondPlayerPiece;
+    }
     return 0;
 }
 
 int MyFightInfo::getWinner() const {
-    return 0;
+    return winner;
 }
 
 MyFightInfo::~MyFightInfo() = default;
+
+MyFightInfo::MyFightInfo(int winner, const MyPoint &position, char firstPlayerPiece, char secondPlayerPiece) : winner(
+        winner), position(position), firstPlayerPiece(firstPlayerPiece), secondPlayerPiece(secondPlayerPiece) {}

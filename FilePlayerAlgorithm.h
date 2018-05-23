@@ -2,13 +2,13 @@
 // Created by Daniel Meltzer on 23/05/2018.
 //
 
-#ifndef CS_TAU_CPP_EX_2_MYPLAYERALGORITHM_H
-#define CS_TAU_CPP_EX_2_MYPLAYERALGORITHM_H
+#ifndef CS_TAU_CPP_EX_2_FILEPLAYERALGORITHM_H
+#define CS_TAU_CPP_EX_2_FILEPLAYERALGORITHM_H
 
 
 #include "PlayerAlgorithm.h"
 
-class MyPlayerAlgorithm : public PlayerAlgorithm {
+class FilePlayerAlgorithm: public PlayerAlgorithm {
 public:
     void getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) override;
 
@@ -22,9 +22,9 @@ public:
 
     unique_ptr<JokerChange> getJokerChange() override;
 
-    ~MyPlayerAlgorithm() override;
+    ~FilePlayerAlgorithm() override;
 
 };
 
 
-#endif //CS_TAU_CPP_EX_2_MYPLAYERALGORITHM_H
+#endif //CS_TAU_CPP_EX_2_FILEPLAYERALGORITHM_H

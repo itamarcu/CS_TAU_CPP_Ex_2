@@ -6,8 +6,24 @@
 #define CS_TAU_CPP_EX_2_MYPIECEPOSITION_H
 
 
-class MyPiecePosition {
+#include "PiecePosition.h"
+#include "MyPoint.h"
 
+class MyPiecePosition : public PiecePosition {
+public:
+    MyPiecePosition(char piece, char jokerRep, const MyPoint &position);
+
+    const Point &getPosition() const override;
+
+    char getPiece() const override;
+
+    char getJokerRep() const override;
+
+    ~MyPiecePosition() override;
+private:
+    char piece;
+    char jokerRep;
+    MyPoint position;
 };
 
 
