@@ -1,5 +1,5 @@
 //
-// Created by daniel meltzer on 22/05/2018.
+// Created by Daniel Meltzer on 22/05/2018.
 //
 
 #ifndef CS_TAU_CPP_EX_2_PLANNEDMOVER_H
@@ -9,6 +9,9 @@
 #include "Point.h"
 #include "MyPoint.h"
 
+/**
+ *
+ */
 class PlannedMove {
     // Fields
 private:

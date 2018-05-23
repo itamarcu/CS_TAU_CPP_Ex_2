@@ -1,16 +1,9 @@
 //
-// Created by daniel meltzer on 22/05/2018.
-//
+// Created by Daniel Meltzer on 22/05/2018.
+// @authors Daniel Meltzer and Itamar Curiel
 
 #include "MyPoint.h"
 
-void MyPoint::setX(int x) {
-    MyPoint::x = x;
-}
-
-void MyPoint::setY(int y) {
-    MyPoint::y = y;
-}
 int MyPoint::getX() const {
     return x;
 }

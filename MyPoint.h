@@ -1,5 +1,5 @@
 //
-// Created by daniel meltzer on 22/05/2018.
+// Created by Daniel Meltzer on 22/05/2018.
 //
 
 #ifndef CS_TAU_CPP_EX_2_MYPOINT_H
@@ -8,6 +8,9 @@
 
 #include "Point.h"
 
+/**
+ * This class implements Point interface
+ */
 class MyPoint : public Point {
 public:
     int x;
@@ -23,9 +26,7 @@ public:
 
     int getY() const override;
 
-    void setX(int x);
 
-    void setY(int y);
 };
 
 
