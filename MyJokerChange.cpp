@@ -12,11 +12,11 @@ char MyJokerChange::getJokerNewRep() const {
     return 0;
 }
 
-MyJokerChange::~MyJokerChange() {
+MyJokerChange::~MyJokerChange() = default;
 
-}
 
-MyJokerChange::MyJokerChange(const MyPoint &positionChange, char jokerRepresntation) : positionChange(
-        positionChange), newJokerRepresntation(jokerRepresntation) {
+
+MyJokerChange::MyJokerChange(const MyPoint &positionChange, char jokerRepresentation) : positionChange(
+        positionChange), newJokerRepresentation(jokerRepresentation) {
 
 }

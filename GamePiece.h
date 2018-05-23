@@ -20,7 +20,7 @@ public:
     bool isJoker;
 
     /**
-     * initalize game piece
+     * initialize game piece
      * @param pieceType the type of piece
      * @param pieceIsJoker is the piece a joker - meaning it can change type
      * @param player - true if it's the first false if it's the second

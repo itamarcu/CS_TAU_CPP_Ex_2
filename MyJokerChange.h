@@ -11,27 +11,37 @@
 #include "MyPoint.h"
 
 /**
- *
+ * @authors Daniel Meltzer and Itamar Curiel
+ * this class let's you express change in joker piece
  */
 class MyJokerChange: public JokerChange {
 public:
-    MyJokerChange(const std::shared_ptr<Point> &positionChange, char newCharRepresentation);
 
-    MyJokerChange(const MyPoint &positionChange, char jokerRepresntation);
-
-/**
-     * get new position of joker
-     * @return
+    /**
+     * MyJokerChange constructor
+     * @warning in case no change accord no need to create instance
+     * @param positionChange joker position to change to
+     * @param newJokerRepresentation  new joker representation to change to
      */
+    MyJokerChange(const MyPoint &positionChange, char newJokerRepresentation);
+
+   /**
+    * get position change of joker
+    * @return Point subclass instance for new position
+    */
     const Point &getJokerChangePosition() const override;
 
+    /**
+     * get new char representation of joker
+     * @return new char joker representation(after change)
+     */
     char getJokerNewRep() const override;
 
     ~MyJokerChange() override;
 
 private:
     MyPoint positionChange;
-    char newJokerRepresntation;
+    char newJokerRepresentation;
 };
 
 

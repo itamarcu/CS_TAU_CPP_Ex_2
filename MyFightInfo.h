@@ -10,8 +10,9 @@
 #include "MyPoint.h"
 #define FIRST_PLAYER_CONST 1
 #define SECOND_PLAYER_CONST 2
-/*
- * @author: Daniel Meltzer and Itamar Curiel
+
+/**
+ * @authors: Daniel Meltzer and Itamar Curiel
  */
 class MyFightInfo : public FightInfo {
 public:
@@ -20,7 +21,11 @@ public:
     const Point &getPosition() const override;
 
     char getPiece(int player) const override;
-
+    /**
+     * get fight winner
+     * @return 0 - if both lose / tie, FIRST_PLAYER_CONST - if first player wins and SECOND_PLAYER_CONST - if
+     * second player wins
+     */
     int getWinner() const override;
 
     ~MyFightInfo() override;

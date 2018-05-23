@@ -4,12 +4,19 @@
 
 #include "MyMove.h"
 
+/**
+ * get move starting point
+ * @return Point subclass instance for starting point representation
+ */
 const Point &MyMove::getFrom() const {
-    return this->from;
+    return from;
 }
-
+/**
+ * get move destination
+ * @return Point subclass instance for destination representation
+ */
 const Point &MyMove::getTo() const {
-    return this->to;
+    return to;
 }
 
 MyMove::~MyMove()  = default;
