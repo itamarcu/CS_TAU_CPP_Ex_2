@@ -5,7 +5,7 @@
 #include "MyFightInfo.h"
 
 const Point &MyFightInfo::getPosition() const {
-    return <#initializer#>;
+    return position;
 }
 
 char MyFightInfo::getPiece(int player) const {

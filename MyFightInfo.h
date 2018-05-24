@@ -27,7 +27,7 @@ public:
     /**
      * get piece
      * @param player for player 1 this should be FIRST_PLAYER_CONST, for player 2 this should be SECOND_PLAYER_CONST
-     * @return piece char
+     * @return piece char, if player is invalid 0 will be returned
      */
     char getPiece(int player) const override;
 
