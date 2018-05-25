@@ -84,7 +84,7 @@ GamePieceType type_from_char(char c) {
 }
 
 
-char nonjoker_lowercase_type_from_char(GamePieceType gamePieceType) {
+char nonjoker_lowercase_char_from_type(GamePieceType gamePieceType) {
     char ch = GamePiece::chrFromType(gamePieceType);
     return ch;
 }
