@@ -16,24 +16,24 @@ private:
     MyPoint destination;
     bool has_joker_changed;
     MyPoint joker_position;
-    GamePieceType new_joker_type;
+    GamePiece::Type new_joker_type;
 
     //Constructors
 public:
     //For invalid moves:
     explicit PlannedMove(bool format) : is_good_format(format), origin(0, 0),
                                         destination(0, 0), has_joker_changed(false),
-                                        joker_position(0, 0), new_joker_type(None) {}
+                                        joker_position(0, 0), new_joker_type(GamePiece::Type::None) {}
 
     //For non-joker moves:
     explicit PlannedMove(int x1, int y1, int x2, int y2)
             : is_good_format(true), origin(x1, y1),
               destination(x2, y2), has_joker_changed(false),
-              joker_position(0, 0), new_joker_type(None) {}
+              joker_position(0, 0), new_joker_type(GamePiece::Type::None) {}
 
     //For joker moves:
     explicit PlannedMove(int x1, int y1, int x2, int y2,
-                         int jx, int jy, GamePieceType jtype)
+                         int jx, int jy, GamePiece::Type jtype)
             : is_good_format(true), origin(x1, y1),
               destination(x2, y2), has_joker_changed(true),
               joker_position(jx, jy), new_joker_type(jtype) {}
@@ -48,7 +48,7 @@ public:
 
     const MyPoint &getJokerPosition() const;
 
-    GamePieceType getNewJokerType() const;
+    GamePiece::Type getNewJokerType() const;
 };
 
 

@@ -25,9 +25,9 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove);
  * @param attacker attacker of fight
  * @param defender defender fight
  * @param position position the pieces fight in
- * @return MoveResult case
+ * @return FightResult case
  */
-MoveResult actually_fight(Game &game, std::shared_ptr<GamePiece> attacker,
+FightResult actually_fight(Game &game, std::shared_ptr<GamePiece> attacker,
                           std::shared_ptr<GamePiece> defender, Point &&position);
 
 #endif //CS_TAU_CPP_RPS_GAMELOGIC_H

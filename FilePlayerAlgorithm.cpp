@@ -4,11 +4,13 @@
 #include "MyPiecePosition.h"
 #include "BoardIO.h"
 #include <memory>
+#include <iostream>
 
 void FilePlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) {
     this->player = player;
     MyBoard board;
-    if (BoardIO::load_board(board, player == FIRST_PLAYER_CONST).type == BoardLoadingSuccess) {
+    auto result = BoardIO::load_board(board, player == FIRST_PLAYER_CONST);
+    if (result.type == BoardLoadingSuccess) {
         //iterate over board
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < M; ++j) {
@@ -17,13 +19,16 @@ void FilePlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
                     MyPoint pointOnBoard(i, j);
                     std::shared_ptr<GamePiece> gamePiece = board.grid[i][j];
                     char type = GamePiece::chrFromType(gamePiece->getType());
-                    char jokerChar =  gamePiece->isJoker ? type:(char)NON_JOKER_REPR_DEFAULT;
-                    unique_ptr<PiecePosition> piece = std::make_unique<MyPiecePosition>(gamePiece->isJoker ? JOKER_CHAR : type, jokerChar, pointOnBoard);
+                    char jokerChar = gamePiece->isJoker ? type : (char) NON_JOKER_REPR_DEFAULT;
+                    unique_ptr<PiecePosition> piece = std::make_unique<MyPiecePosition>(
+                            gamePiece->isJoker ? JOKER_CHAR : type, jokerChar, pointOnBoard);
                     vectorToFill.push_back(std::move(piece));
                 }
             }
         }
-
+    } else {
+        std::cout << "Invalid board-load for player " << player << ": errornum " << result.type << " in line "
+                  << result.line_num << std::endl;
     }
 }
 
@@ -67,7 +72,8 @@ unique_ptr<JokerChange> FilePlayerAlgorithm::getJokerChange() {
 
     std::shared_ptr<PlannedMove> plannedMove = movesList.front();
     if (plannedMove->getHasJokerChanged()) {
-        unique_ptr<JokerChange> jokerChange = std::make_unique<MyJokerChange>(plannedMove->getJokerPosition(), plannedMove->getNewJokerType());
+        unique_ptr<JokerChange> jokerChange = std::make_unique<MyJokerChange>(plannedMove->getJokerPosition(),
+                                                                              plannedMove->getNewJokerType());
         return jokerChange;
     } else
         return nullptr; // no joker change
@@ -75,16 +81,20 @@ unique_ptr<JokerChange> FilePlayerAlgorithm::getJokerChange() {
 
 FilePlayerAlgorithm::~FilePlayerAlgorithm() = default;
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
 FilePlayerAlgorithm::FilePlayerAlgorithm(int player) : player(player) {
-    //TODO construct moves list
     alreadyGotJokerPartOfMove = false;
     alreadyGotMovementPartOfMove = false;
     std::vector<PlannedMove> playersMoves;
-    BoardIO::load_moves(playersMoves,player);
+    BoardIO::load_moves(playersMoves, player);
     for (auto &playersMove : playersMoves) {
         std::shared_ptr<PlannedMove> ptr = std::make_shared<PlannedMove>(playersMove);
-        movesList.emplace_back(ptr);
+        movesList.push_back(ptr);
     }
 
 
 }
+
+#pragma clang diagnostic pop

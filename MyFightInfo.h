@@ -11,7 +11,7 @@
  */
 class MyFightInfo : public FightInfo {
 public:
-    MyFightInfo(int winner, const MyPoint &position, char firstPlayerPiece, char secondPlayerPiece);
+    MyFightInfo(int winner, const Point &position, char firstPlayerPiece, char secondPlayerPiece);
 
     /**
      * get position of fight

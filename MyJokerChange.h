@@ -22,7 +22,7 @@ public:
      * @param positionChange joker position to change to
      * @param newJokerRepresentation  new joker representation to change to
      */
-    MyJokerChange(const MyPoint &positionChange, GamePieceType newJokerRepresentation);
+    MyJokerChange(const MyPoint &positionChange, GamePiece::Type newJokerRepresentation);
 
    /**
     * get position change of joker

@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
 #define M 10  // Rows
 #define N 10  // Columns

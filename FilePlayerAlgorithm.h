@@ -8,7 +8,7 @@
 #include "MyBoard.h"
 
 
-class FilePlayerAlgorithm: public PlayerAlgorithm {
+class FilePlayerAlgorithm : public PlayerAlgorithm {
 private:
     bool alreadyGotJokerPartOfMove;
     bool alreadyGotMovementPartOfMove;
@@ -16,12 +16,17 @@ private:
 
     std::list<std::shared_ptr<PlannedMove>> movesList;
 public:
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
+
     /**
      * initialize file player algorithm using player, this performs load from matching default file
      * as described in EX1
      * @param player
      */
     explicit FilePlayerAlgorithm(int player);
+
+#pragma clang diagnostic pop
 
     /**
      * initialize player positions

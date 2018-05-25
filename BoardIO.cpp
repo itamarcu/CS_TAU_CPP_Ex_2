@@ -14,7 +14,7 @@ LoadBoardResult BoardIO::load_board(MyBoard &board, bool player) {
         std::cerr << "Unable to find/open this file path: " << file_path << std::endl;
         return LoadBoardResult(0, UnableToOpenPath);
     }
-    std::map<GamePieceType, int> remainingCounts;
+    std::map<GamePiece::Type, int> remainingCounts;
     int remainingJokerCount;
     settingCounts(remainingCounts, remainingJokerCount);
 
@@ -27,20 +27,21 @@ LoadBoardResult BoardIO::load_board(MyBoard &board, bool player) {
         if (contents->size() > 4 || contents->size() < 3)
             return LoadBoardResult(line_num, BadFormat);
 
-        auto piece = GamePiece(player, GamePieceType::None);
-        if (contents->size() == 4) { // is a Joker
+        auto piece = GamePiece(player, GamePiece::Type::None);
+        bool is_joker = contents->size() == 4;
+        if (is_joker) {
             if ((*contents)[0] != "J") // NOTE - this is a string, not a char
                 return LoadBoardResult(line_num, BadFormat);
             piece.isJoker = true;
             piece.type = type_from_char((*contents)[3][0]);
-            if (piece.type == None || piece.type == Flag) // Only allowed: R P S B
+            if (piece.type == GamePiece::Type::None || piece.type == GamePiece::Type::Flag) // Only allowed: R P S B
                 return LoadBoardResult(line_num, InvalidJokerPieceType);
             remainingJokerCount--;
             if (remainingJokerCount < 0)
                 return LoadBoardResult(line_num, TooManyOfSamePiece);
         } else { // is not a Joker
             piece.type = type_from_char((*contents)[0][0]);
-            if (piece.type == None)
+            if (piece.type == GamePiece::Type::None)
                 return LoadBoardResult(line_num, InvalidPieceType);
             remainingCounts[piece.type]--;
             if (remainingCounts[piece.type] < 0)
@@ -57,7 +58,7 @@ LoadBoardResult BoardIO::load_board(MyBoard &board, bool player) {
         c -= 1; // ^
 
 
-        std::shared_ptr<GamePiece> piece_ptr = std::make_shared<GamePiece>(piece);
+        std::shared_ptr<GamePiece> piece_ptr = std::make_shared<GamePiece>(player, piece.type, is_joker);
         if (board.grid[r][c] == nullptr)
             board.grid[r][c] = piece_ptr;
         else if (board.grid[r][c]->player == player) {
@@ -65,7 +66,7 @@ LoadBoardResult BoardIO::load_board(MyBoard &board, bool player) {
         }
     }
 
-    if (remainingCounts[GamePieceType::Flag] != 0)
+    if (remainingCounts[GamePiece::Type::Flag] != 0)
         return LoadBoardResult(line_num, NotAllFlagsWerePlaced);
 
     return LoadBoardResult(line_num, BoardLoadingSuccess);
@@ -76,14 +77,14 @@ LoadBoardResult BoardIO::load_board(MyBoard &board, bool player) {
  * @param remainingCounts remaining counts map of pieces
  * @param remainingJokerCount remaining counts of joker
  */
-void BoardIO::settingCounts(std::map<GamePieceType, int> &remainingCounts, int &remainingJokerCount) {
-    remainingCounts = std::map<GamePieceType, int>();
+void BoardIO::settingCounts(std::map<GamePiece::Type, int> &remainingCounts, int &remainingJokerCount) {
+    remainingCounts = std::map<GamePiece::Type, int>();
     remainingJokerCount = J;
-    remainingCounts[Rock] = R;
-    remainingCounts[Paper] = P;
-    remainingCounts[Scissors] = S;
-    remainingCounts[Bomb] = B;
-    remainingCounts[Flag] = F;
+    remainingCounts[GamePiece::Type::Rock] = R;
+    remainingCounts[GamePiece::Type::Paper] = P;
+    remainingCounts[GamePiece::Type::Scissors] = S;
+    remainingCounts[GamePiece::Type::Bomb] = B;
+    remainingCounts[GamePiece::Type::Flag] = F;
 }
 
 void _load_player_moves(GameMoves &gameMoves, bool player) {
@@ -113,7 +114,7 @@ void _load_moves_to_vec(bool player, std::vector<PlannedMove> &moves) {
         if (contents->size() != 4 && contents->size() != 8) {
             std::cout << "bad format line:    \"" << line << "\" (was split into " <<
                       contents->size() << ")" << std::endl;
-            moves.emplace_back(PlannedMove(false));
+            moves.emplace_back(false);
             continue;
         }
 
@@ -124,7 +125,7 @@ void _load_moves_to_vec(bool player, std::vector<PlannedMove> &moves) {
         int y2 = std::stoi((*contents)[3]);
         if (x1 < 1 || x1 > M || y1 < 1 || y1 > N ||
             x2 < 1 || x2 > M || y2 < 1 || y2 > N) {
-            moves.emplace_back(PlannedMove(false));
+            moves.emplace_back(false);
             continue;
         }
         x1 -= 1; // because 0-indexing
@@ -134,26 +135,26 @@ void _load_moves_to_vec(bool player, std::vector<PlannedMove> &moves) {
 
         if (contents->size() == 8) {
             if ((*contents)[4] != "J:") {
-                moves.emplace_back(PlannedMove(false));
+                moves.emplace_back(false);
                 continue;
             };
 
             int jx = std::stoi((*contents)[5]);
             int jy = std::stoi((*contents)[6]);
             if (jx < 1 || jx > M || jy < 1 || jy > N) {
-                moves.emplace_back(PlannedMove(false));
+                moves.emplace_back(false);
                 continue;
             }
             jx -= 1;
             jy -= 1;
-            GamePieceType jokerType = type_from_char((*contents)[7][0]);
-            if (jokerType == None) {
-                moves.emplace_back(PlannedMove(false));
+            GamePiece::Type jokerType = type_from_char((*contents)[7][0]);
+            if (jokerType == GamePiece::Type::None) {
+                moves.emplace_back(false);
                 continue;
             }
-            moves.emplace_back(PlannedMove(x1, y1, x2, y2, jx, jy, jokerType));
+            moves.emplace_back(x1, y1, x2, y2, jx, jy, jokerType);
         } else
-            moves.emplace_back(PlannedMove(x1, y1, x2, y2));
+            moves.emplace_back(x1, y1, x2, y2);
     }
 }
 
