@@ -1,7 +1,3 @@
-//
-// Created by Daniel Meltzer on 22/05/2018.
-//
-
 #include "PlannedMove.h"
 const MyPoint & PlannedMove::getOrigin() const {
     return origin;

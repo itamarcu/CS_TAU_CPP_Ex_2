@@ -1,7 +1,3 @@
-//
-// Created by Daniel Meltzer on 22/05/2018.
-// @authors Daniel Meltzer and Itamar Curiel
-
 #include "MyPoint.h"
 
 int MyPoint::getX() const {

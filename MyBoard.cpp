@@ -1,7 +1,3 @@
-//
-// Created by Daniel Meltzer on 22/05/2018.
-//
-
 #include "MyBoard.h"
 #include "Point.h"
 

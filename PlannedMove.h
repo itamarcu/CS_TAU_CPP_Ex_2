@@ -1,7 +1,3 @@
-//
-// Created by Daniel Meltzer on 22/05/2018.
-//
-
 #ifndef CS_TAU_CPP_EX_2_PLANNEDMOVER_H
 #define CS_TAU_CPP_EX_2_PLANNEDMOVER_H
 
