@@ -15,6 +15,6 @@ const MyPoint &PlannedMove::getJokerPosition() const {
     return joker_position;
 }
 
-GamePieceType PlannedMove::getNewJokerType() const {
+GamePiece::Type PlannedMove::getNewJokerType() const {
     return new_joker_type;
 }

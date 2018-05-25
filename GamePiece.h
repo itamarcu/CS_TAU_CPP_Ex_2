@@ -1,29 +1,31 @@
 #ifndef CS_TAU_CPP_EX_2_GAMEPIECE_H
 #define CS_TAU_CPP_EX_2_GAMEPIECE_H
+
 /**
  * game piece type - for jokers, this is what their non-joker type is
 */
-enum GamePieceType {
-    None, // empty spaces are this type
-    Rock, Paper, Scissors, Bomb,//Jokers have a current type but also the boolean
-    Flag // jokers can't be flags
-};
+
 
 class GamePiece {
 public:
+    enum Type {
+        None, // empty spaces are this type
+        Rock, Paper, Scissors, Bomb,//Jokers have a current type but also the boolean
+        Flag // jokers can't be flags
+    };
+
     bool player;
-    GamePieceType type;
+    Type type;
     bool isJoker;
 
     /**
      * initialize game piece
+     * @param playerIsFirst - true if it's the first false if it's the second
      * @param pieceType the type of piece (current "type", if it's a joker)
      * @param pieceIsJoker true if piece is a joker
-     * @param playerIsFirst - true if it's the first false if it's the second
      */
-    explicit GamePiece(bool playerIsFirst, GamePieceType pieceType, bool pieceIsJoker = false) : player(playerIsFirst),
-                                                                                                 type(pieceType),
-                                                                                                 isJoker(pieceIsJoker) {}
+    explicit GamePiece(const bool playerIsFirst, const Type pieceType, const bool pieceIsJoker = false) :
+            player(playerIsFirst), type(pieceType), isJoker(pieceIsJoker) {}
 
     /**
      *
@@ -37,12 +39,14 @@ public:
      */
     bool canMove();
 
-    GamePieceType getType() const;
-    static char chrFromType(const GamePieceType &gamePieceType);
+    Type getType() const;
+
+    static char chrFromType(const Type &gamePieceType);
 };
 
 
-GamePieceType type_from_char(char c);
+GamePiece::Type type_from_char(const char c);
 
-char nonjoker_lowercase_char_from_type(GamePieceType gamePieceType);
+char nonjoker_lowercase_char_from_type(const GamePiece::Type gamePieceType);
+
 #endif //CS_TAU_CPP_EX_2_GAMEPIECE_H

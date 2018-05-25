@@ -3,11 +3,10 @@
 #include "Auxiliary.h"
 
 
-
 char GamePiece::to_char() {
     char ch;
     if (isJoker)
-        ch = 'J';
+        ch = JOKER_CHAR;
     else
         switch (type) {
             case Rock:
@@ -24,7 +23,7 @@ char GamePiece::to_char() {
                 break;
             case None:
                 ch = JOKER_CHAR;
-                break; // Notice
+                break; // Notice this
             case Flag:
                 ch = FLAG_CHAR;
                 break;
@@ -59,37 +58,37 @@ bool GamePiece::canMove() {
     return false;
 }
 
-GamePieceType GamePiece::getType() const {
+GamePiece::Type GamePiece::getType() const {
     return type;
 }
 
-GamePieceType type_from_char(char c) {
+GamePiece::Type type_from_char(const char c) {
     switch (c) {
         case ROCK_CHAR:
-            return Rock;
+            return GamePiece::Type::Rock;
         case PAPER_CHAR:
-            return Paper;
+            return GamePiece::Type::Paper;
         case SCISSORS_CHAR:
-            return Scissors;
+            return GamePiece::Type::Scissors;
         case BOMB_CHAR:
-            return Bomb;
+            return GamePiece::Type::Bomb;
         case JOKER_CHAR:
-            return None;
+            return GamePiece::Type::None;
         case FLAG_CHAR:
-            return Flag;
+            return GamePiece::Type::Flag;
         default:
             std::cout << "ERROR 95087216986345: char is " << c << std::endl;
-            return None;
+            return GamePiece::Type::None;
     }
 }
 
 
-char nonjoker_lowercase_char_from_type(GamePieceType gamePieceType) {
+char nonjoker_lowercase_char_from_type(const GamePiece::Type gamePieceType) {
     char ch = GamePiece::chrFromType(gamePieceType);
     return ch;
 }
 
-char GamePiece::chrFromType(const GamePieceType &gamePieceType){
+char GamePiece::chrFromType(const Type &gamePieceType) {
 
     char ch;
     switch (gamePieceType) {

@@ -80,7 +80,7 @@ public:
      * @param remainingCounts remaining counts map of pieces
      * @param remainingJokerCount remaining counts of joker
      */
-    static void settingCounts(std::map<GamePieceType, int> &remainingCounts, int &remainingJokerCount);
+    static void settingCounts(std::map<GamePiece::Type, int> &remainingCounts, int &remainingJokerCount);
 
 };
 
