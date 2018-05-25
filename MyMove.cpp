@@ -20,3 +20,5 @@ const Point &MyMove::getTo() const {
 }
 
 MyMove::~MyMove()  = default;
+
+MyMove::MyMove(const MyPoint &from, const MyPoint &to) : from(from), to(to) {}

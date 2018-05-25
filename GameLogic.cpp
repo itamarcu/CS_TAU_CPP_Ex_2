@@ -103,23 +103,22 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
     return SuccessfulMove;
 }
 
-MoveResult actually_fight(Game &game, GamePiece *attacker,
-                          GamePiece *defender, Point &&position) {
+MoveResult actually_fight(Game &game, std::shared_ptr<GamePiece> attacker,
+                          std::shared_ptr<GamePiece> defender, Point &&position) {
     int r = position.getX();
     int c = position.getY();
     auto fightResult = simulate_fight(*attacker, *defender);
     switch (fightResult) {
         case ATTACKER_WON:
-            delete defender;
+
             game.board.grid[r][c] = attacker;
             return MoveResult::SuccessfulMove;
         case DEFENDER_WON:
-            delete attacker;
+
             game.board.grid[r][c] = defender;
             return MoveResult::SuccessfulMove;
         case BOTH_PIECES_LOST:
-            delete attacker;
-            delete defender;
+
             game.board.grid[r][c] = nullptr;
             return MoveResult::SuccessfulMove;
         default:

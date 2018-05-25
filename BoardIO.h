@@ -7,6 +7,7 @@
 #include "GameLogic.h"
 #include "Game.h"
 #include "PlannedMove.h"
+#include <map>
 
 /**
  * result of loading board
@@ -69,7 +70,10 @@ public:
      */
     static LoadBoardResult _add_load_into_board(Game &game, bool player);
 
+    static LoadBoardResult initalizeBoard(MyBoard& board, bool player);
 
+
+    static void settingCounts(std::map<GamePieceType, int> &remainingCounts, int &remainingJokerCount);
 };
 
 

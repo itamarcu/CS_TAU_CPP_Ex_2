@@ -1,8 +1,9 @@
 #ifndef CS_TAU_CPP_RPS_AUXILIARY_H
 #define CS_TAU_CPP_RPS_AUXILIARY_H
 
-#include <string>
+
 #include <vector>
+#include <string>
 
 #define M 10  // Rows
 #define N 10  // Columns
@@ -18,6 +19,8 @@
 #define BOMB_CHAR 'B'
 #define JOKER_CHAR 'J'
 #define FLAG_CHAR 'F'
+#define FIRST_PLAYER_CONST 1
+#define SECOND_PLAYER_CONST 2
 
 /**
  * print line

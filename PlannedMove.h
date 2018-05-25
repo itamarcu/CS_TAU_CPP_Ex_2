@@ -44,13 +44,13 @@ public:
 
     //GETTERS
 public:
-    const Point &getOrigin() const;
+    const MyPoint & getOrigin() const;
 
-    const Point &getDestination() const;
+    const MyPoint & getDestination() const;
 
     bool isHas_joker_changed() const;
 
-    const Point &getJoker_position() const;
+    const MyPoint & getJoker_position() const;
 
     GamePieceType getNew_joker_type() const;
 };

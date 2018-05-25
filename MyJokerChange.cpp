@@ -5,7 +5,7 @@
 #include "MyJokerChange.h"
 
 const Point &MyJokerChange::getJokerChangePosition() const {
-    return <#initializer#>;
+    return positionChange;
 }
 
 char MyJokerChange::getJokerNewRep() const {

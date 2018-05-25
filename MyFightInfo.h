@@ -8,8 +8,7 @@
 
 #include "FightInfo.h"
 #include "MyPoint.h"
-#define FIRST_PLAYER_CONST 1
-#define SECOND_PLAYER_CONST 2
+#include "Auxiliary.h"
 
 /**
  * @authors: Daniel Meltzer and Itamar Curiel

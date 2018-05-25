@@ -11,6 +11,8 @@
 
 class MyMove : public Move {
 public:
+    MyMove(const MyPoint &from, const MyPoint &to);
+
     const Point &getFrom() const override;
 
     const Point &getTo() const override;

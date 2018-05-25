@@ -3,11 +3,11 @@
 //
 
 #include "PlannedMove.h"
-const Point &PlannedMove::getOrigin() const {
+const MyPoint & PlannedMove::getOrigin() const {
     return origin;
 }
 
-const Point &PlannedMove::getDestination() const {
+const MyPoint & PlannedMove::getDestination() const {
     return destination;
 }
 
@@ -15,7 +15,7 @@ bool PlannedMove::isHas_joker_changed() const {
     return has_joker_changed;
 }
 
-const Point &PlannedMove::getJoker_position() const {
+const MyPoint & PlannedMove::getJoker_position() const {
     return joker_position;
 }
 
