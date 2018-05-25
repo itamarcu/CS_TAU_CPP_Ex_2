@@ -32,3 +32,10 @@ int bool_to_player(bool player) {
 }
 
 
+int randomNumberInRange(int from, int to) {
+
+    std::random_device                  rand_dev;
+    std::mt19937                        generator(rand_dev());
+    std::uniform_int_distribution<int>  distr(from, to);
+    return distr(generator);
+}

@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <random>
 
 #define M 10  // Rows
 #define N 10  // Columns
@@ -45,4 +46,11 @@ std::unique_ptr<std::vector<std::string>> split_string_using_delimiter(std::stri
  */
 int bool_to_player(bool player);
 
+/**
+ * generate range number
+ * @param from inclusive from
+ * @param to inclusive to
+ * @return random number in given range
+ */
+int randomNumberInRange( const int from, const int to);
 #endif //CS_TAU_CPP_RPS_AUXILIARY_H
