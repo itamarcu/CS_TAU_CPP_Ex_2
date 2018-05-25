@@ -6,7 +6,7 @@
 
 void _load_moves_to_vec(bool player, std::vector<PlannedMove> &moves);
 
-LoadBoardResult BoardIO::load_board(MyBoard &board, bool player){
+LoadBoardResult BoardIO::load_board(MyBoard &board, bool player) {
     std::string player_num = player ? "1" : "2";
     std::string file_path = "player" + player_num + ".rps_board";
     std::ifstream fin(file_path);
@@ -57,7 +57,7 @@ LoadBoardResult BoardIO::load_board(MyBoard &board, bool player){
         c -= 1; // ^
 
 
-        std::shared_ptr<GamePiece> piece_ptr(new GamePiece {piece});
+        std::shared_ptr<GamePiece> piece_ptr(new GamePiece{piece});
         if (board.grid[r][c] == nullptr)
             board.grid[r][c] = piece_ptr;
         else if (board.grid[r][c]->player == player) {
@@ -71,20 +71,19 @@ LoadBoardResult BoardIO::load_board(MyBoard &board, bool player){
     return LoadBoardResult(line_num, BoardLoadingSuccess);
 }
 
-    /**
-     * setting counts for loading board file
-     * @param remainingCounts remaining counts map of pieces
-     * @param remainingJokerCount remaining counts of joker
-     */
+/**
+ * setting counts for loading board file
+ * @param remainingCounts remaining counts map of pieces
+ * @param remainingJokerCount remaining counts of joker
+ */
 void BoardIO::settingCounts(std::map<GamePieceType, int> &remainingCounts, int &remainingJokerCount) {
-    remainingCounts= std::map<GamePieceType, int>();
-    remainingJokerCount= J;
+    remainingCounts = std::map<GamePieceType, int>();
+    remainingJokerCount = J;
     remainingCounts[Rock] = R;
     remainingCounts[Paper] = P;
     remainingCounts[Scissors] = S;
     remainingCounts[Bomb] = B;
-    remainingCounts[Flag] = F;// Joker
-
+    remainingCounts[Flag] = F;
 }
 
 void _load_player_moves(GameMoves &gameMoves, bool player) {
@@ -226,5 +225,5 @@ void BoardIO::store_game(Game &game) {
 }
 
 void BoardIO::load_moves(std::vector<PlannedMove> &moves, int player) {
-    _load_moves_to_vec(player == FIRST_PLAYER_CONST,moves);
+    _load_moves_to_vec(player == FIRST_PLAYER_CONST, moves);
 }
