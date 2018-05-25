@@ -55,9 +55,7 @@ unique_ptr<JokerChange> FilePlayerAlgorithm::getJokerChange() {
 
 FilePlayerAlgorithm::~FilePlayerAlgorithm() = default;
 
-FilePlayerAlgorithm::FilePlayerAlgorithm(int player, std::list<std::shared_ptr<PlannedMove>> &movesList,
-                                         MyBoard &initialBoard) : player(player) {
-    movesList = std::move(movesList);
+FilePlayerAlgorithm::FilePlayerAlgorithm(int player) : player(player) {
     alreadyGotJokerPartOfMove = false;
     alreadyGotMovementPartOfMove = false;
 }
