@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.9)
-project(CS_TAU_CPP_Ex_2)
+project(CS_TAU_CPP_RPS)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(CS_TAU_CPP_Ex_2
+add_executable(CS_TAU_CPP_RPS
         AutoPlayerAlogrithm.cpp
         AutoPlayerAlogrithm.h
         Auxiliary.cpp

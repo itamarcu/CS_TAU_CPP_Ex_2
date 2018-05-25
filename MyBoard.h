@@ -6,6 +6,7 @@
 #define CS_TAU_CPP_EX_2_MYBOARD_H
 
 
+#include <memory>
 #include "Board.h"
 #include "GamePiece.h"
 #include "Auxiliary.h"

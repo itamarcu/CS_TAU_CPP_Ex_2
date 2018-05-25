@@ -2,7 +2,7 @@ COMP = g++-5.3.0
 
 OBJS = Auxiliary.o BoardIO.o Classes.o Game.o GameLogic.o GameManager.o main.o 
 
-EXEC = ex1
+EXEC = CS_TAU_CPP_RPS
 CPP_COMP_FLAG = -std=c++14 -Wall -Wextra \
 -Werror -pedantic-errors -DNDEBUG
 

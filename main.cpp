@@ -10,7 +10,6 @@ using std::endl;
 
 int main() {
     print_line("---Program started---");
-
     Game game = Game();
     BoardIO::setup_game(game);
     GameManager gm = GameManager(game);

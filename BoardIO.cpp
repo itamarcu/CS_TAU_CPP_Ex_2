@@ -4,85 +4,7 @@
 #include <sstream>
 #include "BoardIO.h"
 
-
-LoadBoardResult BoardIO::_add_load_into_board(Game &game, bool player) {
-
-    //to be deleted
-    std::string player_num = player ? "1" : "2";
-    std::string file_path = "player" + player_num + ".rps_board";
-    std::ifstream fin(file_path);
-    if (fin.fail()) {
-        std::cerr << "Unable to find/open this file path: " << file_path << std::endl;
-        return LoadBoardResult(0, UnableToOpenPath);
-    }
-
-    auto remainingCounts = std::map<GamePieceType, int>();
-    remainingCounts[GamePieceType::Rock] = R;
-    remainingCounts[GamePieceType::Paper] = P;
-    remainingCounts[GamePieceType::Scissors] = S;
-    remainingCounts[GamePieceType::Bomb] = B;
-    remainingCounts[GamePieceType::Flag] = F;
-    int remainingJokerCount = J; // Joker
-
-    int line_num = 0; // Line starts at 1!
-    std::string line;
-    while (std::getline(fin, line)) {
-        line_num += 1;
-        auto delimiter = std::string(" "); // sadly, can't use " "s
-        auto contents = split_string_using_delimiter(line, delimiter);
-        if (contents->size() > 4 || contents->size() < 3)
-            return LoadBoardResult(line_num, BadFormat);
-
-        auto piece = GamePiece(player);
-        if (contents->size() == 4) { // is a Joker
-            if ((*contents)[0] != "J") // NOTE - this is a string, not a char
-                return LoadBoardResult(line_num, BadFormat);
-            piece.isJoker = true;
-            piece.type = type_from_char((*contents)[3][0]);
-            if (piece.type == None || piece.type == Flag) // Only allowed: R P S B
-                return LoadBoardResult(line_num, InvalidJokerPieceType);
-            remainingJokerCount--;
-            if (remainingJokerCount < 0)
-                return LoadBoardResult(line_num, TooManyOfSamePiece);
-        } else { // is not a Joker
-            piece.type = type_from_char((*contents)[0][0]);
-            if (piece.type == None)
-                return LoadBoardResult(line_num, InvalidPieceType);
-            remainingCounts[piece.type]--;
-            if (remainingCounts[piece.type] < 0)
-                return LoadBoardResult(line_num, TooManyOfSamePiece);
-        }
-
-        piece.player = player;
-
-        int r = std::stoi((*contents)[1]);
-        int c = std::stoi((*contents)[2]);
-        if (r < 1 || r > M || c < 1 || c > N)
-            return LoadBoardResult(line_num, CoordinatesOutOfBound);
-        r -= 1; // because 0-indexing
-        c -= 1; // ^
-
-        auto *piece_ptr1 = new GamePiece(piece); // uses implicit Copy Constructor
-        std::shared_ptr<GamePiece> shared_ptr = std::shared_ptr<GamePiece>(piece_ptr1);
-        if (game.board.grid[r][c] == nullptr)
-            true;
-            //game.board.grid[r][c] = piece_ptr;
-        else if (game.board.grid[r][c]->player == player) {
-
-            return LoadBoardResult(line_num, TwoPiecesSamePlayerSamePosition);
-        } else {
-            //This code is here because otherwise we'll have to store 2 boards and merge
-            actually_fight(game, shared_ptr, game.board.grid[r][c], MyPoint(r, c));
-            //if piece lost the fight, pointer was deleted
-        }
-    }
-
-    if (remainingCounts[GamePieceType::Flag] != 0)
-        return LoadBoardResult(line_num, NotAllFlagsWerePlaced);
-
-    return LoadBoardResult(line_num, BoardLoadingSuccess);
-}
-LoadBoardResult BoardIO::initalizeBoard(MyBoard& board, bool player){
+LoadBoardResult BoardIO::load_board(MyBoard &board, bool player){
     std::string player_num = player ? "1" : "2";
     std::string file_path = "player" + player_num + ".rps_board";
     std::ifstream fin(file_path);
@@ -103,7 +25,7 @@ LoadBoardResult BoardIO::initalizeBoard(MyBoard& board, bool player){
         if (contents->size() > 4 || contents->size() < 3)
             return LoadBoardResult(line_num, BadFormat);
 
-        auto piece = GamePiece(player);
+        auto piece = GamePiece(player, GamePieceType::None);
         if (contents->size() == 4) { // is a Joker
             if ((*contents)[0] != "J") // NOTE - this is a string, not a char
                 return LoadBoardResult(line_num, BadFormat);
@@ -235,8 +157,8 @@ void BoardIO::load_moves(GameMoves &gameMoves) {
 }
 
 void BoardIO::setup_game(Game &game) {
-    LoadBoardResult load_of_1 = BoardIO::_add_load_into_board(game, true);
-    LoadBoardResult load_of_2 = BoardIO::_add_load_into_board(game, false);
+    LoadBoardResult load_of_1 = BoardIO::load_board(game.board, true);
+    LoadBoardResult load_of_2 = BoardIO::load_board(game.board, false);
     if (load_of_1.type != BoardLoadingSuccess && load_of_2.type != BoardLoadingSuccess) {
         std::stringstream s;
         s << "Bad Positioning input file for both players - ";

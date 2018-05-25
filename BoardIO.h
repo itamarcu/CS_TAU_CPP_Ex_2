@@ -41,9 +41,11 @@ public:
     explicit GameMoves() : p1_moves(), p2_moves() {}
 };
 
+/**
+ * "static" class for handling file input and output regarding boards
+ */
 class BoardIO {
 public:
-
     /**
      * setup a game
      * @param game game to setup
@@ -64,13 +66,11 @@ public:
 
     /**
      * load file of player to board
-     * @param game game to add file to
+     * @param board board to load into
      * @param player true for player 1 , false for 2
-     * @return one of LoadBoardResult cases according to the succes of the function
+     * @return one of LoadBoardResult cases according to the success of the function
      */
-    static LoadBoardResult _add_load_into_board(Game &game, bool player);
-
-    static LoadBoardResult initalizeBoard(MyBoard& board, bool player);
+    static LoadBoardResult load_board(MyBoard &board, bool player);
 
 
     static void settingCounts(std::map<GamePieceType, int> &remainingCounts, int &remainingJokerCount);

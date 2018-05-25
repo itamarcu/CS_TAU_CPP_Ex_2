@@ -22,10 +22,10 @@ MyBoard::MyBoard() {
 }
 
 void MyBoard::initEmptyGrid() {
-    for(int i  = 0 ; i < N; i++){
-        std::vector<std::shared_ptr < GamePiece>> column;
-        for(int j = 0;j<M;j++){
-            column.emplace_back(std::make_shared<GamePiece>(nullptr));
+    for (int i = 0; i < N; i++) {
+        std::vector<std::shared_ptr<GamePiece>> column;
+        for (int j = 0; j < M; j++) {
+            column.emplace_back(nullptr);
         }
         grid.emplace_back(column);
     }

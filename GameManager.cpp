@@ -2,6 +2,10 @@
 #include <sstream>
 #include "GameManager.h"
 
+void NewGameManager::run_game() {
+
+}
+
 void GameManager::run_moves(GameMoves &gameMoves) {
     // The `moves` variable is an array of Pointers, and not References,
     // because C++ forbids arrays of references
@@ -36,22 +40,33 @@ void GameManager::run_moves(GameMoves &gameMoves) {
                     line_num[curr_p_index] += 1;
                     break;
                 case TriedToMoveEmptySpace: // 1
+                    std::cout << "Bad input for player " << (curr_p_index ? 2 : 1) << ": TriedToMoveEmptySpace\n";
+                    goto case_error;
                 case TriedToMoveUnmovablePiece: // 2
+                    std::cout << "Bad input for player " << (curr_p_index ? 2 : 1) << ": TriedToMoveUnmovablePiece\n";
+                    goto case_error;
                 case TriedToMoveOutOfBorders: // 3
+                    std::cout << "Bad input for player " << (curr_p_index ? 2 : 1) << ": TriedToMoveOutOfBorders\n";
+                    goto case_error;
                 case TriedToMoveIntoAlly: // 4
+                    std::cout << "Bad input for player " << (curr_p_index ? 2 : 1) << ": TriedToMoveIntoAlly\n";
+                    goto case_error;
                 case TriedToMoveEnemy: // 5
+                    std::cout << "Bad input for player " << (curr_p_index ? 2 : 1) << ": TriedToMoveEnemy\n";
+                    goto case_error;
                 case TriedIllegalJokerChange: // 6
+                    std::cout << "Bad input for player " << (curr_p_index ? 2 : 1) << ": TriedIllegalJokerChange\n";
+                    goto case_error;
+                default:
+                    std::cerr << "BUG 58689217038" << std::endl;
+                    break;
+                case_error:
                     s << "Bad Moves input file";
                     s << " for player " << (curr_p_index ? 2 : 1);
                     s << " - line " << (line_num[curr_p_index] + 1);
                     reason = s.str();
                     game.endGame(curr_p_index ? PLAYER_1_VICTORY : PLAYER_2_VICTORY, reason);
-
-//                    std::cout << "debug: Tried no. " << move_result << std::endl;
                     return;
-                default:
-//                    std::cerr << "BUG 58689217038" << std::endl;
-                    break;
             }
         }
         // Check winner

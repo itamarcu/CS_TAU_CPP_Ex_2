@@ -60,6 +60,7 @@ bool GamePiece::canMove() {
     }
     return false;
 }
+
 GamePieceType type_from_char(char c) {
     switch (c) {
         case ROCK_CHAR:
