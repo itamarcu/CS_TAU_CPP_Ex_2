@@ -3,6 +3,8 @@
 #include "GameManager.h"
 
 void NewGameManager::run_game() {
+    auto p1_positions = std::vector<std::unique_ptr<PiecePosition>>(17);
+    p1_algo->getInitialPositions(1, p1_positions);
 
 }
 

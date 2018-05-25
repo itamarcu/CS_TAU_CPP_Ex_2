@@ -11,11 +11,12 @@
 class NewGameManager {
 private:
     Game &game;
-    PlayerAlgorithm *p1_algo;
-    PlayerAlgorithm *p2_algo;
+    std::unique_ptr<PlayerAlgorithm> p1_algo;
+    std::unique_ptr<PlayerAlgorithm> p2_algo;
 public:
-    explicit NewGameManager(Game &g, PlayerAlgorithm *p1_algo, PlayerAlgorithm *p2_algo) : game(g), p1_algo(p1_algo),
-                                                                                           p2_algo(p2_algo) {}
+    explicit NewGameManager(Game &game, std::unique_ptr<PlayerAlgorithm> p1_algo,
+                            std::unique_ptr<PlayerAlgorithm> p2_algo) :
+            game(game), p1_algo(std::move(p1_algo)), p2_algo(std::move(p2_algo)) {}
 
     /**
      * run moves of players, alternating, until game ends
