@@ -17,7 +17,8 @@ void FilePlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
                     MyPoint pointOnBoard(i, j);
                     std::shared_ptr<GamePiece> gamePiece = board.grid[i][j];
                     char type = GamePiece::chrFromType(gamePiece->getType());
-                    unique_ptr<PiecePosition> piece = std::make_unique<MyPiecePosition>(JOKER_CHAR, type, pointOnBoard);
+                    char jokerChar =  gamePiece->isJoker ? type:(char)NON_JOKER_REPR_DEFAULT;
+                    unique_ptr<PiecePosition> piece = std::make_unique<MyPiecePosition>(gamePiece->isJoker ? JOKER_CHAR : type, jokerChar, pointOnBoard);
                     vectorToFill.push_back(std::move(piece));
                 }
             }
@@ -66,8 +67,7 @@ unique_ptr<JokerChange> FilePlayerAlgorithm::getJokerChange() {
 
     std::shared_ptr<PlannedMove> plannedMove = movesList.front();
     if (plannedMove->getHasJokerChanged()) {
-        unique_ptr<JokerChange> jokerChange = unique_ptr<JokerChange>(
-                new MyJokerChange(plannedMove->getJokerPosition(), plannedMove->getNewJokerType()));
+        unique_ptr<JokerChange> jokerChange = std::make_unique<MyJokerChange>(plannedMove->getJokerPosition(), plannedMove->getNewJokerType());
         return jokerChange;
     } else
         return nullptr; // no joker change
