@@ -10,38 +10,40 @@
 FightResult simulate_fight(const GamePiece &attacker,
                            const GamePiece &defender) {
     //Bombs kill everyone
-    if (attacker.type == Bomb || defender.type == Bomb)
+    if (attacker.type == GamePiece::Type::Bomb || defender.type == GamePiece::Type::Bomb)
         return BOTH_PIECES_LOST;
     //Ties are a lose-lose scenario
     if (attacker.type == defender.type)
         return BOTH_PIECES_LOST;
     //Flags are useless in combat
-    if (attacker.type == Flag)
+    if (attacker.type == GamePiece::Type::Flag)
         return DEFENDER_WON;
-    if (defender.type == Flag)
+    if (defender.type == GamePiece::Type::Flag)
         return ATTACKER_WON;
-    // Rock > Scissors > Paper > Rock
-    if (attacker.type == Rock && defender.type == Scissors)
+    // Rock > Scissors > Paper
+    if (attacker.type == GamePiece::Type::Rock && defender.type == GamePiece::Type::Scissors)
         return ATTACKER_WON;
-    if (attacker.type == Paper && defender.type == Rock)
+    if (attacker.type == GamePiece::Type::Paper && defender.type == GamePiece::Type::Rock)
         return ATTACKER_WON;
-    if (attacker.type == Scissors && defender.type == Paper)
+    if (attacker.type == GamePiece::Type::Scissors && defender.type == GamePiece::Type::Paper)
         return ATTACKER_WON;
-    if (attacker.type == Rock && defender.type == Paper)
-        return ATTACKER_WON;
-    if (attacker.type == Paper && defender.type == Scissors)
-        return ATTACKER_WON;
-    if (attacker.type == Scissors && defender.type == Rock)
-        return ATTACKER_WON;
-    
+
+    // Paper < Scissors < Rock
+    if (attacker.type == GamePiece::Type::Rock && defender.type == GamePiece::Type::Paper)
+        return DEFENDER_WON;
+    if (attacker.type == GamePiece::Type::Paper && defender.type == GamePiece::Type::Scissors)
+        return DEFENDER_WON;
+    if (attacker.type == GamePiece::Type::Scissors && defender.type == GamePiece::Type::Rock)
+        return DEFENDER_WON;
+
     std::cout << "BUG in simulate_fight !!!";
     return FightResult::BOTH_PIECES_LOST;
 }
 
 
 MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove) {
-    MyPoint source(plannedMove.getOrigin());
-    MyPoint destination(plannedMove.getDestination());
+    const MyPoint &source(plannedMove.getOrigin());
+    const MyPoint &destination(plannedMove.getDestination());
     int sourceRow = source.getX(), sourceColumn = source.getY(),
             destinationRow = destination.getX(), destinationColumn = destination.getY();
 //    std::cout << "attempting to move " << sourceRow << sourceColumn << " to "
@@ -88,13 +90,13 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
         return TriedIllegalJokerChange;
     switch (plannedMove.getNewJokerType()) {
         // Only R P S B are allowed
-        case Rock:
-        case Paper:
-        case Scissors:
-        case Bomb:
+        case GamePiece::Type::Rock:
+        case GamePiece::Type::Paper:
+        case GamePiece::Type::Scissors:
+        case GamePiece::Type::Bomb:
             return SuccessfulMove;
-        case None:
-        case Flag:
+        case GamePiece::Type::None:
+        case GamePiece::Type::Flag:
             return TriedIllegalJokerChange;
         default:
             std::cerr << "BUG 7984132547" << std::endl;
@@ -103,26 +105,21 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
     return SuccessfulMove;
 }
 
-MoveResult actually_fight(Game &game, std::shared_ptr<GamePiece> attacker,
+FightResult actually_fight(Game &game, std::shared_ptr<GamePiece> attacker,
                           std::shared_ptr<GamePiece> defender, Point &&position) {
     int r = position.getX();
     int c = position.getY();
     auto fightResult = simulate_fight(*attacker, *defender);
     switch (fightResult) {
         case ATTACKER_WON:
-
             game.board.grid[r][c] = attacker;
-            return MoveResult::SuccessfulMove;
         case DEFENDER_WON:
-
             game.board.grid[r][c] = defender;
-            return MoveResult::SuccessfulMove;
         case BOTH_PIECES_LOST:
-
             game.board.grid[r][c] = nullptr;
-            return MoveResult::SuccessfulMove;
         default:
             print_line("ERROR in actually_fight because of weird fight result");
-            return MoveResult::SuccessfulMove;
     }
+
+    return fightResult;
 }
