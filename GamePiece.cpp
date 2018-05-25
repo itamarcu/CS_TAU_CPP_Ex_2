@@ -83,12 +83,14 @@ GamePieceType type_from_char(char c) {
     }
 }
 
+
 char nonjoker_lowercase_type_from_char(GamePieceType gamePieceType) {
     char ch = GamePiece::chrFromType(gamePieceType);
     return ch;
 }
 
 char GamePiece::chrFromType(const GamePieceType &gamePieceType){
+
     char ch;
     switch (gamePieceType) {
         case Rock:

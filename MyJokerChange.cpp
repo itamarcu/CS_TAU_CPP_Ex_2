@@ -15,4 +15,4 @@ MyJokerChange::MyJokerChange(const MyPoint &positionChange, char jokerRepresenta
         positionChange), jokerRepresentation(jokerRepresentation) {}
 
 MyJokerChange::MyJokerChange(const MyPoint &positionChange, GamePieceType jokerRepresentation) : positionChange(
-        positionChange), jokerRepresentation(nonjoker_lowercase_type_from_char(jokerRepresentation)) {}
+        positionChange), jokerRepresentation(nonjoker_lowercase_char_from_type(jokerRepresentation)) {}
