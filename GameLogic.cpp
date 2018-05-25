@@ -27,6 +27,7 @@ FightResult simulate_fight(const GamePiece &attacker,
         return ATTACKER_WON;
     if (attacker.type == GamePiece::Type::Scissors && defender.type == GamePiece::Type::Paper)
         return ATTACKER_WON;
+
     // Paper < Scissors < Rock
     if (attacker.type == GamePiece::Type::Rock && defender.type == GamePiece::Type::Paper)
         return DEFENDER_WON;
