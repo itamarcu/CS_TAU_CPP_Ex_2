@@ -15,7 +15,7 @@ private:
 
 public:
 
-    AutoPlayerAlgorithm(int player, MyBoard &initialBoard);
+    AutoPlayerAlgorithm(int player);
 
     void getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) override;
 

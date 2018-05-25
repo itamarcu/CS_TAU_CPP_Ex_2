@@ -36,7 +36,7 @@ unique_ptr<JokerChange> AutoPlayerAlgorithm::getJokerChange() {
     return unique_ptr<JokerChange>();
 }
 
-AutoPlayerAlgorithm::AutoPlayerAlgorithm(int player, MyBoard &initialBoard) {
+AutoPlayerAlgorithm::AutoPlayerAlgorithm(int player) {
     //TODO something
 }
 
