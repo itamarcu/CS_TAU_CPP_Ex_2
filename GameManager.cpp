@@ -4,7 +4,7 @@
 #include "MyFightInfo.h"
 
 LoadBoardResult NewGameManager::setup_positions(int player, std::vector<std::unique_ptr<PiecePosition>> &positions) {
-    auto player_bool = (bool) (player - 1);
+    auto player_bool = (bool) (2 - player);
     std::map<GamePiece::Type, int> remainingCounts;
     int remainingJokerCount;
     BoardIO::settingCounts(remainingCounts, remainingJokerCount);
@@ -22,24 +22,26 @@ LoadBoardResult NewGameManager::setup_positions(int player, std::vector<std::uni
         } else {
             new_piece = std::make_shared<GamePiece>(player_bool, type_from_char(placement->getPiece()), false);
         }
-        if (new_piece->type == GamePiece::Type::None ||
-            new_piece->type == GamePiece::Type::Flag) // Only allowed: R P S B
-            return LoadBoardResult(line_num, InvalidJokerPieceType);
+
+        GamePiece::Type new_piece_type = new_piece->type;
         if (new_piece->isJoker) {
+            if (new_piece_type == GamePiece::Type::None ||
+                new_piece_type == GamePiece::Type::Flag) // Only allowed: R P S B
+                return LoadBoardResult(line_num, InvalidJokerPieceType);
             remainingJokerCount--;
             if (remainingJokerCount < 0)
                 return LoadBoardResult(line_num, TooManyOfSamePiece);
         } else
-            remainingCounts[new_piece->type]--;
-        if (remainingCounts[new_piece->type] < 0)
+            remainingCounts[new_piece_type]--;
+        if (remainingCounts[new_piece_type] < 0)
             return LoadBoardResult(line_num, TooManyOfSamePiece);
 
         new_piece->player = player_bool;
 
         MyPoint position(placement->getPosition());
-        auto &old_piece = game.board.grid[position.getX()][position.getY()];
+        auto old_piece = game.board.grid[position.getX()][position.getY()];
         if (old_piece == nullptr)
-            old_piece = new_piece;
+            game.board.grid[position.getX()][position.getY()] = new_piece;
         else if (old_piece->player == new_piece->player) {
             return LoadBoardResult(line_num, TwoPiecesSamePlayerSamePosition);
         } else {
@@ -48,14 +50,14 @@ LoadBoardResult NewGameManager::setup_positions(int player, std::vector<std::uni
             int winner = 0;
             if (result == FightResult::ATTACKER_WON)
                 winner = player;
-            else winner = 2 - player;
+            else winner = 3 - player;
             setup_fights.push_back(std::make_unique<MyFightInfo>(
                     player_bool ?
                     MyFightInfo(winner, position,
                                 GamePiece::chrFromType(old_piece->type),
-                                GamePiece::chrFromType(new_piece->type)) :
+                                GamePiece::chrFromType(new_piece_type)) :
                     MyFightInfo(winner, position,
-                                GamePiece::chrFromType(new_piece->type),
+                                GamePiece::chrFromType(new_piece_type),
                                 GamePiece::chrFromType(old_piece->type))));
         }
     }
@@ -72,7 +74,7 @@ bool NewGameManager::setup_both_boards() {
     p1_algorithm->getInitialPositions(1, p1_positions);
     p2_algorithm->getInitialPositions(2, p2_positions);
     auto load_of_1 = this->setup_positions(1, p1_positions);
-    auto load_of_2 = this->setup_positions(2, p1_positions);
+    auto load_of_2 = this->setup_positions(2, p2_positions);
     if (load_of_1.type != BoardLoadingSuccess && load_of_2.type != BoardLoadingSuccess) {
         std::stringstream s;
         s << "Bad Positioning input file for both players - ";
@@ -80,6 +82,7 @@ bool NewGameManager::setup_both_boards() {
         s << ", ";
         s << "player 2: line " << load_of_2.line_num;
         game.endGame(TIE, s.str());
+        std::cout << "error 1 is " << load_of_1.type << ", error 2 is " << load_of_2.type << std::endl;
         return false;
     } else if (load_of_1.type != BoardLoadingSuccess) {
         std::stringstream s;
@@ -134,33 +137,42 @@ void NewGameManager::run_game() {
 
         auto move_result = make_planned_move(game, plannedMove);
 
-//            for (int y = 0; y < N; y++) {
-//                for (int x = 0; x < M; x++) {
-//                    char ch = ' ';
-//                    if (game.board.grid[x][y] != nullptr) {
-//                        ch = game.board.grid[x][y]->to_char();
-//                    }
-//                    std::cout << ch;
-//                }
-//                std::cout << std::endl;
-//            }
-//            std::cout.flush();
+
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < M; x++) {
+                char ch = ' ';
+                if (game.board.grid[x][y] != nullptr) {
+                    ch = game.board.grid[x][y]->to_char();
+                }
+                std::cout << ch;
+            }
+            std::cout << std::endl;
+        }
+        std::cout.flush();
+
+
         std::stringstream s;
         std::string reason;
         switch (move_result) {
             case SuccessfulMove:
                 break;
             case TriedToMoveEmptySpace: // 1
+                print_line("Illegal move: TriedToMoveEmptySpace");
                 goto case_error;
             case TriedToMoveUnmovablePiece: // 2
+                print_line("Illegal move: TriedToMoveUnmovablePiece");
                 goto case_error;
             case TriedToMoveOutOfBorders: // 3
+                print_line("Illegal move: TriedToMoveOutOfBorders");
                 goto case_error;
             case TriedToMoveIntoAlly: // 4
+                print_line("Illegal move: TriedToMoveIntoAlly");
                 goto case_error;
             case TriedToMoveEnemy: // 5
+                print_line("Illegal move: TriedToMoveEnemy");
                 goto case_error;
             case TriedIllegalJokerChange: // 6
+                print_line("Illegal move: TriedIllegalJokerChange");
                 goto case_error;
             default:
                 std::cerr << "BUG 58689217038" << std::endl;

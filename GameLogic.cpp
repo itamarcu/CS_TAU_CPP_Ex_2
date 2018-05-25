@@ -112,10 +112,13 @@ FightResult actually_fight(Game &game, std::shared_ptr<GamePiece> attacker,
     switch (fightResult) {
         case ATTACKER_WON:
             game.board.grid[r][c] = attacker;
+            break;
         case DEFENDER_WON:
             game.board.grid[r][c] = defender;
+            break;
         case BOTH_PIECES_LOST:
             game.board.grid[r][c] = nullptr;
+            break;
         default:
             print_line("ERROR in actually_fight because of weird fight result");
     }
