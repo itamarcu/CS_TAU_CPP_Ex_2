@@ -71,11 +71,11 @@ LoadBoardResult BoardIO::load_board(MyBoard &board, bool player){
     return LoadBoardResult(line_num, BoardLoadingSuccess);
 }
 
-/**
- * setting counts for loading board file
- * @param remainingCounts remaining counts map of pieces
- * @param remainingJokerCount remaining counts of joker
- */
+    /**
+     * setting counts for loading board file
+     * @param remainingCounts remaining counts map of pieces
+     * @param remainingJokerCount remaining counts of joker
+     */
 void BoardIO::settingCounts(std::map<GamePieceType, int> &remainingCounts, int &remainingJokerCount) {
     remainingCounts= std::map<GamePieceType, int>();
     remainingJokerCount= J;

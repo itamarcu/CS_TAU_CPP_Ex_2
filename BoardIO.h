@@ -73,9 +73,16 @@ public:
     static LoadBoardResult load_board(MyBoard &board, bool player);
 
 
+    static void load_moves(std::vector<PlannedMove> &moves, int player);
+
+private:
+/**
+ * setting counts for loading board file
+ * @param remainingCounts remaining counts map of pieces
+ * @param remainingJokerCount remaining counts of joker
+ */
     static void settingCounts(std::map<GamePieceType, int> &remainingCounts, int &remainingJokerCount);
 
-    static void load_moves(std::vector<PlannedMove> &moves, int player);
 };
 
 
