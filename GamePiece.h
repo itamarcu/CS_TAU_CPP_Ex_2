@@ -1,8 +1,8 @@
 #ifndef CS_TAU_CPP_EX_2_GAMEPIECE_H
 #define CS_TAU_CPP_EX_2_GAMEPIECE_H
 /**
- * game piece type according doesn't takes to account whether it's a joker
- */
+ * game piece type - for jokers, this is what their non-joker type is
+*/
 enum GamePieceType {
     None, // empty spaces are this type
     Rock, Paper, Scissors, Bomb,//Jokers have a current type but also the boolean
@@ -41,5 +41,5 @@ public:
 
 GamePieceType type_from_char(char c);
 
-char nonjoker_lowercase_type_from_char(GamePieceType gamePieceType);
+char nonjoker_lowercase_char_from_type(GamePieceType gamePieceType);
 #endif //CS_TAU_CPP_EX_2_GAMEPIECE_H
