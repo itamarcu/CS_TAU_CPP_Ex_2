@@ -23,7 +23,11 @@ unique_ptr<Move> FilePlayerAlgorithm::getMove() {
         alreadyGotJokerPartOfMove = false;
         movesList.pop_front();
     }
+    if (movesList.empty())
+        return nullptr; // no more moves
+
     alreadyGotMovementPartOfMove = true;
+
     std::shared_ptr<PlannedMove> plannedMove = movesList.front();
     unique_ptr<Move> move = unique_ptr<Move>(
             new MyMove(plannedMove->getOrigin(), plannedMove->getDestination()));
@@ -31,11 +35,15 @@ unique_ptr<Move> FilePlayerAlgorithm::getMove() {
 }
 
 unique_ptr<JokerChange> FilePlayerAlgorithm::getJokerChange() {
-    if (alreadyGotMovementPartOfMove) {
-        alreadyGotJokerPartOfMove = false;
+    if (alreadyGotJokerPartOfMove) {
+        alreadyGotMovementPartOfMove = false;
         movesList.pop_front();
     }
-    alreadyGotMovementPartOfMove = true;
+    if (movesList.empty())
+        return nullptr; // no more moves
+
+    alreadyGotJokerPartOfMove = true;
+
     std::shared_ptr<PlannedMove> plannedMove = movesList.front();
     if (plannedMove->getHasJokerChanged()) {
         unique_ptr<JokerChange> jokerChange = unique_ptr<JokerChange>(

@@ -4,8 +4,8 @@ project(CS_TAU_CPP_RPS)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(CS_TAU_CPP_RPS
-        AutoPlayerAlogrithm.cpp
-        AutoPlayerAlogrithm.h
+        AutoPlayerAlgorithm.cpp
+        AutoPlayerAlgorithm.h
         Auxiliary.cpp
         Auxiliary.h
         Board.h
