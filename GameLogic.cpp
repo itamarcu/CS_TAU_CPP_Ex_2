@@ -20,19 +20,20 @@ FightResult simulate_fight(const GamePiece &attacker,
         return DEFENDER_WON;
     if (defender.type == GamePiece::Type::Flag)
         return ATTACKER_WON;
-    // Rock > Scissors > Paper > Rock
+    // Rock > Scissors > Paper
     if (attacker.type == GamePiece::Type::Rock && defender.type == GamePiece::Type::Scissors)
         return ATTACKER_WON;
     if (attacker.type == GamePiece::Type::Paper && defender.type == GamePiece::Type::Rock)
         return ATTACKER_WON;
     if (attacker.type == GamePiece::Type::Scissors && defender.type == GamePiece::Type::Paper)
         return ATTACKER_WON;
+    // Paper < Scissors < Rock
     if (attacker.type == GamePiece::Type::Rock && defender.type == GamePiece::Type::Paper)
-        return ATTACKER_WON;
+        return DEFENDER_WON;
     if (attacker.type == GamePiece::Type::Paper && defender.type == GamePiece::Type::Scissors)
-        return ATTACKER_WON;
+        return DEFENDER_WON;
     if (attacker.type == GamePiece::Type::Scissors && defender.type == GamePiece::Type::Rock)
-        return ATTACKER_WON;
+        return DEFENDER_WON;
 
     std::cout << "BUG in simulate_fight !!!";
     return FightResult::BOTH_PIECES_LOST;

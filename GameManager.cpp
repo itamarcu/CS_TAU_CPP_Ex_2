@@ -9,10 +9,12 @@ LoadBoardResult NewGameManager::setup_positions(int player, std::vector<std::uni
     int remainingJokerCount;
     BoardIO::settingCounts(remainingCounts, remainingJokerCount);
     int line_num = 0; // Line starts at 1!
-    while (!positions.empty()) {
+    for (auto &placement : positions) {
         line_num += 1;
-        auto placement = std::move(positions.back());
-        positions.pop_back();
+
+        if (placement == nullptr) {
+            return LoadBoardResult(line_num, BadFormat);
+        }
 
         std::shared_ptr<GamePiece> new_piece;
         if (placement->getPiece() == JOKER_CHAR) {
@@ -65,8 +67,8 @@ LoadBoardResult NewGameManager::setup_positions(int player, std::vector<std::uni
 }
 
 bool NewGameManager::setup_both_boards() {
-    auto p1_positions = std::vector<std::unique_ptr<PiecePosition>>(1);
-    auto p2_positions = std::vector<std::unique_ptr<PiecePosition>>(1);
+    auto p1_positions = std::vector<std::unique_ptr<PiecePosition>>(0);
+    auto p2_positions = std::vector<std::unique_ptr<PiecePosition>>(0);
     p1_algorithm->getInitialPositions(1, p1_positions);
     p2_algorithm->getInitialPositions(2, p2_positions);
     auto load_of_1 = this->setup_positions(1, p1_positions);
