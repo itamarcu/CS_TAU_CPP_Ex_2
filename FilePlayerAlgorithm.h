@@ -16,8 +16,7 @@ private:
 
     std::list<std::shared_ptr<PlannedMove>> movesList;
 public:
-    FilePlayerAlgorithm(int player, std::list<std::shared_ptr<PlannedMove>>& movesList,
-                        MyBoard &initialBoard);
+    FilePlayerAlgorithm(int player);
 
     void getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) override;
 
