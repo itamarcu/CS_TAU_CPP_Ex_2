@@ -43,6 +43,7 @@ public:
 };
 
 
-
 GamePieceType type_from_char(char c);
+
+char nonjoker_lowercase_type_from_char(GamePieceType gamePieceType);
 #endif //CS_TAU_CPP_EX_2_GAMEPIECE_H

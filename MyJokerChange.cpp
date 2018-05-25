@@ -9,14 +9,14 @@ const Point &MyJokerChange::getJokerChangePosition() const {
 }
 
 char MyJokerChange::getJokerNewRep() const {
-    return 0;
+    return jokerRepresentation;
 }
 
 MyJokerChange::~MyJokerChange() = default;
 
 
-
 MyJokerChange::MyJokerChange(const MyPoint &positionChange, char jokerRepresentation) : positionChange(
-        positionChange), newJokerRepresentation(jokerRepresentation) {
+        positionChange), jokerRepresentation(jokerRepresentation) {}
 
-}
+MyJokerChange::MyJokerChange(const MyPoint &positionChange, GamePieceType jokerRepresentation) : positionChange(
+        positionChange), jokerRepresentation(nonjoker_lowercase_type_from_char(jokerRepresentation)) {}

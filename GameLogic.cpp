@@ -77,16 +77,16 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
 
 MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
     MoveResult firstResult = _make_move_part_of_planned_move(game, plannedMove);
-    if (firstResult != SuccessfulMove || !plannedMove.isHas_joker_changed())
+    if (firstResult != SuccessfulMove || !plannedMove.getHasJokerChanged())
         return firstResult;
 
-    MyPoint jokerPosition(plannedMove.getJoker_position());
+    MyPoint jokerPosition(plannedMove.getJokerPosition());
     int jx = jokerPosition.getX();
     int jy = jokerPosition.getY();
     auto joker = game.board.grid[jx][jy];
     if (joker == nullptr || !joker->isJoker || joker->player != game.currentPlayer)
         return TriedIllegalJokerChange;
-    switch (plannedMove.getNew_joker_type()) {
+    switch (plannedMove.getNewJokerType()) {
         // Only R P S B are allowed
         case Rock:
         case Paper:

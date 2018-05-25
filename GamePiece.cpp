@@ -80,3 +80,33 @@ GamePieceType type_from_char(char c) {
             return None;
     }
 }
+
+char nonjoker_lowercase_type_from_char(GamePieceType gamePieceType) {
+    char ch;
+    switch (gamePieceType) {
+        case Rock:
+            ch = ROCK_CHAR;
+            break;
+        case Paper:
+            ch = PAPER_CHAR;
+            break;
+        case Scissors:
+            ch = SCISSORS_CHAR;
+            break;
+        case Bomb:
+            ch = BOMB_CHAR;
+            break;
+        case None:
+            ch = JOKER_CHAR;
+            break; // Notice
+        case Flag:
+            ch = FLAG_CHAR;
+            break;
+        default:;
+            std::cerr << "Unknown type in char_from_type... c'mon guys" << std::endl;
+            ch = '@';
+            break;
+    }
+    ch = std::tolower(ch, std::locale()); // to lowercase
+    return ch;
+}

@@ -9,21 +9,24 @@
 #include <memory>
 #include "JokerChange.h"
 #include "MyPoint.h"
+#include "GamePiece.h"
 
-/**
- * @authors Daniel Meltzer and Itamar Curiel
- * this class let's you express change in joker piece
- */
 class MyJokerChange: public JokerChange {
 public:
 
     /**
      * MyJokerChange constructor
-     * @warning in case no change accord no need to create instance
      * @param positionChange joker position to change to
      * @param newJokerRepresentation  new joker representation to change to
      */
     MyJokerChange(const MyPoint &positionChange, char newJokerRepresentation);
+
+    /**
+     * MyJokerChange constructor
+     * @param positionChange joker position to change to
+     * @param newJokerRepresentation  new joker representation to change to
+     */
+    MyJokerChange(const MyPoint &positionChange, GamePieceType newJokerRepresentation);
 
    /**
     * get position change of joker
@@ -41,7 +44,7 @@ public:
 
 private:
     MyPoint positionChange;
-    char newJokerRepresentation;
+    char jokerRepresentation;
 };
 
 

@@ -48,11 +48,11 @@ public:
 
     const MyPoint & getDestination() const;
 
-    bool isHas_joker_changed() const;
+    bool getHasJokerChanged() const;
 
-    const MyPoint & getJoker_position() const;
+    const MyPoint &getJokerPosition() const;
 
-    GamePieceType getNew_joker_type() const;
+    GamePieceType getNewJokerType() const;
 };
 
 

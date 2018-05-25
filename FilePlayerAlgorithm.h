@@ -13,8 +13,15 @@
 
 
 class FilePlayerAlgorithm: public PlayerAlgorithm {
-public:
+private:
+    bool alreadyGotJokerPartOfMove;
+    bool alreadyGotMovementPartOfMove;
+    int player; // 1 or 2
+    std::shared_ptr<PlannedMove> getFromNextMove();
 
+    std::list<std::shared_ptr<PlannedMove>> movesList;
+    std::vector<unique_ptr<PiecePosition>> initialPositions;
+public:
     FilePlayerAlgorithm(int player, std::list<std::shared_ptr<PlannedMove>>& movesList,
                         MyBoard &initialBoard);
 
@@ -53,13 +60,6 @@ public:
     unique_ptr<JokerChange> getJokerChange() override;
 
     ~FilePlayerAlgorithm() override;
-
-private:
-
-    int player;
-    std::list<std::shared_ptr<PlannedMove>> movesList;
-
-    std::vector<unique_ptr<PiecePosition>> initialPositions;
 };
 
 
