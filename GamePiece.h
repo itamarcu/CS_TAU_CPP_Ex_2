@@ -36,6 +36,9 @@ public:
      * @return true if this unit can move (if it is not a flag or a bomb or a bomb-joker)
      */
     bool canMove();
+
+    GamePieceType getType() const;
+    static char chrFromType(const GamePieceType &gamePieceType);
 };
 
 

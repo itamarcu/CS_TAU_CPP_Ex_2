@@ -1,9 +1,30 @@
 #include "FilePlayerAlgorithm.h"
 #include "MyMove.h"
 #include "MyJokerChange.h"
+#include "MyPiecePosition.h"
+#include <memory>
 
 void FilePlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) {
-    //TODO move/change code from BoardIO into here. Notice that it should change from grid to vector of positions
+    if(this->player !=player){
+        //TODO: itamar decide
+    }
+    else{
+        MyBoard board;
+        //iterate over board
+        for (int i = 0; i < N; ++i) {
+            for(int j = 0;j<M;++j){
+                if(board.grid[i][j]){
+                    // piece in board
+                    MyPoint pointOnBoard(i,j);
+                    std::shared_ptr<GamePiece> gamePiece = board.grid[i][j];
+                    char type = GamePiece::chrFromType(gamePiece->getType());
+                    unique_ptr<PiecePosition> piece = std::make_unique<MyPiecePosition>(JOKER_CHAR, type,pointOnBoard);
+                    vectorToFill.push_back(std::move(piece));
+                }
+            }
+        }
+    }
+
 }
 
 void FilePlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) {
@@ -29,8 +50,8 @@ unique_ptr<Move> FilePlayerAlgorithm::getMove() {
     alreadyGotMovementPartOfMove = true;
 
     std::shared_ptr<PlannedMove> plannedMove = movesList.front();
-    unique_ptr<Move> move = unique_ptr<Move>(
-            new MyMove(plannedMove->getOrigin(), plannedMove->getDestination()));
+    unique_ptr<Move> move = std::make_unique<MyMove>(plannedMove->getOrigin(), plannedMove->getDestination());
+
     return move;
 }
 

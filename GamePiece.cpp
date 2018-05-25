@@ -2,6 +2,8 @@
 #include "GamePiece.h"
 #include "Auxiliary.h"
 
+
+
 char GamePiece::to_char() {
     char ch;
     if (isJoker)
@@ -57,6 +59,10 @@ bool GamePiece::canMove() {
     return false;
 }
 
+GamePieceType GamePiece::getType() const {
+    return type;
+}
+
 GamePieceType type_from_char(char c) {
     switch (c) {
         case ROCK_CHAR:
@@ -78,6 +84,11 @@ GamePieceType type_from_char(char c) {
 }
 
 char nonjoker_lowercase_type_from_char(GamePieceType gamePieceType) {
+    char ch = GamePiece::chrFromType(gamePieceType);
+    return ch;
+}
+
+char GamePiece::chrFromType(const GamePieceType &gamePieceType){
     char ch;
     switch (gamePieceType) {
         case Rock:
@@ -103,6 +114,5 @@ char nonjoker_lowercase_type_from_char(GamePieceType gamePieceType) {
             ch = '@';
             break;
     }
-    ch = std::tolower(ch, std::locale()); // to lowercase
     return ch;
 }

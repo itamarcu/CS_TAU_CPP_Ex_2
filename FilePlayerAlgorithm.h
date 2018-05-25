@@ -18,6 +18,11 @@ private:
 public:
     explicit FilePlayerAlgorithm(int player);
 
+    /**
+     * initialize player positions
+     * @param player player should be equal to ivar player
+     * @param vectorToFill vector to fill
+     */
     void getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) override;
 
     /**
