@@ -4,6 +4,8 @@
 #include <sstream>
 #include "BoardIO.h"
 
+void _load_moves_to_vec(bool player, std::vector<PlannedMove> &moves);
+
 LoadBoardResult BoardIO::load_board(MyBoard &board, bool player){
     std::string player_num = player ? "1" : "2";
     std::string file_path = "player" + player_num + ".rps_board";
@@ -86,6 +88,12 @@ void BoardIO::settingCounts(std::map<GamePieceType, int> &remainingCounts, int &
 }
 
 void _load_player_moves(GameMoves &gameMoves, bool player) {
+    std::vector<PlannedMove> &moves = player ? gameMoves.p1_moves : gameMoves.p2_moves;
+    _load_moves_to_vec(player, moves);
+
+}
+
+void _load_moves_to_vec(bool player, std::vector<PlannedMove> &moves) {
     std::string player_num = player ? "1" : "2";
     std::string file_path = "player" + player_num + ".rps_moves";
     std::ifstream fin(file_path);
@@ -94,7 +102,7 @@ void _load_player_moves(GameMoves &gameMoves, bool player) {
         return;
     }
 
-    std::vector<PlannedMove> &moves = player ? gameMoves.p1_moves : gameMoves.p2_moves;
+
     moves.clear();
 
     std::string line;
@@ -148,7 +156,6 @@ void _load_player_moves(GameMoves &gameMoves, bool player) {
         } else
             moves.emplace_back(PlannedMove(x1, y1, x2, y2));
     }
-
 }
 
 void BoardIO::load_moves(GameMoves &gameMoves) {
@@ -216,4 +223,8 @@ void BoardIO::store_game(Game &game) {
     //    }
 
     fout.flush();
+}
+
+void BoardIO::load_moves(std::vector<PlannedMove> &moves, int player) {
+    _load_moves_to_vec(player == FIRST_PLAYER_CONST,moves);
 }

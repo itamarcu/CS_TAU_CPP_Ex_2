@@ -74,6 +74,8 @@ public:
 
 
     static void settingCounts(std::map<GamePieceType, int> &remainingCounts, int &remainingJokerCount);
+
+    static void load_moves(std::vector<PlannedMove> &moves, int player);
 };
 
 

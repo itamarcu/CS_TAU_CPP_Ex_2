@@ -8,7 +8,7 @@
 void FilePlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) {
     this->player = player;
     MyBoard board;
-    if (BoardIO::load_board(board, player == SECOND_PLAYER_CONST).type == BoardLoadingSuccess) {
+    if (BoardIO::load_board(board, player == FIRST_PLAYER_CONST).type == BoardLoadingSuccess) {
         //iterate over board
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < M; ++j) {
@@ -79,4 +79,12 @@ FilePlayerAlgorithm::FilePlayerAlgorithm(int player) : player(player) {
     //TODO construct moves list
     alreadyGotJokerPartOfMove = false;
     alreadyGotMovementPartOfMove = false;
+    std::vector<PlannedMove> playersMoves;
+    BoardIO::load_moves(playersMoves,player);
+    for (auto &playersMove : playersMoves) {
+        std::shared_ptr<PlannedMove> ptr = std::make_shared<PlannedMove>(playersMove);
+        movesList.emplace_back(ptr);
+    }
+
+
 }
