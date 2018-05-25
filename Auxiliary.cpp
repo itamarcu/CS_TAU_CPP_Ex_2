@@ -5,8 +5,8 @@ void print_line(std::string str) {
     std::cout << str << std::endl;
 }
 
-std::vector<std::string> *split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter) {
-    auto splittedStrings = new std::vector<std::string>();
+std::unique_ptr<std::vector<std::string>> split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter) {
+    std::unique_ptr<std::vector<std::string>> splittedStrings = std::make_unique<std::vector<std::string>>();
     size_t pos = stringToSplit.find(delimiter);
     size_t initialPos = 0;
 

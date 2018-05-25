@@ -35,7 +35,7 @@ void print_line(std::string str);
  * @param delimiter delimiter to use
  * @return vector of strings splited form the original one
  */
-std::vector<std::string> *split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter);
+std::unique_ptr<std::vector<std::string>> split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter);
 
 /**
  *
