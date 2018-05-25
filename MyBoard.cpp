@@ -21,9 +21,9 @@ void MyBoard::initEmptyGrid() {
     for (int i = 0; i < N; i++) {
         std::vector<std::shared_ptr<GamePiece>> column;
         for (int j = 0; j < M; j++) {
-            column.emplace_back(nullptr);
+            column.push_back(nullptr);
         }
-        grid.emplace_back(column);
+        grid.push_back(column);
     }
 }
 

@@ -5,13 +5,13 @@
 #include "MyBoard.h"
 
 enum MoveResult { // Can't be in GameLogic due to circular dependency
-    SuccessfulMove,
-    TriedToMoveEmptySpace,
-    TriedToMoveUnmovablePiece,
-    TriedToMoveOutOfBorders,
-    TriedToMoveIntoAlly,
-    TriedToMoveEnemy,
-    TriedIllegalJokerChange
+    SuccessfulMove = 0,
+    TriedToMoveEmptySpace = 1,
+    TriedToMoveUnmovablePiece = 2,
+    TriedToMoveOutOfBorders = 3,
+    TriedToMoveIntoAlly = 4,
+    TriedToMoveEnemy = 5,
+    TriedIllegalJokerChange = 6
 };
 
 enum GameWinner {
