@@ -51,6 +51,10 @@ public:
     unique_ptr<JokerChange> getJokerChange() override;
 
     ~AutoPlayerAlgorithm() override;
+
+private:
+    std::vector<std::shared_ptr<FightInfo>> initialFights;
+    std::vector<std::shared_ptr<PiecePosition>> knownOpponentPeices;
 };
 
 

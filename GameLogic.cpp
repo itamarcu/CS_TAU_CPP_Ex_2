@@ -33,7 +33,7 @@ FightResult simulate_fight(const GamePiece &attacker,
         return ATTACKER_WON;
     if (attacker.type == Scissors && defender.type == Rock)
         return ATTACKER_WON;
-
+    
     std::cout << "BUG in simulate_fight !!!";
     return FightResult::BOTH_PIECES_LOST;
 }
