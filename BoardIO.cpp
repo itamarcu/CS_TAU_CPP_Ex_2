@@ -6,6 +6,8 @@
 
 
 LoadBoardResult BoardIO::_add_load_into_board(Game &game, bool player) {
+
+    //to be deleted
     std::string player_num = player ? "1" : "2";
     std::string file_path = "player" + player_num + ".rps_board";
     std::ifstream fin(file_path);
