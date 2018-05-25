@@ -57,7 +57,7 @@ LoadBoardResult BoardIO::load_board(MyBoard &board, bool player) {
         c -= 1; // ^
 
 
-        std::shared_ptr<GamePiece> piece_ptr(new GamePiece{piece});
+        std::shared_ptr<GamePiece> piece_ptr = std::make_shared<GamePiece>(piece);
         if (board.grid[r][c] == nullptr)
             board.grid[r][c] = piece_ptr;
         else if (board.grid[r][c]->player == player) {
