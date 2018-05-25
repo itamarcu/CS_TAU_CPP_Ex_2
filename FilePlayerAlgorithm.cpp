@@ -2,29 +2,28 @@
 #include "MyMove.h"
 #include "MyJokerChange.h"
 #include "MyPiecePosition.h"
+#include "BoardIO.h"
 #include <memory>
 
 void FilePlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) {
-    if(this->player !=player){
-        //TODO: itamar decide
-    }
-    else{
-        MyBoard board;
+    this->player = player;
+    MyBoard board;
+    if (BoardIO::load_board(board, player == SECOND_PLAYER_CONST).type == BoardLoadingSuccess) {
         //iterate over board
         for (int i = 0; i < N; ++i) {
-            for(int j = 0;j<M;++j){
-                if(board.grid[i][j]){
+            for (int j = 0; j < M; ++j) {
+                if (board.grid[i][j]) {
                     // piece in board
-                    MyPoint pointOnBoard(i,j);
+                    MyPoint pointOnBoard(i, j);
                     std::shared_ptr<GamePiece> gamePiece = board.grid[i][j];
                     char type = GamePiece::chrFromType(gamePiece->getType());
-                    unique_ptr<PiecePosition> piece = std::make_unique<MyPiecePosition>(JOKER_CHAR, type,pointOnBoard);
+                    unique_ptr<PiecePosition> piece = std::make_unique<MyPiecePosition>(JOKER_CHAR, type, pointOnBoard);
                     vectorToFill.push_back(std::move(piece));
                 }
             }
         }
-    }
 
+    }
 }
 
 void FilePlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) {
