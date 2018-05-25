@@ -32,10 +32,19 @@ int bool_to_player(bool player) {
 }
 
 
-int randomNumberInRange(int from, int to) {
+int random_number_in_range(const int from, const int to) {
 
     std::random_device                  rand_dev;
     std::mt19937                        generator(rand_dev());
     std::uniform_int_distribution<int>  distr(from, to);
     return distr(generator);
+}
+
+template<typename T>
+void shuffle_vector(std::vector<T> &vecToShuffle) {
+    std::random_device random_dev;
+    std::mt19937       generator(random_dev());
+
+    std::shuffle(vecToShuffle.begin(), vecToShuffle.end(), generator);
+
 }

@@ -15,6 +15,7 @@
 #define B 2  // Bombs
 #define J 2  // Jokers
 #define F 1  // Flags
+#define PLAYER_PICES_MAX_COUNT R+P+S+B+J+F
 #define ROCK_CHAR 'R'
 #define PAPER_CHAR 'P'
 #define SCISSORS_CHAR 'S'
@@ -47,10 +48,12 @@ std::unique_ptr<std::vector<std::string>> split_string_using_delimiter(std::stri
 int bool_to_player(bool player);
 
 /**
- * generate range number
+ * generate ranged number
  * @param from inclusive from
  * @param to inclusive to
  * @return random number in given range
  */
-int randomNumberInRange( const int from, const int to);
+int random_number_in_range(const int from, const int to);
+template <typename T>
+void shuffle_vector(std::vector<T> &vecToShuffle);
 #endif //CS_TAU_CPP_RPS_AUXILIARY_H

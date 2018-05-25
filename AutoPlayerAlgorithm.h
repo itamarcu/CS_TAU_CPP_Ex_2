@@ -23,15 +23,25 @@ private:
         OurPlayer = 1,
         SecondPlayer = 2,
         /**
-         * would be used when you think that a piece is some of the follows(we've seen it in a fight) but might be a joker
+         * would be with suspceted on used when you think that a piece is some of the follows(we've seen it in a fight) but might be a joker
          */
-        SuspctedRock = 4,
-        SuspectedScissors = 8,
-        SuspectedPaper = 16,
+        Rock = 4,
+        Scissors = 8,
+        Paper = 16,
         /**
-         * if we've seen a piece change it's type it must be a joker
+         * if we've seen a piece change it's type it must be a joker, not suspected
          */
-        Joker = 32
+        Joker = 32,
+        /**
+         * will be used only on our pieces
+         */
+        Bomb = 64,
+
+        Flag = 128,
+        /**
+         * to use when you don't know for sure it's a piece or joker
+         */
+        Suspected = 256
     };
 public:
 
@@ -76,6 +86,10 @@ private:
 
     //2d board of ints Representing Knowledge on Board, see enum
     int myBoard[N][M];
+
+    void addNonJokerPiece(std::vector<unique_ptr<PiecePosition>> &vectorToFill, std::vector<MyPoint> &availableSpots,
+                          int count, char chr) const;
+    int get_piece_from_char(char c) const;
 };
 
 
