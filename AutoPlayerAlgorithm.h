@@ -12,7 +12,15 @@ private:
     unsigned int lastOpponentPiece;
     unsigned int lastMyPiece;
 
-    unique_ptr<std::vector<MyPoint>> get_vector_with_settings(int settings, int non = 0) const;
+    /**
+     * From MyBoard, returns a filtered vector of positions. A position will only
+     * be returned if the piece on it is filtered in and not filtered out. For example,
+     * if filter_in is `OurPlayer` and filter_out is `Movable` this will return
+     * all pieces that belong to us and are not movable. You can also do stuff like
+     * filter_in = `Joker | SecondPlayer` to get only jokers of enemy player.
+     * @return
+     */
+    unique_ptr<std::vector<MyPoint>> get_by_filter(int filter_in, int filter_out = 0) const;
 
     /**
      * new representation for joker
@@ -26,7 +34,7 @@ private:
     enum BoardCases {
         NoPlayer = 0,
         OurPlayer = 1,
-        SecondPlayer = 2,
+        EnemyPlayer = 2,
 
         /**
          * could be with suspected on, when you think that a piece is some of the follows(we've seen it win in a fight) but might be a joker
@@ -36,12 +44,12 @@ private:
         Paper = 16,
 
         /**
-         * if we've seen a piece change it's type it must be a joker, not suspected
+         * if we've seen a piece change its type it must be a joker, not suspected
          */
         Joker = 32,
 
         /**
-         * will be used only on our pieces
+         * will be used only on our pieces (because no way of knowing about enemy's)
          */
         Bomb = 64,
 
@@ -51,8 +59,9 @@ private:
          * to use when you don't know for sure it's a piece or joker
          */
         Suspected = 256,
+
         /**
-         * for this in other player doesn't mean for sure false
+         * Movable=false, for enemy pieces, just means it hasn't moved yet
          */
         Movable = 512
     };
@@ -113,7 +122,7 @@ public:
     ~AutoPlayerAlgorithm() override;
 
 
-    unique_ptr<Move> makeAttack(const MyPoint &attackPoint, const MyPoint &attackerPoint);
+    unique_ptr<Move> makeAttack(const MyPoint &attacker_position, const MyPoint &defender_position);
 };
 
 
