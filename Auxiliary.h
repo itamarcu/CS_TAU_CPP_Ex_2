@@ -59,11 +59,8 @@ int random_number_in_range(int from, int to);
 
 template<typename T>
 void shuffle_vector(std::vector<T> &vecToShuffle) {
-    std::random_device random_dev;
-    std::mt19937 generator(random_dev());
-
-    std::shuffle(vecToShuffle.begin(), vecToShuffle.end(), generator);
-
+    auto rng = std::default_random_engine {};
+    std::shuffle(vecToShuffle.begin(), vecToShuffle.end(), rng);
 }
 
 #endif //CS_TAU_CPP_RPS_AUXILIARY_H
