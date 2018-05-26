@@ -1,5 +1,6 @@
 #include "AutoPlayerAlgorithm.h"
 #include "MyPiecePosition.h"
+#include "MyFightInfo.h"
 
 #define SIZE_OF_BAISED_JOKER_ARRAY 6
 #define BAISED_JOKER_ARRAY {SCISSORS_CHAR,ROCK_CHAR,PAPER_CHAR,ROCK_CHAR,SCISSORS_CHAR, ROCK_CHAR}
@@ -10,11 +11,32 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
 
 void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
 
+    if(myBoard[move.getTo().getX()][move.getTo().getY()] == AutoPlayerAlgorithm::BoardCases ::NoPlayer){
+        myBoard[move.getTo().getX()][move.getTo().getY()] = myBoard[move.getFrom().getX()][move.getFrom().getY()];
 
+    }
+    lastOpponentPiece = myBoard[move.getFrom().getX()][move.getFrom().getY()];
+    myBoard[move.getFrom().getX()][move.getFrom().getY()] = AutoPlayerAlgorithm::BoardCases ::NoPlayer;
+    //assumes no error in move
 }
 
 void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
-    //TODO something
+    if(fightInfo.getWinner()!=player){
+        char newPlayerChar = fightInfo.getPiece(player == FIRST_PLAYER_CONST ? SECOND_PLAYER_CONST : FIRST_PLAYER_CONST);
+        if((lastOpponentPiece && get_piece_from_char(newPlayerChar))||(!(lastOpponentPiece && BoardCases::Suspected))){
+            //might be regular piece
+
+            myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] = lastOpponentPiece | Suspected |
+                    get_piece_from_char(newPlayerChar);
+        }
+        else{
+
+            // for sure a joker, changed it's repr
+            int value = AutoPlayerAlgorithm::BoardCases ::SecondPlayer  | AutoPlayerAlgorithm::BoardCases ::Joker | get_piece_from_char(newPlayerChar);
+            myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] = value;
+        }
+
+    }
 
 }
 
@@ -34,7 +56,7 @@ unique_ptr<JokerChange> AutoPlayerAlgorithm::getJokerChange() {
     return unique_ptr<JokerChange>();
 }
 
-AutoPlayerAlgorithm::AutoPlayerAlgorithm(int player):player(player) {
+AutoPlayerAlgorithm::AutoPlayerAlgorithm(int player):player(player),lastOpponentPiece(AutoPlayerAlgorithm::BoardCases::NoPlayer) {
 }
 
 AutoPlayerAlgorithm::~AutoPlayerAlgorithm() = default;
@@ -85,7 +107,7 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
 }
 
 void AutoPlayerAlgorithm::addNonJokerPiece(std::vector<unique_ptr<PiecePosition>> &vectorToFill,
-                                           std::vector<MyPoint> &availableSpots, int count, char chr) const {
+                                           std::vector<MyPoint> &availableSpots, int count, char chr)  {
     for(int i = 0; i < count; i++){
         MyPiecePosition myPiecePosition(chr,NON_JOKER_REPR_DEFAULT,availableSpots[i]);
         int value =  AutoPlayerAlgorithm::BoardCases ::OurPlayer | get_piece_from_char(chr);

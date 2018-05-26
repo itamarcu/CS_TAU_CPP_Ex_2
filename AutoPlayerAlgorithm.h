@@ -11,10 +11,12 @@
  */
 class AutoPlayerAlgorithm : public PlayerAlgorithm {
 private:
+    int player; // 1 or 2
+    int lastOpponentPiece;
+    std::shared_ptr<PlannedMove> getFromNextMove();
     bool alreadyGotJokerPartOfMove;
     bool alreadyGotMovementPartOfMove;
-    int player; // 1 or 2
-    std::shared_ptr<PlannedMove> getFromNextMove();
+
     /**
      * board cases, don't use directly! so you can use or operator and save as int
      */
@@ -23,7 +25,7 @@ private:
         OurPlayer = 1,
         SecondPlayer = 2,
         /**
-         * would be with suspceted on used when you think that a piece is some of the follows(we've seen it in a fight) but might be a joker
+         * could be with suspceted on, when you think that a piece is some of the follows(we've seen it win in a fight) but might be a joker
          */
         Rock = 4,
         Scissors = 8,
@@ -57,7 +59,7 @@ public:
     void notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) override;
 
     /**
-     * notify function on opponent move
+     * notify function on opponent move, assumes no error in move
      * @param move the move of the opponent
      */
     void notifyOnOpponentMove(const Move &move) override;
@@ -88,7 +90,7 @@ private:
     int myBoard[N][M];
 
     void addNonJokerPiece(std::vector<unique_ptr<PiecePosition>> &vectorToFill, std::vector<MyPoint> &availableSpots,
-                          int count, char chr) const;
+                          int count, char chr) ;
     int get_piece_from_char(char c) const;
 };
 
