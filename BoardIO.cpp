@@ -158,38 +158,6 @@ void _load_moves_to_vec(bool player, std::vector<PlannedMove> &moves) {
     }
 }
 
-void BoardIO::load_moves(GameMoves &gameMoves) {
-    _load_player_moves(gameMoves, true);
-    _load_player_moves(gameMoves, false);
-}
-
-void BoardIO::setup_game(Game &game) {
-    LoadBoardResult load_of_1 = BoardIO::load_board(game.board, true);
-    LoadBoardResult load_of_2 = BoardIO::load_board(game.board, false);
-    if (load_of_1.type != BoardLoadingSuccess && load_of_2.type != BoardLoadingSuccess) {
-        std::stringstream s;
-        s << "Bad Positioning input file for both players - ";
-        s << "player 1: line " << load_of_1.line_num;
-        s << ", ";
-        s << "player 2: line " << load_of_2.line_num;
-        game.endGame(TIE, s.str());
-        std::cout << "error 1 is " << load_of_1.type <<
-                  ", error 2 is " << load_of_2.type << std::endl;
-    } else if (load_of_1.type != BoardLoadingSuccess) {
-        std::stringstream s;
-        s << "Bad Positioning input file for player 1 - ";
-        s << "line " << load_of_1.line_num;
-        game.endGame(PLAYER_2_VICTORY, s.str());
-        std::cout << "error 1 is " << load_of_1.type << std::endl;
-    } else if (load_of_2.type != BoardLoadingSuccess) {
-        std::stringstream s;
-        s << "Bad Positioning input file for player 2 - ";
-        s << "line " << load_of_2.line_num;
-        std::cout << "error 2 is " << load_of_2.type << std::endl;
-        game.endGame(PLAYER_1_VICTORY, s.str());
-    }
-}
-
 void BoardIO::store_game(Game &game) {
     std::ofstream fout("rps.output");
     fout << "Winner: " << game.getGameWinner() << std::endl;
