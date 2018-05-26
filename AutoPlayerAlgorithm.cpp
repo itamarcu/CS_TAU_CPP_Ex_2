@@ -6,7 +6,28 @@
 #define BAISED_JOKER_ARRAY {SCISSORS_CHAR, ROCK_CHAR, PAPER_CHAR, ROCK_CHAR, SCISSORS_CHAR, ROCK_CHAR}
 
 void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) {
-    //TODO something
+
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < M ; ++j) {
+            int res = b.getPlayer(Point(i,j));
+            if(res == 0){
+                myBoard[i][j] = NoPlayer;
+            }
+            else if(res == FIRST_PLAYER_CONST){
+                //update if not our player
+                if(player != FIRST_PLAYER_CONST){
+                    myBoard[i][j] = SecondPlayer;
+                }
+            }
+            else if(res == SECOND_PLAYER_CONST){
+                if(player !=SECOND_PLAYER_CONST){
+                    myBoard[i][j] = SecondPlayer;
+                }
+            }
+        }
+    }
+
+
 }
 
 void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
