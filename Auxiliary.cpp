@@ -41,11 +41,6 @@ int random_number_in_range(const int from, const int to) {
     return distr(generator);
 }
 
-template<typename T>
-void shuffle_vector(std::vector<T> &vecToShuffle) {
-    std::random_device random_dev;
-    std::mt19937       generator(random_dev());
 
-    std::shuffle(vecToShuffle.begin(), vecToShuffle.end(), generator);
 
-}
+
