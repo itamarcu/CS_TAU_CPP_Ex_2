@@ -24,6 +24,7 @@ void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
     lastOpponentPiece = myBoard[move.getFrom().getX()][move.getFrom().getY()] | Movable;
     if (myBoard[move.getTo().getX()][move.getTo().getY()] == AutoPlayerAlgorithm::BoardCases::NoPlayer) {
         myBoard[move.getTo().getX()][move.getTo().getY()] = lastOpponentPiece; // if there is no player in destination just move
+        lastOpponentPiece = 0 ;
     }
     // empty the from of the player
     myBoard[move.getFrom().getX()][move.getFrom().getY()] = AutoPlayerAlgorithm::BoardCases::NoPlayer;
@@ -126,6 +127,7 @@ unique_ptr<Move> AutoPlayerAlgorithm::getMove() {
                 std::cout << "ERROR [3213TVJ]: shouldn't reach here" << std::endl;
                 return nullptr;
             }
+            this->lastMyPiece = 0;
             return moveToMake;
 
         }
