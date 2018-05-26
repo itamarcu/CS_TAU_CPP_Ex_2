@@ -122,7 +122,7 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }
-    availableSpots.erase(availableSpots.begin() + J);
+    availableSpots.erase(availableSpots.begin() ,availableSpots.begin()+ J);
 
     addNonJokerPiece(vectorToFill, availableSpots, B, BOMB_CHAR);
     addNonJokerPiece(vectorToFill, availableSpots, S, SCISSORS_CHAR);
@@ -140,6 +140,6 @@ void AutoPlayerAlgorithm::addNonJokerPiece(std::vector<unique_ptr<PiecePosition>
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }
-    availableSpots.erase(availableSpots.begin() + count);
+    availableSpots.erase(availableSpots.begin(),availableSpots.begin() + count);
 }
 
