@@ -136,27 +136,31 @@ unique_ptr<Move> AutoPlayerAlgorithm::getMove() {
             return makeAttack(attackPoint,paperPoint);
         }
         else{
+            unique_ptr<Move> moveToMake;
             std::unique_ptr<std::vector<MyPoint>> emptySpaces = get_vector_with_settings(NoPlayer);
             if(!myPapers->empty()){
-                unique_ptr<Move> moveToMake = makeAttack((*emptySpaces)[0],(*myPapers)[0]);
+                 moveToMake = makeAttack((*emptySpaces)[0],(*myPapers)[0]);
                 this->myBoard[moveToMake->getTo().getX()][moveToMake->getTo().getY()] = lastMyPiece;
             }
             else if(!myRocks->empty()){
-                unique_ptr<Move> moveToMake = makeAttack((*emptySpaces)[0],(*myRocks)[0]);
+                moveToMake = makeAttack((*emptySpaces)[0],(*myRocks)[0]);
                 this->myBoard[moveToMake->getTo().getX()][moveToMake->getTo().getY()] = lastMyPiece;
 
             }
             else if(!myScissors->empty()){
-                unique_ptr<Move> moveToMake = makeAttack((*emptySpaces)[0],(*myScissors)[0]);
+                moveToMake = makeAttack((*emptySpaces)[0],(*myScissors)[0]);
                 this->myBoard[moveToMake->getTo().getX()][moveToMake->getTo().getY()] = lastMyPiece;
             }else{
                 std::cout<< "ERROR [3213TVJ]: shouldn't reach here" <<std::endl;
+                return nullptr;
             }
+            return moveToMake;
 
         }
     }
-
-    return unique_ptr<Move>();
+    //unreachable code
+    std::cout<< "ERROR [3213TVJ]: Logics are ruined, end of world" <<std::endl;
+    return nullptr;
 }
 
 unique_ptr<Move> AutoPlayerAlgorithm::makeAttack(const MyPoint &attackPoint, const MyPoint &attackerPoint) {
