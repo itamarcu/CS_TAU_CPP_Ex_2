@@ -13,15 +13,15 @@
  * result of loading board
  */
 enum LoadBoardResultType {
-    UnableToOpenPath,
-    BadFormat,
-    InvalidJokerPieceType,
-    InvalidPieceType,
-    TooManyOfSamePiece,
-    CoordinatesOutOfBound,
-    TwoPiecesSamePlayerSamePosition,
-    NotAllFlagsWerePlaced,
-    BoardLoadingSuccess
+    UnableToOpenPath = 0,
+    BadFormat = 1,
+    InvalidJokerPieceType = 2,
+    InvalidPieceType = 3,
+    TooManyOfSamePiece = 4,
+    CoordinatesOutOfBound = 5,
+    TwoPiecesSamePlayerSamePosition = 6,
+    NotAllFlagsWerePlaced = 7,
+    BoardLoadingSuccess = 8
 };
 
 struct LoadBoardResult {

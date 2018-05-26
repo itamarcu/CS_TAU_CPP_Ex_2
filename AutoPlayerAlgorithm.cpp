@@ -9,7 +9,7 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
 
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M ; ++j) {
-            int res = b.getPlayer(Point(i,j));
+            int res = b.getPlayer(MyPoint(i,j));
             if(res == 0){
                 myBoard[i][j] = NoPlayer;
             }
@@ -26,8 +26,6 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
             }
         }
     }
-
-
 }
 
 void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
