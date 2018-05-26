@@ -1,5 +1,6 @@
 #include <iostream>
 #include "GameLogic.h"
+#include "MyFightInfo.h"
 
 /**
  * simulate a fight between two pieces and return the result
@@ -64,11 +65,25 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
         game.board.grid[destinationRow][destinationColumn] =
                 game.board.grid[sourceRow][sourceColumn];
     } else {
-        actually_fight(
+        auto result = actually_fight(
                 game,
                 game.board.grid[sourceRow][sourceColumn],
                 game.board.grid[destinationRow][destinationColumn],
                 MyPoint(destinationRow, destinationColumn));
+        int winner = 0;
+        if (result == FightResult::ATTACKER_WON)
+            winner = game.currentPlayer ? 1 : 2;
+        else if (result == FightResult::DEFENDER_WON)
+            winner = game.currentPlayer ? 2 : 1;
+        game.freshFightResult = std::make_unique<MyFightInfo>(
+                game.currentPlayer ?
+
+                MyFightInfo(winner, MyPoint(sourceRow, sourceColumn, true),
+                            GamePiece::chrFromType(game.board.grid[destinationRow][destinationColumn]->type),
+                            GamePiece::chrFromType(game.board.grid[sourceRow][sourceColumn]->type)) :
+                MyFightInfo(winner, MyPoint(sourceRow, sourceColumn, true),
+                            GamePiece::chrFromType(game.board.grid[sourceRow][sourceColumn]->type),
+                            GamePiece::chrFromType(game.board.grid[destinationRow][destinationColumn]->type)));
     }
 
     game.board.grid[sourceRow][sourceColumn] = nullptr;
@@ -106,7 +121,7 @@ MoveResult make_planned_move(Game &game, PlannedMove &plannedMove) {
 }
 
 FightResult actually_fight(Game &game, std::shared_ptr<GamePiece> attacker,
-                          std::shared_ptr<GamePiece> defender, Point &&position) {
+                           std::shared_ptr<GamePiece> defender, Point &&position) {
     int r = position.getX();
     int c = position.getY();
     auto fightResult = simulate_fight(*attacker, *defender);

@@ -14,6 +14,8 @@ public:
 
     MyPoint(int x, int y);
 
+    MyPoint(int x, int y, bool start_from_one);
+
     ~MyPoint() override;
 
     explicit MyPoint(const Point &p) : x(p.getX()), y(p.getY()) {}

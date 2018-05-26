@@ -3,7 +3,6 @@
 #include "MyJokerChange.h"
 #include "MyPiecePosition.h"
 #include "BoardIO.h"
-#include <memory>
 #include <iostream>
 
 void FilePlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) {
@@ -50,7 +49,7 @@ unique_ptr<Move> FilePlayerAlgorithm::getMove() {
         movesList.pop_front();
     }
     if (movesList.empty())
-        return nullptr; // no more moves
+        return nullptr; // no more moves, so send invalid move
 
     alreadyGotMovementPartOfMove = true;
 

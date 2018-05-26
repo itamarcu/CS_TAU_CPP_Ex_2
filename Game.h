@@ -3,6 +3,7 @@
 
 
 #include "MyBoard.h"
+#include "FightInfo.h"
 
 enum MoveResult { // Can't be in GameLogic due to circular dependency
     SuccessfulMove = 0,
@@ -33,9 +34,13 @@ public:
      * true = Player 1, false = Player 2
      */
     bool currentPlayer;
+
+    std::unique_ptr<FightInfo> freshFightResult;
+
 private:
     GameWinner gameWinner;
     std::string gameEndReason;
+
     //MARK: Constructors
 public:
     /**
@@ -43,7 +48,8 @@ public:
      */
     explicit Game() : board(),
                       currentPlayer(true), gameWinner(GAME_NOT_ENDED),
-                      gameEndReason("Game did not end yet") {}
+                      gameEndReason("Game did not end yet"), freshFightResult(nullptr) {}
+
     //MARK: Functions
 public:
     /**

@@ -50,7 +50,8 @@ LoadBoardResult NewGameManager::setup_positions(int player, std::vector<std::uni
             int winner = 0;
             if (result == FightResult::ATTACKER_WON)
                 winner = player;
-            else winner = 3 - player;
+            else if (result == FightResult::DEFENDER_WON)
+                winner = 3 - player;
             setup_fights.push_back(std::make_unique<MyFightInfo>(
                     player_bool ?
                     MyFightInfo(winner, position,
@@ -112,6 +113,7 @@ void NewGameManager::run_game() {
     p2_algorithm->notifyOnInitialBoard(game.board, setup_fights);
 
     while (game.getGameWinner() == GAME_NOT_ENDED) {
+        // Load move and joker change
         auto move = game.currentPlayer ? p1_algorithm->getMove() : p2_algorithm->getMove();
         auto jokerChange = game.currentPlayer ? p1_algorithm->getJokerChange() : p2_algorithm->getJokerChange();
         if (move == nullptr) {
@@ -120,6 +122,13 @@ void NewGameManager::run_game() {
             return;
         }
 
+        // Notify on opponent move
+        if (game.currentPlayer)
+            p2_algorithm->notifyOnOpponentMove(*move);
+        else
+            p1_algorithm->notifyOnOpponentMove(*move);
+
+        // Make move and joker change
         PlannedMove plannedMove(false);
         if (jokerChange == nullptr) // no joker swap
         {
@@ -134,10 +143,16 @@ void NewGameManager::run_game() {
             plannedMove = PlannedMove(from.getX(), from.getY(), to.getX(), to.getY(), jokPos.getX(), jokPos.getY(),
                                       type_from_char(jokRep));
         }
-
         auto move_result = make_planned_move(game, plannedMove);
 
+        // Notify on fight result
+        if (game.freshFightResult != nullptr) {
+            p1_algorithm->notifyFightResult(*game.freshFightResult);
+            p2_algorithm->notifyFightResult(*game.freshFightResult);
+            game.freshFightResult = nullptr;
+        }
 
+        //Debug - print board
         for (int y = 0; y < N; y++) {
             for (int x = 0; x < M; x++) {
                 char ch = ' ';
@@ -150,7 +165,7 @@ void NewGameManager::run_game() {
         }
         std::cout.flush();
 
-
+        // If move is illegal, print and stop game
         std::stringstream s;
         std::string reason;
         switch (move_result) {
@@ -184,10 +199,13 @@ void NewGameManager::run_game() {
                 game.endGame(game.currentPlayer ? PLAYER_2_VICTORY : PLAYER_1_VICTORY, reason);
                 return;
         }
+
         // Check winner
         if (game.checkWin()) {
             return;
         }
+
+        // Advance to next player's turn
         game.currentPlayer = !game.currentPlayer;
     }
 }
