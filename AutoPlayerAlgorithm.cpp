@@ -159,7 +159,7 @@ unique_ptr<Move> AutoPlayerAlgorithm::getMove() {
         }
     }
     //unreachable code
-    std::cout<< "ERROR [3213TVJ]: Logics are ruined, end of world" <<std::endl;
+    std::cout<< "ERROR [3213STVJ]: Logics are ruined, end of world" <<std::endl;
     return nullptr;
 }
 
