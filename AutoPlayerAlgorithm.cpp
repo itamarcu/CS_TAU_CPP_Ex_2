@@ -1,3 +1,4 @@
+#include <iostream>
 #include "AutoPlayerAlgorithm.h"
 #include "MyPiecePosition.h"
 #include "MyFightInfo.h"
@@ -95,7 +96,7 @@ unsigned int AutoPlayerAlgorithm::get_piece_from_char(char c) const {
         case ROCK_CHAR:
             return AutoPlayerAlgorithm::BoardCases::Rock;
         default:
-            std::out << "error 73213: AutoPlayer get piece default reached "<< std::endl;
+            std::cout << "error 73213: AutoPlayer get piece default reached "<< std::endl;
             return 0;//shouldn't get here
     }
 
@@ -115,7 +116,7 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
     for (int i = 0; i < J; i++) {
         char chr = wantedJokerChars[random_number_in_range(0, SIZE_OF_BAISED_JOKER_ARRAY - 1)];
         MyPiecePosition myPiecePosition(JOKER_CHAR, chr, availableSpots[i]);
-        int value = AutoPlayerAlgorithm::BoardCases::Joker | AutoPlayerAlgorithm::BoardCases::OurPlayer |
+        unsigned int value = AutoPlayerAlgorithm::BoardCases::Joker | AutoPlayerAlgorithm::BoardCases::OurPlayer |
                     get_piece_from_char(chr);
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
@@ -134,7 +135,7 @@ void AutoPlayerAlgorithm::addNonJokerPiece(std::vector<unique_ptr<PiecePosition>
                                            std::vector<MyPoint> &availableSpots, int count, char chr) {
     for (int i = 0; i < count; i++) {
         MyPiecePosition myPiecePosition(chr, NON_JOKER_REPR_DEFAULT, availableSpots[i]);
-        int value = AutoPlayerAlgorithm::BoardCases::OurPlayer | get_piece_from_char(chr);
+        unsigned int value = AutoPlayerAlgorithm::BoardCases::OurPlayer | get_piece_from_char(chr);
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }
