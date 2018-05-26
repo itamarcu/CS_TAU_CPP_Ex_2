@@ -65,10 +65,12 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
         game.board.grid[destinationRow][destinationColumn] =
                 game.board.grid[sourceRow][sourceColumn];
     } else {
+        auto attacking_piece = game.board.grid[sourceRow][sourceColumn];
+        auto defending_piece = game.board.grid[destinationRow][destinationColumn];
         auto result = actually_fight(
                 game,
-                game.board.grid[sourceRow][sourceColumn],
-                game.board.grid[destinationRow][destinationColumn],
+                attacking_piece,
+                defending_piece,
                 MyPoint(destinationRow, destinationColumn));
         int winner = 0;
         if (result == FightResult::ATTACKER_WON)
@@ -77,13 +79,12 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
             winner = game.currentPlayer ? 2 : 1;
         game.freshFightResult = std::make_unique<MyFightInfo>(
                 game.currentPlayer ?
-
                 MyFightInfo(winner, MyPoint(sourceRow, sourceColumn, true),
-                            GamePiece::chrFromType(game.board.grid[destinationRow][destinationColumn]->type),
-                            GamePiece::chrFromType(game.board.grid[sourceRow][sourceColumn]->type)) :
+                            GamePiece::chrFromType(defending_piece->type),
+                            GamePiece::chrFromType(attacking_piece->type)) :
                 MyFightInfo(winner, MyPoint(sourceRow, sourceColumn, true),
-                            GamePiece::chrFromType(game.board.grid[sourceRow][sourceColumn]->type),
-                            GamePiece::chrFromType(game.board.grid[destinationRow][destinationColumn]->type)));
+                            GamePiece::chrFromType(attacking_piece->type),
+                            GamePiece::chrFromType(defending_piece->type)));
     }
 
     game.board.grid[sourceRow][sourceColumn] = nullptr;
