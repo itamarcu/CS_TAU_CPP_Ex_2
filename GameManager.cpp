@@ -146,14 +146,7 @@ void NewGameManager::run_game() {
             plannedMove = PlannedMove(from.getX(), from.getY(), to.getX(), to.getY(), jokPos.getX(), jokPos.getY(),
                                       type_from_char(jokRep));
         }
-        auto move_result = make_planned_move(game, plannedMove);
 
-        // Notify on fight result
-        if (game.freshFightResult != nullptr) {
-            p1_algorithm->notifyFightResult(*game.freshFightResult);
-            p2_algorithm->notifyFightResult(*game.freshFightResult);
-            game.freshFightResult = nullptr;
-        }
 
         //Debug - print board
         std::cout << "--- Turn " << turn_counter << " ---" << std::endl;
@@ -179,6 +172,16 @@ void NewGameManager::run_game() {
                       " to " << x2 << "," << y2 << std::endl;
         }
         std::cout.flush();
+
+
+        auto move_result = make_planned_move(game, plannedMove);
+
+        // Notify on fight result
+        if (game.freshFightResult != nullptr) {
+            p1_algorithm->notifyFightResult(*game.freshFightResult);
+            p2_algorithm->notifyFightResult(*game.freshFightResult);
+            game.freshFightResult = nullptr;
+        }
 
         // If move is illegal, print and stop game
         std::stringstream s;

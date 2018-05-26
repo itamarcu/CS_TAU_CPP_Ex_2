@@ -20,7 +20,7 @@ private:
     enum BoardCases {
         NoPlayer = 1, // start from 1
         OurPlayer = 2,
-        EnemyPlayer = 4,
+        EnemyPlayer = 1024,
 
         /**
          * could be with suspected on, when you think that a piece is some of the follows(we've seen it win in a fight) but might be a joker
@@ -49,7 +49,7 @@ private:
         /**
          * Movable just means it hasn't moved yet, for enemy pieces (we can't really know)
          */
-                Movable = 1024
+                Movable = 4
     };
 
     /**
