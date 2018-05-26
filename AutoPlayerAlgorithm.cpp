@@ -97,6 +97,7 @@ unsigned int AutoPlayerAlgorithm::get_piece_from_char(char c) const {
         case ROCK_CHAR:
             return AutoPlayerAlgorithm::BoardCases::Rock;
         default:
+            std::out << "error 73213: AutoPlayer get piece default reached "<< std::endl;
             return 0;//shouldn't get here
     }
 
@@ -109,6 +110,7 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
             availableSpots.emplace_back(i, j);
         }
     }
+    shuffle_vector(availableSpots);
     availableSpots.erase(availableSpots.begin() + MAX_POSSIBLE_PIECE_COUNT);
     //bias for joker
     char wantedJokerChars[SIZE_OF_BAISED_JOKER_ARRAY] = BAISED_JOKER_ARRAY;
