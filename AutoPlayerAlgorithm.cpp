@@ -109,17 +109,17 @@ unique_ptr<Move> AutoPlayerAlgorithm::getMove() {
         std::unique_ptr<std::vector<MyPoint>> enemyScissors = get_vector_with_settings(Scissors | SecondPlayer);
         std::unique_ptr<std::vector<MyPoint>> enemyRocks = get_vector_with_settings(Rock | SecondPlayer);
         std::unique_ptr<std::vector<MyPoint>> enemyPapers = get_vector_with_settings(Paper | SecondPlayer);
-        if ((!enemyScissors->empty()) && (!myRocks->empty())) {
+        if (!enemyScissors->empty() && !myRocks->empty()) {
             MyPoint &rockPoint = (*myRocks)[0];
             MyPoint &attackPoint = (*enemyScissors)[0];
             return makeAttack(attackPoint, rockPoint);
-        } else if ((!enemyPapers->empty()) && (!myScissors->empty())) {
-            MyPoint &attackPoint = (*enemyPapers)[0];
+        } else if (!enemyPapers->empty() && !myScissors->empty()) {
             MyPoint &scissorPoint = (*myScissors)[0];
-            return makeAttack(attackPoint, scissorPoint);
-        } else if ((!enemyRocks->empty()) && (myPapers->empty())) {
             MyPoint &attackPoint = (*enemyPapers)[0];
+            return makeAttack(attackPoint, scissorPoint);
+        } else if (!enemyRocks->empty() && !myPapers->empty()) {
             MyPoint &paperPoint = (*myPapers)[0];
+            MyPoint &attackPoint = (*enemyRocks)[0];
             return makeAttack(attackPoint, paperPoint);
         } else {
             unique_ptr<Move> moveToMake;
@@ -130,7 +130,6 @@ unique_ptr<Move> AutoPlayerAlgorithm::getMove() {
             } else if (!myRocks->empty()) {
                 moveToMake = makeAttack((*emptySpaces)[0], (*myRocks)[0]);
                 this->myBoard[moveToMake->getTo().getX()][moveToMake->getTo().getY()] = lastMyPiece;
-
             } else if (!myScissors->empty()) {
                 moveToMake = makeAttack((*emptySpaces)[0], (*myScissors)[0]);
                 this->myBoard[moveToMake->getTo().getX()][moveToMake->getTo().getY()] = lastMyPiece;
@@ -224,7 +223,7 @@ unsigned int AutoPlayerAlgorithm::get_piece_from_char(char c) const {
 
 }
 
-unique_ptr<std::vector<MyPoint>> AutoPlayerAlgorithm::get_vector_with_settings(int settings, int non) const{
+unique_ptr<std::vector<MyPoint>> AutoPlayerAlgorithm::get_vector_with_settings(int settings, int non) const {
     std::unique_ptr<std::vector<MyPoint>> vector = std::make_unique<std::vector<MyPoint>>();
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {

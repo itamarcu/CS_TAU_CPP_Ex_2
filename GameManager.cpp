@@ -112,7 +112,7 @@ void NewGameManager::run_game() {
     p1_algorithm->notifyOnInitialBoard(game.board, setup_fights);
     p2_algorithm->notifyOnInitialBoard(game.board, setup_fights);
 
-    int num_of_moves = 0;
+    int turn_counter = 0;
     while (game.getGameWinner() == GAME_NOT_ENDED) {
         // Load move and joker change
         auto move = game.currentPlayer ? p1_algorithm->getMove() : p2_algorithm->getMove();
@@ -120,10 +120,10 @@ void NewGameManager::run_game() {
         if (move == nullptr) {
             game.endGame(game.currentPlayer ? PLAYER_2_VICTORY : PLAYER_1_VICTORY,
                          "Enemy player ran out of moves first!");
-            printf("Game ended after %d moves due to player running out of moves.\n", num_of_moves);
+            printf("Game ended after %d moves due to player running out of moves.\n", turn_counter);
             return;
         }
-        num_of_moves++;
+        turn_counter++;
 
         // Notify on opponent move
         if (game.currentPlayer)
@@ -156,7 +156,7 @@ void NewGameManager::run_game() {
         }
 
         //Debug - print board
-        std::cout << "--- " << num_of_moves << " ---" << std::endl;
+        std::cout << "--- Turn " << turn_counter << " ---" << std::endl;
         for (int y = 0; y < N; y++) {
             for (int x = 0; x < M; x++) {
                 char ch = ' ';
@@ -167,7 +167,17 @@ void NewGameManager::run_game() {
             }
             std::cout << std::endl;
         }
-        std::cout << std::endl;
+        int x1 = move->getFrom().getX();
+        int y1 = move->getFrom().getY();
+        int x2 = move->getTo().getX();
+        int y2 = move->getTo().getY();
+        if (game.board.grid[x1][y1] == nullptr) {
+            print_line("Player attempted to move an empty space...");
+        } else {
+            std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
+                    " piece " << game.board.grid[x1][y1]->to_char() << " from " << x1 << "," << y1 <<
+                      " to " << x2 << "," << y2 << std::endl;
+        }
         std::cout.flush();
 
         // If move is illegal, print and stop game
