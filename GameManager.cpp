@@ -112,6 +112,7 @@ void NewGameManager::run_game() {
     p1_algorithm->notifyOnInitialBoard(game.board, setup_fights);
     p2_algorithm->notifyOnInitialBoard(game.board, setup_fights);
 
+    int num_of_moves = 0;
     while (game.getGameWinner() == GAME_NOT_ENDED) {
         // Load move and joker change
         auto move = game.currentPlayer ? p1_algorithm->getMove() : p2_algorithm->getMove();
@@ -119,8 +120,10 @@ void NewGameManager::run_game() {
         if (move == nullptr) {
             game.endGame(game.currentPlayer ? PLAYER_2_VICTORY : PLAYER_1_VICTORY,
                          "Enemy player ran out of moves first!");
+            printf("Game ended after %d moves due to player running out of moves.\n", num_of_moves);
             return;
         }
+        num_of_moves++;
 
         // Notify on opponent move
         if (game.currentPlayer)

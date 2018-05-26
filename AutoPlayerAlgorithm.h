@@ -6,19 +6,13 @@
 #include "PlannedMove.h"
 #include "MyBoard.h"
 
-/**
- * @authors: Daniel Meltzer and Itamar Curiel
- */
 class AutoPlayerAlgorithm : public PlayerAlgorithm {
 private:
     unsigned int player; // 1 or 2
     unsigned int lastOpponentPiece;
     unsigned int lastMyPiece;
-    std::shared_ptr<PlannedMove> getFromNextMove();
     unique_ptr<std::vector<MyPoint>> get_vector_with_settings(int settings) const;
     unique_ptr<std::vector<MyPoint>> get_vector_with_settings(int settings, int non);
-    bool alreadyGotJokerPartOfMove;
-    bool alreadyGotMovementPartOfMove;
 
     /**
      * new representation for joker

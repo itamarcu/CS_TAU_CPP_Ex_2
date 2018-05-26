@@ -6,9 +6,6 @@
 #include "MyPoint.h"
 #include "Auxiliary.h"
 
-/**
- * @authors: Daniel Meltzer and Itamar Curiel
- */
 class MyFightInfo : public FightInfo {
 public:
     MyFightInfo(int winner, const Point &position, char firstPlayerPiece, char secondPlayerPiece);
