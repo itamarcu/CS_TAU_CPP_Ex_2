@@ -11,6 +11,7 @@ using std::endl;
 
 int main(int argc, char *argv[]) {
     print_line("---Program started---");
+    init_global_rng();
     if (argc != 2) {
         printf("Usage: %s [auto/file]-vs-[auto/file]\n", argv[0]);
         return -1;

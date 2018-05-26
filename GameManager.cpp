@@ -156,6 +156,7 @@ void NewGameManager::run_game() {
         }
 
         //Debug - print board
+        std::cout << "--- " << num_of_moves << " ---" << std::endl;
         for (int y = 0; y < N; y++) {
             for (int x = 0; x < M; x++) {
                 char ch = ' ';
@@ -166,6 +167,7 @@ void NewGameManager::run_game() {
             }
             std::cout << std::endl;
         }
+        std::cout << std::endl;
         std::cout.flush();
 
         // If move is illegal, print and stop game

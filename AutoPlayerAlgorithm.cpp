@@ -151,7 +151,7 @@ unique_ptr<Move> AutoPlayerAlgorithm::makeAttack(const MyPoint &attackPoint, con
 }
 
 unique_ptr<JokerChange> AutoPlayerAlgorithm::getJokerChange() {
-    int random = random_number_in_range(1, 10);
+    int random = random_number_in_range_inclusive(1, 10);
     std::unique_ptr<std::vector<MyPoint>> jokerPositions = get_vector_with_settings(Joker & OurPlayer);
     //in 70% probability
     if (random <= 7) {
@@ -269,7 +269,7 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
     //bias for joker
     char wantedJokerChars[SIZE_OF_BIASED_JOKER_ARRAY] = BIASED_JOKER_ARRAY;
     for (int i = 0; i < J; i++) {
-        char chr = wantedJokerChars[random_number_in_range(0, SIZE_OF_BIASED_JOKER_ARRAY - 1)];
+        char chr = wantedJokerChars[random_number_in_range_inclusive(0, SIZE_OF_BIASED_JOKER_ARRAY - 1)];
         MyPiecePosition myPiecePosition(JOKER_CHAR, chr, availableSpots[i]);
         unsigned int value = Joker | OurPlayer |
                              get_piece_from_char(chr);

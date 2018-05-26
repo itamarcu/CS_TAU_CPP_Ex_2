@@ -5,7 +5,8 @@ void print_line(std::string str) {
     std::cout << str << std::endl;
 }
 
-std::unique_ptr<std::vector<std::string>> split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter) {
+std::unique_ptr<std::vector<std::string>>
+split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter) {
     std::unique_ptr<std::vector<std::string>> splittedStrings = std::make_unique<std::vector<std::string>>();
     size_t pos = stringToSplit.find(delimiter);
     size_t initialPos = 0;
@@ -31,12 +32,16 @@ int bool_to_player(bool player) {
     return (1 - player) + 1; // 0->2, 1->1
 }
 
+std::mt19937 global_rng;
 
-int random_number_in_range(int from, int to) {
+int random_number_in_range_inclusive(int from, int to) {
+    std::uniform_int_distribution<int> distr(from, to);
+    return distr(global_rng);
+}
+
+void init_global_rng() {
     auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    std::mt19937 generator(seed);
-    std::uniform_int_distribution<int>  distr(from, to);
-    return distr(generator);
+    global_rng = std::mt19937(seed);
 }
 
 

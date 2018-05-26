@@ -44,25 +44,26 @@ std::unique_ptr<std::vector<std::string>>
 split_string_using_delimiter(std::string &stringToSplit, std::string &delimiter);
 
 /**
- *
  * @param player true for player 1, false for player 2
  * @return 1 or 2
  */
 int bool_to_player(bool player);
 
+extern std::mt19937 global_rng;
+
+void init_global_rng();
+
 /**
- * generate ranged number
+ * generate number within [from, to]
  * @param from inclusive from
  * @param to inclusive to
  * @return random number in given range
  */
-int random_number_in_range(int from, int to);
+int random_number_in_range_inclusive(int from, int to);
 
 template<typename T>
 void shuffle_vector(std::vector<T> &vecToShuffle) {
-    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    std::mt19937 generator(seed);
-    std::shuffle(vecToShuffle.begin(), vecToShuffle.end(), generator);
+    std::shuffle(vecToShuffle.begin(), vecToShuffle.end(), global_rng);
 }
 
 #endif //CS_TAU_CPP_RPS_AUXILIARY_H
