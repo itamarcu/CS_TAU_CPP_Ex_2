@@ -11,6 +11,46 @@ private:
     unsigned int player; // 1 or 2
     unsigned int lastOpponentPiece;
     unsigned int lastMyPiece;
+    //2d board of ints representing knowledge on board, see enum
+    unsigned int myBoard[N][M];
+
+    /**
+     * board cases, don't use directly! so you can use or operator and save as int
+     */
+    enum BoardCases {
+        NoPlayer = 0,
+        OurPlayer = 1,
+        EnemyPlayer = 2,
+
+        /**
+         * could be with suspected on, when you think that a piece is some of the follows(we've seen it win in a fight) but might be a joker
+         */
+                Rock = 4,
+        Scissors = 8,
+        Paper = 16,
+
+        /**
+         * if we've seen a piece change its type it must be a joker, not suspected
+         */
+                Joker = 32,
+
+        /**
+         * will be used only on our pieces (because no way of knowing about enemy's)
+         */
+                Bomb = 64,
+
+        Flag = 128,
+
+        /**
+         * to use when you don't know for sure it's a piece or joker
+         */
+                Suspected = 256,
+
+        /**
+         * Movable=false, for enemy pieces, just means it hasn't moved yet
+         */
+                Movable = 512
+    };
 
     /**
      * From MyBoard, returns a filtered vector of positions. A position will only
@@ -27,47 +67,7 @@ private:
      * @param jokerPoint the joker point to change
      * @return new repr
      */
-    char getNewRepr(const MyPoint &jokerPoint);
-    /**
-     * board cases, don't use directly! so you can use or operator and save as int
-     */
-    enum BoardCases {
-        NoPlayer = 0,
-        OurPlayer = 1,
-        EnemyPlayer = 2,
-
-        /**
-         * could be with suspected on, when you think that a piece is some of the follows(we've seen it win in a fight) but might be a joker
-         */
-        Rock = 4,
-        Scissors = 8,
-        Paper = 16,
-
-        /**
-         * if we've seen a piece change its type it must be a joker, not suspected
-         */
-        Joker = 32,
-
-        /**
-         * will be used only on our pieces (because no way of knowing about enemy's)
-         */
-        Bomb = 64,
-
-        Flag = 128,
-
-        /**
-         * to use when you don't know for sure it's a piece or joker
-         */
-        Suspected = 256,
-
-        /**
-         * Movable=false, for enemy pieces, just means it hasn't moved yet
-         */
-        Movable = 512
-    };
-
-    //2d board of ints Representing Knowledge on Board, see enum
-    unsigned int myBoard[N][M];
+    char select_new_joker_repr(const MyPoint &jokerPoint);
 
     /**
      * add non joker pieces to initial board
@@ -77,10 +77,16 @@ private:
      * @param chr the chr of the piece
      * @param movable is it movable
      */
-    void addNonJokerPiece(std::vector<unique_ptr<PiecePosition>> &vectorToFill,
-                              std::vector<MyPoint> &availableSpots, int count, char chr, bool movable);
+    void select_non_joker_piece_to_add(std::vector<unique_ptr<PiecePosition>> &vectorToFill,
+                                       std::vector<MyPoint> &availableSpots, int count, char chr, bool movable);
 
+    unique_ptr<JokerChange> select_joker_change(const unique_ptr<std::vector<MyPoint>> &jokerPositions, int pos);
     unsigned int get_piece_from_char(char c) const;
+
+    /**
+     * Creates and returns this movement to make, and updates knowledge
+     */
+    unique_ptr<Move> make_move(const MyPoint &attacker_position, const MyPoint &defender_position);
 
 public:
 
@@ -119,10 +125,10 @@ public:
      */
     unique_ptr<JokerChange> getJokerChange() override;
 
+
     ~AutoPlayerAlgorithm() override;
 
 
-    unique_ptr<Move> makeAttack(const MyPoint &attacker_position, const MyPoint &defender_position);
 };
 
 
