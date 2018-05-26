@@ -97,7 +97,7 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
         int value = AutoPlayerAlgorithm::BoardCases::Joker | AutoPlayerAlgorithm::BoardCases::OurPlayer |
                     get_piece_from_char(chr);
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
-        vectorToFill.emplace_back(std::make_unique<MyPiecePosition>(myPiecePosition));
+        vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }
     availableSpots.erase(availableSpots.begin() + J);
 
@@ -115,7 +115,7 @@ void AutoPlayerAlgorithm::addNonJokerPiece(std::vector<unique_ptr<PiecePosition>
         MyPiecePosition myPiecePosition(chr, NON_JOKER_REPR_DEFAULT, availableSpots[i]);
         int value = AutoPlayerAlgorithm::BoardCases::OurPlayer | get_piece_from_char(chr);
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
-        vectorToFill.emplace_back(std::make_unique<MyPiecePosition>(myPiecePosition));
+        vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }
     availableSpots.erase(availableSpots.begin() + count);
 }
