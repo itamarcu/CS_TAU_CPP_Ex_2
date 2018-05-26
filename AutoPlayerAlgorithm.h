@@ -6,16 +6,48 @@
 #include "PlannedMove.h"
 #include "MyBoard.h"
 
+/**
+ * @authors: Daniel Meltzer and Itamar Curiel
+ */
 class AutoPlayerAlgorithm : public PlayerAlgorithm {
 private:
+    int player; // 1 or 2
+    int lastOpponentPiece;
+    std::shared_ptr<PlannedMove> getFromNextMove();
     bool alreadyGotJokerPartOfMove;
     bool alreadyGotMovementPartOfMove;
-    int player; // 1 or 2
-    std::shared_ptr<PlannedMove> getFromNextMove();
 
+    /**
+     * board cases, don't use directly! so you can use or operator and save as int
+     */
+    enum BoardCases{
+        NoPlayer = 0,
+        OurPlayer = 1,
+        SecondPlayer = 2,
+        /**
+         * could be with suspceted on, when you think that a piece is some of the follows(we've seen it win in a fight) but might be a joker
+         */
+        Rock = 4,
+        Scissors = 8,
+        Paper = 16,
+        /**
+         * if we've seen a piece change it's type it must be a joker, not suspected
+         */
+        Joker = 32,
+        /**
+         * will be used only on our pieces
+         */
+        Bomb = 64,
+
+        Flag = 128,
+        /**
+         * to use when you don't know for sure it's a piece or joker
+         */
+        Suspected = 256
+    };
 public:
 
-    AutoPlayerAlgorithm(int player);
+    explicit AutoPlayerAlgorithm(int player);
 
     void getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) override;
 
@@ -27,7 +59,7 @@ public:
     void notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) override;
 
     /**
-     * notify function on opponent move
+     * notify function on opponent move, assumes no error in move
      * @param move the move of the opponent
      */
     void notifyOnOpponentMove(const Move &move) override;
@@ -53,8 +85,13 @@ public:
     ~AutoPlayerAlgorithm() override;
 
 private:
-    std::vector<std::shared_ptr<FightInfo>> initialFights;
-    std::vector<std::shared_ptr<PiecePosition>> knownOpponentPeices;
+
+    //2d board of ints Representing Knowledge on Board, see enum
+    int myBoard[N][M];
+
+    void addNonJokerPiece(std::vector<unique_ptr<PiecePosition>> &vectorToFill, std::vector<MyPoint> &availableSpots,
+                          int count, char chr) ;
+    int get_piece_from_char(char c) const;
 };
 
 
