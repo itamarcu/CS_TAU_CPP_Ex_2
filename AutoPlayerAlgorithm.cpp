@@ -265,7 +265,7 @@ void AutoPlayerAlgorithm::select_non_joker_piece_to_add(std::vector<unique_ptr<P
     for (int i = 0; i < count; i++) {
         MyPiecePosition myPiecePosition(chr, NON_JOKER_REPR_DEFAULT, availableSpots[i]);
         unsigned int value =
-                AutoPlayerAlgorithm::BoardCases::OurPlayer | get_piece_from_char(chr) | (movable ? 0 : Movable);
+                AutoPlayerAlgorithm::BoardCases::OurPlayer | get_piece_from_char(chr) | (movable ? Movable : 0);
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }

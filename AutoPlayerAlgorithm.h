@@ -47,7 +47,7 @@ private:
                 Suspected = 256,
 
         /**
-         * Movable=false, for enemy pieces, just means it hasn't moved yet
+         * Movable just means it hasn't moved yet, for enemy pieces (we can't really know)
          */
                 Movable = 512
     };
