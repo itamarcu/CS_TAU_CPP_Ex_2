@@ -123,6 +123,7 @@ public:
 
 
     unique_ptr<Move> makeAttack(const MyPoint &attacker_position, const MyPoint &defender_position);
+    unique_ptr<JokerChange> getJokerChange(const unique_ptr<std::vector<MyPoint>> &jokerPositions, int pos);
 };
 
 
