@@ -20,20 +20,26 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
     }
 }
 
+//assumes no error in move
 void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
-    lastOpponentPiece = myBoard[move.getFrom().getX()][move.getFrom().getY()] | Movable;
-    if (myBoard[move.getTo().getX()][move.getTo().getY()] == AutoPlayerAlgorithm::BoardCases::NoPlayer) {
-        myBoard[move.getTo().getX()][move.getTo().getY()] = lastOpponentPiece; // if there is no player in destination just move
+    int from_x = move.getFrom().getX() - 1;
+    int from_y = move.getFrom().getY() - 1;
+    int to_x = move.getTo().getX() - 1;
+    int to_y = move.getTo().getY() - 1;
+    lastOpponentPiece = myBoard[from_x][from_y] | Movable;
+    if (myBoard[to_x][to_y] == AutoPlayerAlgorithm::BoardCases::NoPlayer) {
+        myBoard[to_x][to_y] = lastOpponentPiece; // if there is no player in destination just move
     }
     // empty the from of the player
-    myBoard[move.getFrom().getX()][move.getFrom().getY()] = AutoPlayerAlgorithm::BoardCases::NoPlayer;
+    myBoard[from_x][from_y] = AutoPlayerAlgorithm::BoardCases::NoPlayer;
     lastMyPiece = 0;
-    //assumes no error in move
 }
 
 void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
+    int fight_x = fightInfo.getPosition().getX() - 1;
+    int fight_y = fightInfo.getPosition().getY() - 1;
     if (fightInfo.getWinner() == 0) {
-        myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] = 0;
+        myBoard[fight_x][fight_y] = 0;
     } else if (fightInfo.getWinner() != player) {
         char newPlayerChar = fightInfo.getPiece(
                 player == FIRST_PLAYER_CONST ? SECOND_PLAYER_CONST : FIRST_PLAYER_CONST);
@@ -42,14 +48,14 @@ void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
             //might be regular piece
             if (lastOpponentPiece != 0) {
                 // he attacked me
-                myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] =
+                myBoard[fight_x][fight_y] =
                         lastOpponentPiece | Suspected |
                         get_piece_from_char(
                                 newPlayerChar);
             } else {
                 // I attacked him
-                myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] =
-                        myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()]
+                myBoard[fight_x][fight_y] =
+                        myBoard[fight_x][fight_y]
                         | Suspected | get_piece_from_char(newPlayerChar);
             }
         } else {
@@ -58,12 +64,12 @@ void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
             unsigned int value =
                     AutoPlayerAlgorithm::BoardCases::EnemyPlayer | AutoPlayerAlgorithm::BoardCases::Joker |
                     get_piece_from_char(newPlayerChar);
-            myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] = value;
+            myBoard[fight_x][fight_y] = value;
         }
     } else if (fightInfo.getWinner() == player) {
         if (lastMyPiece != 0) {
             //we won and we attacked.
-            myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] = lastMyPiece;
+            myBoard[fight_x][fight_y] = lastMyPiece;
         }
 
     }
