@@ -18,38 +18,38 @@ private:
      * board cases, don't use directly! so you can use or operator and save as int
      */
     enum BoardCases {
-        NoPlayer = 0,
-        OurPlayer = 1,
-        EnemyPlayer = 2,
+        NoPlayer = 1, // start from 1
+        OurPlayer = 2,
+        EnemyPlayer = 4,
 
         /**
          * could be with suspected on, when you think that a piece is some of the follows(we've seen it win in a fight) but might be a joker
          */
-                Rock = 4,
-        Scissors = 8,
-        Paper = 16,
+                Rock = 8,
+        Scissors = 16,
+        Paper = 32,
 
         /**
          * if we've seen a piece change its type it must be a joker, not suspected
          */
-                Joker = 32,
+                Joker = 64,
 
         /**
          * will be used only on our pieces (because no way of knowing about enemy's)
          */
-                Bomb = 64,
+                Bomb = 128,
 
-        Flag = 128,
+        Flag = 256,
 
         /**
          * to use when you don't know for sure it's a piece or joker
          */
-                Suspected = 256,
+                Suspected = 512,
 
         /**
          * Movable just means it hasn't moved yet, for enemy pieces (we can't really know)
          */
-                Movable = 512
+                Movable = 1024
     };
 
     /**

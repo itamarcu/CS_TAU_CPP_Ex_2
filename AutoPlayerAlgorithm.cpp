@@ -24,7 +24,7 @@ void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
     lastOpponentPiece = myBoard[move.getFrom().getX()][move.getFrom().getY()] | Movable;
     if (myBoard[move.getTo().getX()][move.getTo().getY()] == AutoPlayerAlgorithm::BoardCases::NoPlayer) {
         myBoard[move.getTo().getX()][move.getTo().getY()] = lastOpponentPiece; // if there is no player in destination just move
-        lastOpponentPiece = 0 ;
+        lastOpponentPiece = 0;
     }
     // empty the from of the player
     myBoard[move.getFrom().getX()][move.getFrom().getY()] = AutoPlayerAlgorithm::BoardCases::NoPlayer;
@@ -33,8 +33,8 @@ void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
 }
 
 void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
-    int fight_x = fightInfo.getPosition().getX() - 1;
-    int fight_y = fightInfo.getPosition().getY() - 1;
+    int fight_x = fightInfo.getPosition().getX() - 0; // TODO 1-indexing
+    int fight_y = fightInfo.getPosition().getY() - 0;
     if (fightInfo.getWinner() == 0) {
         myBoard[fight_x][fight_y] = 0;
     } else if (fightInfo.getWinner() != player) {
