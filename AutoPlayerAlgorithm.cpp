@@ -113,7 +113,7 @@ char AutoPlayerAlgorithm::getNewRepr(const MyPoint &jokerPoint) {
         c = ROCK_CHAR;
     }
     else{
-        std::cout << "ERROR: 32321 - shoudln't reach here"<< std::endl;
+        std::cout << "ERROR: 32321 - should not reach here"<< std::endl;
     }
     return c;
 }

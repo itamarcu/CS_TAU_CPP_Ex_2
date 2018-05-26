@@ -18,7 +18,12 @@ private:
 
     bool alreadyGotJokerPartOfMove;
     bool alreadyGotMovementPartOfMove;
-
+    /**
+     * new representation for joker
+     * @param jokerPoint the joker point to change
+     * @return new repr
+     */
+    char getNewRepr(const MyPoint &jokerPoint);
     /**
      * board cases, don't use directly! so you can use or operator and save as int
      */
@@ -100,7 +105,7 @@ public:
 
     ~AutoPlayerAlgorithm() override;
 
-    char getNewRepr(const MyPoint &jokerPoint);
+
 };
 
 
