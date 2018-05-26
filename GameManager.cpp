@@ -150,30 +150,30 @@ void NewGameManager::run_game() {
         }
 
 
-        //Debug - print board
-        std::cout << "--- Turn " << turn_counter << " ---" << std::endl;
-        for (int y = 0; y < N; y++) {
-            for (int x = 0; x < M; x++) {
-                char ch = ' ';
-                if (game.board.grid[x][y] != nullptr) {
-                    ch = game.board.grid[x][y]->to_char();
-                }
-                std::cout << ch;
-            }
-            std::cout << std::endl;
-        }
-        int x1 = move->getFrom().getX();
-        int y1 = move->getFrom().getY();
-        int x2 = move->getTo().getX();
-        int y2 = move->getTo().getY();
-        if (game.board.grid[x1][y1] == nullptr) {
-            print_line("Player attempted to move an empty space...");
-        } else {
-            std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
-                    " piece " << game.board.grid[x1][y1]->to_char() << " from " << x1 << "," << y1 <<
-                      " to " << x2 << "," << y2 << std::endl;
-        }
-        std::cout.flush();
+//        //Debug - print board
+//        std::cout << "--- Turn " << turn_counter << " ---" << std::endl;
+//        for (int y = 0; y < N; y++) {
+//            for (int x = 0; x < M; x++) {
+//                char ch = ' ';
+//                if (game.board.grid[x][y] != nullptr) {
+//                    ch = game.board.grid[x][y]->to_char();
+//                }
+//                std::cout << ch;
+//            }
+//            std::cout << std::endl;
+//        }
+//        int x1 = move->getFrom().getX();
+//        int y1 = move->getFrom().getY();
+//        int x2 = move->getTo().getX();
+//        int y2 = move->getTo().getY();
+//        if (game.board.grid[x1][y1] == nullptr) {
+//            print_line("Player attempted to move an empty space...");
+//        } else {
+//            std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
+//                    " piece " << game.board.grid[x1][y1]->to_char() << " from " << x1 << "," << y1 <<
+//                      " to " << x2 << "," << y2 << std::endl;
+//        }
+////        std::cout.flush(); // might be weird
 
 
         auto move_result = make_planned_move(game, plannedMove);
