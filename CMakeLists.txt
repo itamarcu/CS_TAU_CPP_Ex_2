@@ -4,11 +4,11 @@ project(CS_TAU_CPP_RPS)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(CS_TAU_CPP_RPS
+        main.cpp
         AutoPlayerAlgorithm.cpp
         AutoPlayerAlgorithm.h
         Auxiliary.cpp
         Auxiliary.h
-        Board.h
         BoardIO.cpp
         BoardIO.h
         FightInfo.h
@@ -22,9 +22,6 @@ add_executable(CS_TAU_CPP_RPS
         GameManager.h
         GamePiece.cpp
         GamePiece.h
-        JokerChange.h
-        main.cpp
-        Move.h
         MyBoard.cpp
         MyBoard.h
         MyFightInfo.cpp
@@ -37,8 +34,11 @@ add_executable(CS_TAU_CPP_RPS
         MyPiecePosition.h
         MyPoint.cpp
         MyPoint.h
-        PiecePosition.h
         PlannedMove.cpp
         PlannedMove.h
+        PiecePosition.h
+        Move.h
+        Board.h
         PlayerAlgorithm.h
+        JokerChange.h
         Point.h)

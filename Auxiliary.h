@@ -6,6 +6,7 @@
 #include <string>
 #include <memory>
 #include <random>
+#include <algorithm>
 
 #define M 10  // Rows
 #define N 10  // Columns
@@ -54,7 +55,7 @@ int bool_to_player(bool player);
  * @param to inclusive to
  * @return random number in given range
  */
-int random_number_in_range(const int from, const int to);
+int random_number_in_range(int from, int to);
 
 template<typename T>
 void shuffle_vector(std::vector<T> &vecToShuffle) {

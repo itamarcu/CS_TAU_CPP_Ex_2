@@ -33,7 +33,7 @@ int bool_to_player(bool player) {
 }
 
 
-int random_number_in_range(const int from, const int to) {
+int random_number_in_range(int from, int to) {
 
     std::random_device                  rand_dev;
     std::mt19937                        generator(rand_dev());
