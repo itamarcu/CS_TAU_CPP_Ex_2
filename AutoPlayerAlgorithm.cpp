@@ -23,6 +23,10 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
                 if (player != SECOND_PLAYER_CONST) {
                     myBoard[i][j] = EnemyPlayer;
                 }
+
+            }
+            else{
+                std::cout << "Error [SWTR-RTDD-MYUI-OPQD 4831]: shouldn't reach here"<<std::endl;
             }
         }
     }
@@ -31,9 +35,9 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
 void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
     lastOpponentPiece = myBoard[move.getFrom().getX()][move.getFrom().getY()] | Movable;
     if (myBoard[move.getTo().getX()][move.getTo().getY()] == AutoPlayerAlgorithm::BoardCases::NoPlayer) {
-        myBoard[move.getTo().getX()][move.getTo().getY()] = lastOpponentPiece;
+        myBoard[move.getTo().getX()][move.getTo().getY()] = lastOpponentPiece; // if there is no player in destination just move
     }
-
+    // empty the from of the player
     myBoard[move.getFrom().getX()][move.getFrom().getY()] = AutoPlayerAlgorithm::BoardCases::NoPlayer;
     lastMyPiece = 0;
     //assumes no error in move
@@ -49,11 +53,13 @@ void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
             (!(lastOpponentPiece && BoardCases::Suspected))) {
             //might be regular piece
             if (lastOpponentPiece != 0) {
+                // he attacked me
                 myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] =
                         lastOpponentPiece | Suspected |
                         get_piece_from_char(
                                 newPlayerChar);
             } else {
+                // I attacked him
                 myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] =
                         myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()]
                         | Suspected | get_piece_from_char(newPlayerChar);
@@ -68,9 +74,10 @@ void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
         }
     } else if (fightInfo.getWinner() == player) {
         if (lastMyPiece != 0) {
-            //if last move is ours
+            //we won and we attacked.
             myBoard[fightInfo.getPosition().getX()][fightInfo.getPosition().getY()] = lastMyPiece;
         }
+
     }
     lastMyPiece = 0;
     lastOpponentPiece = 0;
@@ -88,19 +95,13 @@ unique_ptr<Move> AutoPlayerAlgorithm::getMove() {
         MyPoint &mustBeFlag = (*couldBeEnemyFlagPointsVector)[0];
         if (!myPapers->empty()) {
             MyPoint &paperPoint = (*myPapers)[0];
-            lastMyPiece = myBoard[paperPoint.getX()][paperPoint.getY()];
-            myBoard[paperPoint.getX()][paperPoint.getY()] = NoPlayer;
-            return std::make_unique<MyMove>(paperPoint, mustBeFlag);// kill the flag
+            return makeAttack(mustBeFlag,paperPoint);
         } else if (!myRocks->empty()) {
             MyPoint &rockPoint = (*myRocks)[0];
-            lastMyPiece = myBoard[rockPoint.getX()][rockPoint.getY()];
-            myBoard[rockPoint.getX()][rockPoint.getY()] = NoPlayer;
-            return std::make_unique<MyMove>(rockPoint, mustBeFlag);// kill the flag
+            return makeAttack(mustBeFlag,rockPoint);
         } else if (!myScissors->empty()) {
             MyPoint &scissorsPoint = (*myScissors)[0];
-            lastMyPiece = myBoard[scissorsPoint.getX()][scissorsPoint.getY()];
-            myBoard[scissorsPoint.getX()][scissorsPoint.getY()] = NoPlayer;
-            return std::make_unique<MyMove>(scissorsPoint, mustBeFlag);//kill the flag
+            return makeAttack(mustBeFlag,scissorsPoint);
         } else { // joker can't be bomb in our implementation(of the auto)
             std::cout << "Error SDKD-DSDS-SADD-DYSD-213SHD9403: shouldn't reach here  " << std::endl;
             return nullptr;
@@ -155,25 +156,24 @@ unique_ptr<JokerChange> AutoPlayerAlgorithm::getJokerChange() {
     //in 70% probability
     if (random <= 7) {
         if (jokerPositions->size() == J) {
-            char c;
-            MyPoint &jokerPoint = (*jokerPositions)[random / 4];
-            c = getNewRepr(jokerPoint);
-
-            std::unique_ptr<JokerChange> change = std::make_unique<MyJokerChange>(jokerPoint, c);
-            return std::move(change);
+            return  getJokerChange(jokerPositions,random/4);
         } else if (jokerPositions->size() == 1) {
-            char c;
-            MyPoint &jokerPoint = (*jokerPositions)[0];
-            c = getNewRepr(jokerPoint);
-
-            std::unique_ptr<JokerChange> change = std::make_unique<MyJokerChange>(jokerPoint, c);
-            return std::move(change);
+            return getJokerChange(jokerPositions,0);
         }
-        //unique_ptr<JokerChange> change = std::make_unique<MyJokerChange>();
+
 
     }
     //otherwise no change
     return nullptr;
+}
+
+unique_ptr<JokerChange> AutoPlayerAlgorithm::getJokerChange(const unique_ptr<std::vector<MyPoint>> &jokerPositions, int pos) {
+    char c;
+    MyPoint &jokerPoint = (*jokerPositions)[pos];
+    c = this->getNewRepr(jokerPoint);
+
+    unique_ptr<JokerChange> change = std::make_unique<MyJokerChange>(jokerPoint, c);
+    return std::move(change);
 }
 
 char AutoPlayerAlgorithm::getNewRepr(const MyPoint &jokerPoint) {
