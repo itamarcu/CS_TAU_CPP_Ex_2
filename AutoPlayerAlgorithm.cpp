@@ -95,6 +95,7 @@ unsigned int AutoPlayerAlgorithm::get_piece_from_char(char c) const {
         case ROCK_CHAR:
             return AutoPlayerAlgorithm::BoardCases::Rock;
         default:
+            std::out << "error 73213: AutoPlayer get piece default reached "<< std::endl;
             return 0;//shouldn't get here
     }
 
@@ -107,6 +108,7 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
             availableSpots.emplace_back(i, j);
         }
     }
+    shuffle_vector(availableSpots);
     availableSpots.erase(availableSpots.begin() + MAX_POSSIBLE_PIECE_COUNT);
     //bias for joker
     char wantedJokerChars[SIZE_OF_BAISED_JOKER_ARRAY] = BAISED_JOKER_ARRAY;
@@ -118,7 +120,7 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }
-    availableSpots.erase(availableSpots.begin() + J);
+    availableSpots.erase(availableSpots.begin() ,availableSpots.begin()+ J);
 
     addNonJokerPiece(vectorToFill, availableSpots, B, BOMB_CHAR);
     addNonJokerPiece(vectorToFill, availableSpots, S, SCISSORS_CHAR);
@@ -136,6 +138,6 @@ void AutoPlayerAlgorithm::addNonJokerPiece(std::vector<unique_ptr<PiecePosition>
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }
-    availableSpots.erase(availableSpots.begin() + count);
+    availableSpots.erase(availableSpots.begin(),availableSpots.begin() + count);
 }
 
