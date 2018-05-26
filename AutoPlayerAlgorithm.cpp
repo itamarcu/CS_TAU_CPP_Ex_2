@@ -20,19 +20,16 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
     }
 }
 
-//assumes no error in move
 void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
-    int from_x = move.getFrom().getX() - 1;
-    int from_y = move.getFrom().getY() - 1;
-    int to_x = move.getTo().getX() - 1;
-    int to_y = move.getTo().getY() - 1;
-    lastOpponentPiece = myBoard[from_x][from_y] | Movable;
-    if (myBoard[to_x][to_y] == AutoPlayerAlgorithm::BoardCases::NoPlayer) {
-        myBoard[to_x][to_y] = lastOpponentPiece; // if there is no player in destination just move
+    lastOpponentPiece = myBoard[move.getFrom().getX()][move.getFrom().getY()] | Movable;
+    if (myBoard[move.getTo().getX()][move.getTo().getY()] == AutoPlayerAlgorithm::BoardCases::NoPlayer) {
+        myBoard[move.getTo().getX()][move.getTo().getY()] = lastOpponentPiece; // if there is no player in destination just move
+        lastOpponentPiece = 0 ;
     }
     // empty the from of the player
-    myBoard[from_x][from_y] = AutoPlayerAlgorithm::BoardCases::NoPlayer;
+    myBoard[move.getFrom().getX()][move.getFrom().getY()] = AutoPlayerAlgorithm::BoardCases::NoPlayer;
     lastMyPiece = 0;
+    //assumes no error in move
 }
 
 void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
@@ -132,6 +129,7 @@ unique_ptr<Move> AutoPlayerAlgorithm::getMove() {
                 std::cout << "ERROR [3213TVJ]: shouldn't reach here" << std::endl;
                 return nullptr;
             }
+            this->lastMyPiece = 0;
             return moveToMake;
 
         }
