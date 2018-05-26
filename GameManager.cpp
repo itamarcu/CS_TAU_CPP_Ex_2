@@ -78,7 +78,7 @@ bool NewGameManager::setup_both_boards() {
     auto load_of_2 = this->setup_positions(2, p2_positions);
     if (load_of_1.type != BoardLoadingSuccess && load_of_2.type != BoardLoadingSuccess) {
         std::stringstream s;
-        s << "Bad Positioning input file for both players - ";
+        s << "Bad Positioning input for both players - ";
         s << "player 1: line " << load_of_1.line_num;
         s << ", ";
         s << "player 2: line " << load_of_2.line_num;
@@ -87,17 +87,17 @@ bool NewGameManager::setup_both_boards() {
         return false;
     } else if (load_of_1.type != BoardLoadingSuccess) {
         std::stringstream s;
-        s << "Bad Positioning input file for player 1 - ";
+        s << "Bad Positioning input for player 1 - ";
         s << "line " << load_of_1.line_num;
         game.endGame(PLAYER_2_VICTORY, s.str());
         std::cout << "error 1 is " << load_of_1.type << std::endl;
         return false;
     } else if (load_of_2.type != BoardLoadingSuccess) {
         std::stringstream s;
-        s << "Bad Positioning input file for player 2 - ";
+        s << "Bad Positioning input for player 2 - ";
         s << "line " << load_of_2.line_num;
-        std::cout << "error 2 is " << load_of_2.type << std::endl;
         game.endGame(PLAYER_1_VICTORY, s.str());
+        std::cout << "error 2 is " << load_of_2.type << std::endl;
         return false;
     }
 
