@@ -13,11 +13,13 @@ class AutoPlayerAlgorithm : public PlayerAlgorithm {
 private:
     unsigned int player; // 1 or 2
     unsigned int lastOpponentPiece;
-
+    unsigned int lastMyPiece;
     std::shared_ptr<PlannedMove> getFromNextMove();
-
+    unique_ptr<std::vector<MyPoint>> get_vector_with_settings(int settings) const;
+    unique_ptr<std::vector<MyPoint>> get_vector_with_settings(int settings, int non);
     bool alreadyGotJokerPartOfMove;
     bool alreadyGotMovementPartOfMove;
+
     /**
      * new representation for joker
      * @param jokerPoint the joker point to change
@@ -54,18 +56,29 @@ private:
         /**
          * to use when you don't know for sure it's a piece or joker
          */
-        Suspected = 256
+        Suspected = 256,
+        /**
+         * for this in other player doesn't mean for sure false
+         */
+        Movable = 512
     };
 
     //2d board of ints Representing Knowledge on Board, see enum
     unsigned int myBoard[N][M];
 
-    void addNonJokerPiece(std::vector<unique_ptr<PiecePosition>> &vectorToFill, std::vector<MyPoint> &availableSpots,
-                          int count, char chr);
+    /**
+     * add non joker pieces to initial board
+     * @param vectorToFill vector of piece
+     * @param availableSpots available spots to add in
+     * @param count count of the piece
+     * @param chr the chr of the piece
+     * @param movable is it movable
+     */
+    void addNonJokerPiece(std::vector<unique_ptr<PiecePosition>> &vectorToFill,
+                              std::vector<MyPoint> &availableSpots, int count, char chr, bool movable);
 
     unsigned int get_piece_from_char(char c) const;
 
-    unique_ptr<std::vector<MyPoint>> get_vector_joker_positions();
 public:
 
     explicit AutoPlayerAlgorithm(int player);
@@ -106,6 +119,7 @@ public:
     ~AutoPlayerAlgorithm() override;
 
 
+    unique_ptr<Move> makeAttack(const MyPoint &attackPoint, const MyPoint &attackerPoint);
 };
 
 
