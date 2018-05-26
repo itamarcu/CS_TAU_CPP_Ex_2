@@ -226,20 +226,11 @@ unsigned int AutoPlayerAlgorithm::get_piece_from_char(char c) const {
 
 
 unique_ptr<std::vector<MyPoint>> AutoPlayerAlgorithm::get_vector_with_settings(int settings) const {
-    std::unique_ptr<std::vector<MyPoint>> vector = std::make_unique<std::vector<MyPoint>>();
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < M; ++j) {
-            if ((myBoard[i][j] & settings) == settings) {
-                vector->emplace_back(i, j);
-            }
-        }
-    }
-    shuffle_vector(*vector);
-    return vector;
+    return get_vector_with_settings(settings,0);
 
 }
 
-unique_ptr<std::vector<MyPoint>> AutoPlayerAlgorithm::get_vector_with_settings(int settings, int non) {
+unique_ptr<std::vector<MyPoint>> AutoPlayerAlgorithm::get_vector_with_settings(int settings, int non) const{
     std::unique_ptr<std::vector<MyPoint>> vector = std::make_unique<std::vector<MyPoint>>();
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {
