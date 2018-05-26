@@ -1,5 +1,6 @@
 #include "Auxiliary.h"
 #include <iostream>
+#include <algorithm>
 
 void print_line(std::string str) {
     std::cout << str << std::endl;
