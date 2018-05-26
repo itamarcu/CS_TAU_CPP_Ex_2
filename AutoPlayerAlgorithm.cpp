@@ -15,8 +15,6 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
                 myBoard[i][j] = NoPlayer;
             } else if (res != player) {
                 myBoard[i][j] = EnemyPlayer;
-            } else {
-                std::cout << "Error [SWTR-RTDD-MYUI-OPQD 4831]: shouldn't reach here" << std::endl;
             }
         }
     }
