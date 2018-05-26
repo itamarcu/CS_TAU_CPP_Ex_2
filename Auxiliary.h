@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <chrono>
 
+#define MAX_CONSECUTIVE_TURNS_WITHOUT_FIGHT 100
+
 #define M 10  // Rows
 #define N 10  // Columns
 #define R 2  // Rocks
@@ -17,13 +19,16 @@
 #define B 2  // Bombs
 #define J 2  // Jokers
 #define F 1  // Flags
+
 #define MAX_POSSIBLE_PIECE_COUNT (R+P+S+B+J+F)
+
 #define ROCK_CHAR 'R'
 #define PAPER_CHAR 'P'
 #define SCISSORS_CHAR 'S'
 #define BOMB_CHAR 'B'
 #define JOKER_CHAR 'J'
 #define FLAG_CHAR 'F'
+
 #define FIRST_PLAYER_CONST 1
 #define SECOND_PLAYER_CONST 2
 

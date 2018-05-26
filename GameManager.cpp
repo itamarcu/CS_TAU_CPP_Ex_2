@@ -113,6 +113,7 @@ void NewGameManager::run_game() {
     p2_algorithm->notifyOnInitialBoard(game.board, setup_fights);
 
     int turn_counter = 0;
+    int consecutive_turns_without_a_fight = 0;
     while (game.getGameWinner() == GAME_NOT_ENDED) {
         // Load move and joker change
         auto move = game.currentPlayer ? p1_algorithm->getMove() : p2_algorithm->getMove();
@@ -124,6 +125,7 @@ void NewGameManager::run_game() {
             return;
         }
         turn_counter++;
+        consecutive_turns_without_a_fight++;
 
         // Notify on opponent move
         if (game.currentPlayer)
@@ -181,6 +183,7 @@ void NewGameManager::run_game() {
             p1_algorithm->notifyFightResult(*game.freshFightResult);
             p2_algorithm->notifyFightResult(*game.freshFightResult);
             game.freshFightResult = nullptr;
+            consecutive_turns_without_a_fight = 0;
         }
 
         // If move is illegal, print and stop game
@@ -220,6 +223,13 @@ void NewGameManager::run_game() {
 
         // Check winner
         if (game.checkWin()) {
+            return;
+        }
+        if (consecutive_turns_without_a_fight >= MAX_CONSECUTIVE_TURNS_WITHOUT_FIGHT) {
+            s << "Game ended in a tie - " << MAX_CONSECUTIVE_TURNS_WITHOUT_FIGHT
+              << " consecutive moves without a fight.";
+            reason = s.str();
+            game.endGame(TIE, reason);
             return;
         }
 
