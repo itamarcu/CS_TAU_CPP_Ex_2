@@ -7,6 +7,7 @@
 #include <memory>
 #include <random>
 #include <algorithm>
+#include <chrono>
 
 #define M 10  // Rows
 #define N 10  // Columns
@@ -59,8 +60,9 @@ int random_number_in_range(int from, int to);
 
 template<typename T>
 void shuffle_vector(std::vector<T> &vecToShuffle) {
-    auto rng = std::default_random_engine {};
-    std::shuffle(vecToShuffle.begin(), vecToShuffle.end(), rng);
+    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    std::mt19937 generator(seed);
+    std::shuffle(vecToShuffle.begin(), vecToShuffle.end(), generator);
 }
 
 #endif //CS_TAU_CPP_RPS_AUXILIARY_H

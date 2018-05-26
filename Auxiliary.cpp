@@ -1,6 +1,5 @@
 #include "Auxiliary.h"
 #include <iostream>
-#include <algorithm>
 
 void print_line(std::string str) {
     std::cout << str << std::endl;
@@ -34,9 +33,8 @@ int bool_to_player(bool player) {
 
 
 int random_number_in_range(int from, int to) {
-
-    std::random_device                  rand_dev;
-    std::mt19937                        generator(rand_dev());
+    auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    std::mt19937 generator(seed);
     std::uniform_int_distribution<int>  distr(from, to);
     return distr(generator);
 }
