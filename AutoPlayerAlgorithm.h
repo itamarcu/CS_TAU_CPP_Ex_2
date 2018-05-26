@@ -60,6 +60,7 @@ private:
 
     unsigned int get_piece_from_char(char c) const;
 
+    unique_ptr<std::vector<MyPoint>> get_vector_joker_positions();
 public:
 
     explicit AutoPlayerAlgorithm(int player);
@@ -99,6 +100,7 @@ public:
 
     ~AutoPlayerAlgorithm() override;
 
+    char getNewRepr(const MyPoint &jokerPoint);
 };
 
 
