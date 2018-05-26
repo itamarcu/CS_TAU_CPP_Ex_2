@@ -11,8 +11,8 @@ private:
     unsigned int player; // 1 or 2
     unsigned int lastOpponentPiece;
     unsigned int lastMyPiece;
-    unique_ptr<std::vector<MyPoint>> get_vector_with_settings(int settings) const;
-    unique_ptr<std::vector<MyPoint>> get_vector_with_settings(int settings, int non) const;
+
+    unique_ptr<std::vector<MyPoint>> get_vector_with_settings(int settings, int non = 0) const;
 
     /**
      * new representation for joker
