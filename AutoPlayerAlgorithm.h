@@ -125,9 +125,7 @@ public:
      */
     unique_ptr<JokerChange> getJokerChange() override;
 
-
     ~AutoPlayerAlgorithm() override;
-
 
 };
 

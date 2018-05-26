@@ -13,16 +13,8 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
             int res = b.getPlayer(MyPoint(i, j));
             if (res == 0) {
                 myBoard[i][j] = NoPlayer;
-            } else if (res == FIRST_PLAYER_CONST) {
-                //update if not our player
-                if (player != FIRST_PLAYER_CONST) {
-                    myBoard[i][j] = EnemyPlayer;
-                }
-            } else if (res == SECOND_PLAYER_CONST) {
-                if (player != SECOND_PLAYER_CONST) {
-                    myBoard[i][j] = EnemyPlayer;
-                }
-
+            } else if (res != player) {
+                myBoard[i][j] = EnemyPlayer;
             } else {
                 std::cout << "Error [SWTR-RTDD-MYUI-OPQD 4831]: shouldn't reach here" << std::endl;
             }
@@ -275,7 +267,7 @@ void AutoPlayerAlgorithm::select_non_joker_piece_to_add(std::vector<unique_ptr<P
     for (int i = 0; i < count; i++) {
         MyPiecePosition myPiecePosition(chr, NON_JOKER_REPR_DEFAULT, availableSpots[i]);
         unsigned int value =
-                AutoPlayerAlgorithm::BoardCases::OurPlayer | get_piece_from_char(chr) | movable ? 0 : Movable;
+                AutoPlayerAlgorithm::BoardCases::OurPlayer | get_piece_from_char(chr) | (movable ? 0 : Movable);
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }
