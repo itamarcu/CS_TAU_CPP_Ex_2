@@ -9,6 +9,10 @@
 #include <algorithm>
 #include <chrono>
 
+//DEBUG
+extern bool DEBUGGING_MODE;
+//DEBUG
+
 #define MAX_CONSECUTIVE_TURNS_WITHOUT_FIGHT 100
 
 #define M 10  // Rows

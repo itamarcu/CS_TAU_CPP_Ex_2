@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Game.h"
-#include "GamePiece.h"
 
 GameWinner Game::getGameWinner() const {
     return gameWinner;

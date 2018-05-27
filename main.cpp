@@ -12,16 +12,18 @@ using std::endl;
 int main(int argc, char *argv[]) {
     print_line("---Program started---");
     init_global_rng();
-    if (argc != 2) {
+    if (argc < 2) {
         printf("Usage: %s [auto/file]-vs-[auto/file]\n", argv[0]);
         return -1;
     }
+    DEBUGGING_MODE = argc == 3;
     std::string argument = argv[1];
     if (!(argument == "auto-vs-file" || argument == "auto-vs-auto"
           || argument == "file-vs-auto" || argument == "file-vs-file")) {
         printf("Usage: %s [auto/file]-vs-[auto/file]\n", argv[0]);
         return -1;
     }
+
     std::unique_ptr<PlayerAlgorithm> p1_algo = nullptr;
     std::unique_ptr<PlayerAlgorithm> p2_algo = nullptr;
     if (argument.substr(0, 4) == "file") {

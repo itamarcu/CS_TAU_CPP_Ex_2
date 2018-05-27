@@ -83,21 +83,24 @@ bool NewGameManager::setup_both_boards() {
         s << ", ";
         s << "player 2: line " << load_of_2.line_num;
         game.endGame(TIE, s.str());
-        std::cout << "error 1 is " << load_of_1.type << ", error 2 is " << load_of_2.type << std::endl;
+        if (DEBUGGING_MODE)
+            std::cout << "error 1 is " << load_of_1.type << ", error 2 is " << load_of_2.type << std::endl;
         return false;
     } else if (load_of_1.type != BoardLoadingSuccess) {
         std::stringstream s;
         s << "Bad Positioning input for player 1 - ";
         s << "line " << load_of_1.line_num;
         game.endGame(PLAYER_2_VICTORY, s.str());
-        std::cout << "error 1 is " << load_of_1.type << std::endl;
+        if (DEBUGGING_MODE)
+            std::cout << "error 1 is " << load_of_1.type << std::endl;
         return false;
     } else if (load_of_2.type != BoardLoadingSuccess) {
         std::stringstream s;
         s << "Bad Positioning input for player 2 - ";
         s << "line " << load_of_2.line_num;
         game.endGame(PLAYER_1_VICTORY, s.str());
-        std::cout << "error 2 is " << load_of_2.type << std::endl;
+        if (DEBUGGING_MODE)
+            std::cout << "error 2 is " << load_of_2.type << std::endl;
         return false;
     }
 
@@ -155,30 +158,32 @@ void NewGameManager::run_game() {
         }
 
 
-        //Debug - print board
-        std::cout << "--- Turn " << turn_counter << " ---" << std::endl;
-        for (int y = 0; y < N; y++) {
-            for (int x = 0; x < M; x++) {
-                char ch = ' ';
-                if (game.board.grid[x][y] != nullptr) {
-                    ch = game.board.grid[x][y]->to_char();
+        if (DEBUGGING_MODE) {
+            //Debug - print board
+            std::cout << "--- Turn " << turn_counter << " ---" << std::endl;
+            for (int y = 0; y < N; y++) {
+                for (int x = 0; x < M; x++) {
+                    char ch = ' ';
+                    if (game.board.grid[x][y] != nullptr) {
+                        ch = game.board.grid[x][y]->to_char();
+                    }
+                    std::cout << ch;
                 }
-                std::cout << ch;
+                std::cout << std::endl;
             }
-            std::cout << std::endl;
-        }
-        int x1 = move->getFrom().getX();
-        int y1 = move->getFrom().getY();
-        int x2 = move->getTo().getX();
-        int y2 = move->getTo().getY();
-        if (game.board.grid[x1][y1] == nullptr) {
-            std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
-                    " NOTHING from " << x1 << "," << y1 <<
-                      " to " << x2 << "," << y2 << std::endl;
-        } else {
-            std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
-                    " piece " << game.board.grid[x1][y1]->to_char() << " from " << x1 << "," << y1 <<
-                      " to " << x2 << "," << y2 << std::endl;
+            int x1 = move->getFrom().getX();
+            int y1 = move->getFrom().getY();
+            int x2 = move->getTo().getX();
+            int y2 = move->getTo().getY();
+            if (game.board.grid[x1][y1] == nullptr) {
+                std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
+                        " NOTHING from " << x1 << "," << y1 <<
+                          " to " << x2 << "," << y2 << std::endl;
+            } else {
+                std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
+                        " piece " << game.board.grid[x1][y1]->to_char() << " from " << x1 << "," << y1 <<
+                          " to " << x2 << "," << y2 << std::endl;
+            }
         }
 
         //Make the move

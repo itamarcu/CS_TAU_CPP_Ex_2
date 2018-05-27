@@ -24,6 +24,9 @@ enum GameWinner {
 
 class Game {
     // Fields
+private:
+    GameWinner gameWinner;
+    std::string gameEndReason;
 public:
     /**
     * board of game
@@ -37,18 +40,16 @@ public:
 
     std::unique_ptr<FightInfo> freshFightResult;
 
-private:
-    GameWinner gameWinner;
-    std::string gameEndReason;
-
     //MARK: Constructors
 public:
     /**
      * initialize game with default parameters
      */
-    explicit Game() : board(),
-                      currentPlayer(true), gameWinner(GAME_NOT_ENDED),
-                      gameEndReason("Game did not end yet"), freshFightResult(nullptr) {}
+    explicit Game() : gameWinner(GAME_NOT_ENDED),
+                      gameEndReason("Game did not end yet"),
+                      board(),
+                      currentPlayer(true),
+                      freshFightResult(nullptr) {}
 
     //MARK: Functions
 public:

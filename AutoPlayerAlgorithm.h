@@ -41,10 +41,10 @@ private:
 
         Flag = 256,
 
-        /**
-         * to use when you don't know for sure it's a piece or joker
-         */
-                Suspected = 512,
+//        /**
+//         * to use when you don't know for sure it's a piece or joker
+//         */
+//                Suspected = 512,
 
         /**
          * false CanMove just means it hasn't moved yet, for enemy pieces (we can't really know)
@@ -60,7 +60,7 @@ private:
      * filter_in = `Joker | SecondPlayer` to get only jokers of enemy player.
      * @return only pieces that are "all of filter_in and none of filter_out"
      */
-    unique_ptr<std::vector<MyPoint>> get_by_filter(int filter_in, int filter_out = 0) const;
+    unique_ptr<std::vector<MyPoint>> get_by_filter(unsigned int filter_in, unsigned int filter_out = 0) const;
 
     /**
      * new representation for joker

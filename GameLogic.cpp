@@ -47,8 +47,6 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
     const MyPoint &destination(plannedMove.getDestination());
     int sourceRow = source.getX(), sourceColumn = source.getY(),
             destinationRow = destination.getX(), destinationColumn = destination.getY();
-//    std::cout << "attempting to move " << sourceRow << sourceColumn << " to "
-//              << destinationRow << destinationColumn << std::endl;
     if (game.board.grid[sourceRow][sourceColumn] == nullptr) {
         return TriedToMoveEmptySpace;
     }

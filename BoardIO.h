@@ -47,18 +47,6 @@ public:
 class BoardIO {
 public:
     /**
-     * setup a game
-     * @param game game to setup
-     */
-    static void setup_game(Game &game);
-
-    /**
-     * load moves from files
-     * @param moves moves to setup
-     */
-    static void load_moves(GameMoves &moves);
-
-    /**
      * store the game
      * @param game game to store
      */

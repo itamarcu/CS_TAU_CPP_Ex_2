@@ -33,14 +33,18 @@ void FilePlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
 
 void FilePlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector<unique_ptr<FightInfo>> &fights) {
     //Empty on purpose
+    (void) b;
+    (void) fights;
 }
 
 void FilePlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
     //Empty on purpose
+    (void) move;
 }
 
 void FilePlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
     //Empty on purpose
+    (void) fightInfo;
 }
 
 unique_ptr<Move> FilePlayerAlgorithm::getMove() {
@@ -80,9 +84,6 @@ unique_ptr<JokerChange> FilePlayerAlgorithm::getJokerChange() {
 
 FilePlayerAlgorithm::~FilePlayerAlgorithm() = default;
 
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "OCUnusedGlobalDeclarationInspection"
-
 FilePlayerAlgorithm::FilePlayerAlgorithm(int player) : player(player) {
     alreadyGotJokerPartOfMove = false;
     alreadyGotMovementPartOfMove = false;
@@ -95,5 +96,3 @@ FilePlayerAlgorithm::FilePlayerAlgorithm(int player) : player(player) {
 
 
 }
-
-#pragma clang diagnostic pop

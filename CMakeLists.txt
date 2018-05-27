@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.9)
 project(CS_TAU_CPP_RPS)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c++14 -lmingw32 -Wall -Wextra -Werror -pedantic-errors")
 
 add_executable(CS_TAU_CPP_RPS
         main.cpp

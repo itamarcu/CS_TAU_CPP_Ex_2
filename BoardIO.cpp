@@ -87,12 +87,6 @@ void BoardIO::settingCounts(std::map<GamePiece::Type, int> &remainingCounts, int
     remainingCounts[GamePiece::Type::Flag] = F;
 }
 
-void _load_player_moves(GameMoves &gameMoves, bool player) {
-    std::vector<PlannedMove> &moves = player ? gameMoves.p1_moves : gameMoves.p2_moves;
-    _load_moves_to_vec(player, moves);
-
-}
-
 void _load_moves_to_vec(bool player, std::vector<PlannedMove> &moves) {
     std::string player_num = player ? "1" : "2";
     std::string file_path = "player" + player_num + ".rps_moves";
@@ -115,7 +109,7 @@ void _load_moves_to_vec(bool player, std::vector<PlannedMove> &moves) {
             std::cout << "bad format line:    \"" << line << "\" (was split into " <<
                       contents->size() << ")" << std::endl;
             moves.emplace_back(false);
-            continue;
+            break;
         }
 
 

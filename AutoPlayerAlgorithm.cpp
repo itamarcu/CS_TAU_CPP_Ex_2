@@ -8,9 +8,10 @@
 #define BIASED_JOKER_ARRAY {SCISSORS_CHAR, ROCK_CHAR, PAPER_CHAR, ROCK_CHAR, SCISSORS_CHAR, ROCK_CHAR}
 
 void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector<std::unique_ptr<FightInfo>> &fights) {
+    (void) fights; // avoid compiler warning about unused parameter v__v
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {
-            int res = b.getPlayer(MyPoint(i, j));
+            unsigned int res = (unsigned int) b.getPlayer(MyPoint(i, j));
             if (res == 0) {
                 myBoard[i][j] = NoPlayer;
             } else if (res != player) {
@@ -38,9 +39,10 @@ void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
 void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
     int fight_x = fightInfo.getPosition().getX() - 0; // TODO 1-indexing
     int fight_y = fightInfo.getPosition().getY() - 0;
-    if (fightInfo.getWinner() == 0) {
+    auto winner = (unsigned int) fightInfo.getWinner();
+    if (winner == 0) {
         myBoard[fight_x][fight_y] = 0;
-    } else if (fightInfo.getWinner() == player) {
+    } else if (winner == player) {
         if (ourPieceWhichJustAttacked != 0) {
             //we won and we attacked.
             myBoard[fight_x][fight_y] = ourPieceWhichJustAttacked;
@@ -226,7 +228,8 @@ unsigned int AutoPlayerAlgorithm::encode_type_from_char(char c) const {
 
 }
 
-unique_ptr<std::vector<MyPoint>> AutoPlayerAlgorithm::get_by_filter(int filter_in, int filter_out) const {
+unique_ptr<std::vector<MyPoint>>
+AutoPlayerAlgorithm::get_by_filter(unsigned int filter_in, unsigned int filter_out) const {
     std::unique_ptr<std::vector<MyPoint>> vector = std::make_unique<std::vector<MyPoint>>();
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {
@@ -240,10 +243,8 @@ unique_ptr<std::vector<MyPoint>> AutoPlayerAlgorithm::get_by_filter(int filter_i
     return vector;
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunused-parameter"
-
 void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr<PiecePosition>> &vectorToFill) {
+    (void) player; // avoid compiler warning about unused parameter v__v
     std::vector<MyPoint> availableSpots;
     for (int i = 0; i < N; ++i) {
         for (int j = 0; j < M; ++j) {
@@ -271,8 +272,6 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
     select_non_joker_piece_to_add(vectorToFill, availableSpots, F, FLAG_CHAR, false);
 
 }
-
-#pragma clang diagnostic pop
 
 void AutoPlayerAlgorithm::select_non_joker_piece_to_add(std::vector<unique_ptr<PiecePosition>> &vectorToFill,
                                                         std::vector<MyPoint> &availableSpots, int count, char chr,
