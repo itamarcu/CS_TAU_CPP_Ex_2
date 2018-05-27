@@ -17,6 +17,9 @@ int main(int argc, char *argv[]) {
         return -1;
     }
     DEBUGGING_MODE = argc == 3;
+    if (DEBUGGING_MODE)
+        cout << "DEBUGGING_MODE: ON" << endl;
+
     std::string argument = argv[1];
     if (!(argument == "auto-vs-file" || argument == "auto-vs-auto"
           || argument == "file-vs-auto" || argument == "file-vs-file")) {

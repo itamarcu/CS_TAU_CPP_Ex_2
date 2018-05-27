@@ -81,10 +81,10 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
             winner = game.currentPlayer ? 2 : 1;
         game.freshFightResult = std::make_unique<MyFightInfo>(
                 game.currentPlayer ?
-                MyFightInfo(winner, MyPoint(destinationRow, destinationColumn, true),
+                MyFightInfo(winner, MyPoint(destinationRow, destinationColumn, false), // TODO 1-indexing
                             GamePiece::chrFromType(defending_piece->type),
                             GamePiece::chrFromType(attacking_piece->type)) :
-                MyFightInfo(winner, MyPoint(destinationRow, destinationColumn, true),
+                MyFightInfo(winner, MyPoint(destinationRow, destinationColumn, false), // TODO 1-indexing
                             GamePiece::chrFromType(attacking_piece->type),
                             GamePiece::chrFromType(defending_piece->type)));
     }
