@@ -9,8 +9,8 @@
 class AutoPlayerAlgorithm : public PlayerAlgorithm {
 private:
     unsigned int player; // 1 or 2
-    unsigned int lastOpponentPiece;
-    unsigned int lastMyPiece;
+    unsigned int enemyPieceWhichJustAttacked;
+    unsigned int ourPieceWhichJustAttacked;
     //2d board of ints representing knowledge on board, see enum
     unsigned int myBoard[N][M];
 
@@ -47,9 +47,9 @@ private:
                 Suspected = 512,
 
         /**
-         * Movable just means it hasn't moved yet, for enemy pieces (we can't really know)
+         * false CanMove just means it hasn't moved yet, for enemy pieces (we can't really know)
          */
-                Movable = 4
+                CanMove = 4
     };
 
     /**
@@ -58,7 +58,7 @@ private:
      * if filter_in is `OurPlayer` and filter_out is `Movable` this will return
      * all pieces that belong to us and are not movable. You can also do stuff like
      * filter_in = `Joker | SecondPlayer` to get only jokers of enemy player.
-     * @return
+     * @return only pieces that are "all of filter_in and none of filter_out"
      */
     unique_ptr<std::vector<MyPoint>> get_by_filter(int filter_in, int filter_out = 0) const;
 
@@ -81,12 +81,13 @@ private:
                                        std::vector<MyPoint> &availableSpots, int count, char chr, bool movable);
 
     unique_ptr<JokerChange> select_joker_change(const unique_ptr<std::vector<MyPoint>> &jokerPositions, int pos);
-    unsigned int get_piece_from_char(char c) const;
+
+    unsigned int encode_type_from_char(char c) const;
 
     /**
      * Creates and returns this movement to make, and updates knowledge
      */
-    unique_ptr<Move> make_move(const MyPoint &attacker_position, const MyPoint &defender_position);
+    unique_ptr<Move> make_move(const MyPoint &from, const MyPoint &to);
 
 public:
 

@@ -21,15 +21,18 @@ void AutoPlayerAlgorithm::notifyOnInitialBoard(const Board &b, const std::vector
 }
 
 void AutoPlayerAlgorithm::notifyOnOpponentMove(const Move &move) {
-    lastOpponentPiece = myBoard[move.getFrom().getX()][move.getFrom().getY()] | Movable;
-    if (myBoard[move.getTo().getX()][move.getTo().getY()] == AutoPlayerAlgorithm::BoardCases::NoPlayer) {
-        myBoard[move.getTo().getX()][move.getTo().getY()] = lastOpponentPiece; // if there is no player in destination just move
-        lastOpponentPiece = 0;
-    }
-    // empty the from of the player
-    myBoard[move.getFrom().getX()][move.getFrom().getY()] = AutoPlayerAlgorithm::BoardCases::NoPlayer;
-    lastMyPiece = 0;
-    //assumes no error in move
+    int from_x = move.getFrom().getX() - 0; // TODO 1-indexing
+    int from_y = move.getFrom().getY() - 0;
+    int to_x = move.getTo().getX() - 0;
+    int to_y = move.getTo().getY() - 0;
+    enemyPieceWhichJustAttacked = myBoard[from_x][from_y] | CanMove;
+    myBoard[from_x][from_y] = NoPlayer;
+    if (myBoard[to_x][to_y] == NoPlayer) {
+        myBoard[to_x][to_y] = enemyPieceWhichJustAttacked; // if there is no player in destination just move
+        enemyPieceWhichJustAttacked = 0;
+    } //else, there will be a fight and the knowledge will be updated then
+
+    ourPieceWhichJustAttacked = 0;
 }
 
 void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
@@ -37,110 +40,118 @@ void AutoPlayerAlgorithm::notifyFightResult(const FightInfo &fightInfo) {
     int fight_y = fightInfo.getPosition().getY() - 0;
     if (fightInfo.getWinner() == 0) {
         myBoard[fight_x][fight_y] = 0;
-    } else if (fightInfo.getWinner() != player) {
-        char newPlayerChar = fightInfo.getPiece(
-                player == FIRST_PLAYER_CONST ? SECOND_PLAYER_CONST : FIRST_PLAYER_CONST);
-        if ((lastOpponentPiece && get_piece_from_char(newPlayerChar)) ||
-            (!(lastOpponentPiece && BoardCases::Suspected))) {
-            //might be regular piece
-            if (lastOpponentPiece != 0) {
-                // he attacked me
-                myBoard[fight_x][fight_y] =
-                        lastOpponentPiece | Suspected |
-                        get_piece_from_char(
-                                newPlayerChar);
-            } else {
-                // I attacked him
-                myBoard[fight_x][fight_y] =
-                        myBoard[fight_x][fight_y]
-                        | Suspected | get_piece_from_char(newPlayerChar);
-            }
-        } else {
-
-            // for sure a joker, changed it's repr
-            unsigned int value =
-                    AutoPlayerAlgorithm::BoardCases::EnemyPlayer | AutoPlayerAlgorithm::BoardCases::Joker |
-                    get_piece_from_char(newPlayerChar);
-            myBoard[fight_x][fight_y] = value;
-        }
     } else if (fightInfo.getWinner() == player) {
-        if (lastMyPiece != 0) {
+        if (ourPieceWhichJustAttacked != 0) {
             //we won and we attacked.
-            myBoard[fight_x][fight_y] = lastMyPiece;
+            myBoard[fight_x][fight_y] = ourPieceWhichJustAttacked;
         }
 
+    } else  // enemy won, let's get some information
+    {
+        char enemy_piece_char = fightInfo.getPiece(
+                player == FIRST_PLAYER_CONST ? SECOND_PLAYER_CONST : FIRST_PLAYER_CONST);
+        unsigned int encoded_enemy_piece = encode_type_from_char(enemy_piece_char) | EnemyPlayer | CanMove;
+        // TODO joker smartness later
+        if (ourPieceWhichJustAttacked != 0) {
+            // We attacked and failed, so we can get extra information
+            myBoard[fight_x][fight_y] = myBoard[fight_x][fight_y] | encoded_enemy_piece;
+        } else {
+            //Enemy attacked and succeeded
+            myBoard[fight_x][fight_y] = encoded_enemy_piece | enemyPieceWhichJustAttacked;
+        }
     }
-    lastMyPiece = 0;
-    lastOpponentPiece = 0;
+    ourPieceWhichJustAttacked = 0;
+    enemyPieceWhichJustAttacked = 0;
 }
 
 unique_ptr<Move> AutoPlayerAlgorithm::getMove() {
-    lastOpponentPiece = 0;
-    std::unique_ptr<std::vector<MyPoint>> couldBeEnemyFlagPointsVector = get_by_filter(EnemyPlayer,
-                                                                                       Movable);
+    enemyPieceWhichJustAttacked = 0;
+    std::unique_ptr<std::vector<MyPoint>> couldBeEnemyFlagPointsVector = get_by_filter(EnemyPlayer, CanMove);
     std::unique_ptr<std::vector<MyPoint>> myScissors = get_by_filter(Scissors | OurPlayer);
     std::unique_ptr<std::vector<MyPoint>> myRocks = get_by_filter(Rock | OurPlayer);
     std::unique_ptr<std::vector<MyPoint>> myPapers = get_by_filter(Paper | OurPlayer);
 
+    // if we can be sure about a flag/bomb - attack that thing
     if (couldBeEnemyFlagPointsVector->size() <= F + B) {
-        MyPoint &mustBeFlag = (*couldBeEnemyFlagPointsVector)[0];
+        MyPoint &enemyFlagOrBomb = (*couldBeEnemyFlagPointsVector)[0];
         if (!myPapers->empty()) {
             MyPoint &paperPoint = (*myPapers)[0];
-            return make_move(mustBeFlag, paperPoint);
+            return make_move(paperPoint, enemyFlagOrBomb);
         } else if (!myRocks->empty()) {
             MyPoint &rockPoint = (*myRocks)[0];
-            return make_move(mustBeFlag, rockPoint);
+            return make_move(rockPoint, enemyFlagOrBomb);
         } else if (!myScissors->empty()) {
             MyPoint &scissorsPoint = (*myScissors)[0];
-            return make_move(mustBeFlag, scissorsPoint);
+            return make_move(scissorsPoint, enemyFlagOrBomb);
         } else { // joker can't be bomb in our implementation(of the auto)
             std::cout << "Error SDKD-DSDS-SADD-DYSD-213SHD9403: shouldn't reach here  " << std::endl;
             return nullptr;
         }
-    } else {
-        std::unique_ptr<std::vector<MyPoint>> enemyScissors = get_by_filter(Scissors | EnemyPlayer);
-        std::unique_ptr<std::vector<MyPoint>> enemyRocks = get_by_filter(Rock | EnemyPlayer);
-        std::unique_ptr<std::vector<MyPoint>> enemyPapers = get_by_filter(Paper | EnemyPlayer);
-        if (!enemyScissors->empty() && !myRocks->empty()) {
-            MyPoint &rockPoint = (*myRocks)[0];
-            MyPoint &attackPoint = (*enemyScissors)[0];
-            return make_move(rockPoint, attackPoint);
-        } else if (!enemyPapers->empty() && !myScissors->empty()) {
-            MyPoint &scissorPoint = (*myScissors)[0];
-            MyPoint &attackPoint = (*enemyPapers)[0];
-            return make_move(scissorPoint, attackPoint);
-        } else if (!enemyRocks->empty() && !myPapers->empty()) {
+    }
+    std::unique_ptr<std::vector<MyPoint>> enemyScissors = get_by_filter(Scissors | EnemyPlayer);
+    std::unique_ptr<std::vector<MyPoint>> enemyRocks = get_by_filter(Rock | EnemyPlayer);
+    std::unique_ptr<std::vector<MyPoint>> enemyPapers = get_by_filter(Paper | EnemyPlayer);
+    if (!enemyScissors->empty() && !myRocks->empty()) {
+        MyPoint &rockPoint = (*myRocks)[0];
+        MyPoint &enemyPiece = (*enemyScissors)[0];
+        return make_move(rockPoint, enemyPiece);
+    } else if (!enemyPapers->empty() && !myScissors->empty()) {
+        MyPoint &scissorPoint = (*myScissors)[0];
+        MyPoint &attackPoint = (*enemyPapers)[0];
+        return make_move(scissorPoint, attackPoint);
+    } else if (!enemyRocks->empty() && !myPapers->empty()) {
+        MyPoint &paperPoint = (*myPapers)[0];
+        MyPoint &attackPoint = (*enemyRocks)[0];
+        return make_move(paperPoint, attackPoint);
+    }
+    if (random_number_in_range_inclusive(1, 10) <= 3) // 30% chance of picking a fight with someone anyways
+    {
+        std::unique_ptr<std::vector<MyPoint>> enemySpaces = get_by_filter(EnemyPlayer); //TODO prefer non-movers
+        shuffle_vector(*enemySpaces); // random enemy, gives us more info
+        MyPoint &enemyPiece = (*enemySpaces)[0];
+        if (!myPapers->empty()) {
             MyPoint &paperPoint = (*myPapers)[0];
-            MyPoint &attackPoint = (*enemyRocks)[0];
-            return make_move(paperPoint, attackPoint);
+            return make_move(paperPoint, enemyPiece);
+        } else if (!myRocks->empty()) {
+            MyPoint &rockPoint = (*myRocks)[0];
+            return make_move(rockPoint, enemyPiece);
+        } else if (!myScissors->empty()) {
+            MyPoint &scissorsPoint = (*myScissors)[0];
+            return make_move(scissorsPoint, enemyPiece);
         } else {
-            unique_ptr<Move> moveToMake;
-            std::unique_ptr<std::vector<MyPoint>> emptySpaces = get_by_filter(NoPlayer);
-            if (!myPapers->empty()) {
-                moveToMake = make_move((*myPapers)[0], (*emptySpaces)[0]);
-                this->myBoard[moveToMake->getTo().getX()][moveToMake->getTo().getY()] = lastMyPiece;
-            } else if (!myRocks->empty()) {
-                moveToMake = make_move((*myRocks)[0], (*emptySpaces)[0]);
-                this->myBoard[moveToMake->getTo().getX()][moveToMake->getTo().getY()] = lastMyPiece;
-            } else if (!myScissors->empty()) {
-                moveToMake = make_move((*myScissors)[0], (*emptySpaces)[0]);
-                this->myBoard[moveToMake->getTo().getX()][moveToMake->getTo().getY()] = lastMyPiece;
-            } else {
-                std::cout << "ERROR [3213TVJ]: shouldn't reach here" << std::endl;
-                return nullptr;
-            }
-            this->lastMyPiece = 0;
-            return moveToMake;
-
+            std::cout << "Error Jhllllllrbkjlv6lks: shouldn't reach here  " << std::endl;
+            return nullptr;
         }
     }
+
+    // go to an empty space
+    std::unique_ptr<std::vector<MyPoint>> emptySpaces = get_by_filter(NoPlayer);
+    shuffle_vector(*emptySpaces);
+
+    auto emptySpace = (*emptySpaces)[0];
+    unique_ptr<Move> move;
+    if (!myPapers->empty()) {
+        move = make_move((*myPapers)[0], emptySpace);
+    } else if (!myRocks->empty()) {
+        move = make_move((*myRocks)[0], (*emptySpaces)[0]);
+    } else if (!myScissors->empty()) {
+        move = make_move((*myScissors)[0], (*emptySpaces)[0]);
+    } else {
+        std::cout << "ERROR [3213TVJ]: shouldn't reach here" << std::endl;
+        return nullptr;
+    }
+    myBoard[emptySpace.getX()][emptySpace.getY()] = ourPieceWhichJustAttacked;
+    ourPieceWhichJustAttacked = 0;
+    return move;
+
+
 }
 
-unique_ptr<Move> AutoPlayerAlgorithm::make_move(const MyPoint &attacker_position,
-                                                const MyPoint &defender_position) {
-    this->lastMyPiece = this->myBoard[attacker_position.getX()][attacker_position.getY()];
-    this->myBoard[attacker_position.getX()][attacker_position.getY()] = NoPlayer;
-    return std::make_unique<MyMove>(attacker_position, defender_position);
+unique_ptr<Move> AutoPlayerAlgorithm::make_move(const MyPoint &from,
+                                                const MyPoint &to) {
+    this->ourPieceWhichJustAttacked = this->myBoard[from.getX()][from.getY()];
+    this->myBoard[from.getX()][from.getY()] = NoPlayer;
+    return std::make_unique<MyMove>(from, to);
 }
 
 unique_ptr<JokerChange> AutoPlayerAlgorithm::getJokerChange() {
@@ -189,24 +200,24 @@ char AutoPlayerAlgorithm::select_new_joker_repr(const MyPoint &jokerPoint) {
 }
 
 AutoPlayerAlgorithm::AutoPlayerAlgorithm(int player) : player((unsigned int) player),
-                                                       lastOpponentPiece(AutoPlayerAlgorithm::BoardCases::NoPlayer) {}
+                                                       enemyPieceWhichJustAttacked(NoPlayer) {}
 
 AutoPlayerAlgorithm::~AutoPlayerAlgorithm() = default;
 
-unsigned int AutoPlayerAlgorithm::get_piece_from_char(char c) const {
-    switch (c) {
+unsigned int AutoPlayerAlgorithm::encode_type_from_char(char c) const {
+    switch (toupper(c)) {
         case BOMB_CHAR:
-            return AutoPlayerAlgorithm::BoardCases::Bomb;
+            return Bomb;
         case FLAG_CHAR:
-            return AutoPlayerAlgorithm::BoardCases::Flag;
+            return Flag;
         case JOKER_CHAR:
-            return AutoPlayerAlgorithm::BoardCases::Joker;
+            return Joker;
         case SCISSORS_CHAR:
-            return AutoPlayerAlgorithm::BoardCases::Scissors;
+            return Scissors;
         case PAPER_CHAR:
-            return AutoPlayerAlgorithm::BoardCases::Paper;
+            return Paper;
         case ROCK_CHAR:
-            return AutoPlayerAlgorithm::BoardCases::Rock;
+            return Rock;
         default:
             std::cout << "Error [ESFR-GPDR-MLSQ-NRTS-KLMR.743480193.PC]: AutoPlayer get piece default reached."
                       << std::endl;
@@ -247,7 +258,7 @@ void AutoPlayerAlgorithm::getInitialPositions(int player, std::vector<unique_ptr
         char chr = wantedJokerChars[random_number_in_range_inclusive(0, SIZE_OF_BIASED_JOKER_ARRAY - 1)];
         MyPiecePosition myPiecePosition(JOKER_CHAR, chr, availableSpots[i]);
         unsigned int value = Joker | OurPlayer |
-                             get_piece_from_char(chr);
+                             encode_type_from_char(chr);
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }
@@ -269,7 +280,7 @@ void AutoPlayerAlgorithm::select_non_joker_piece_to_add(std::vector<unique_ptr<P
     for (int i = 0; i < count; i++) {
         MyPiecePosition myPiecePosition(chr, NON_JOKER_REPR_DEFAULT, availableSpots[i]);
         unsigned int value =
-                AutoPlayerAlgorithm::BoardCases::OurPlayer | get_piece_from_char(chr) | (movable ? Movable : 0);
+                OurPlayer | encode_type_from_char(chr) | (movable ? CanMove : 0);
         myBoard[availableSpots[i].getX()][availableSpots[i].getY()] = value;
         vectorToFill.push_back(std::make_unique<MyPiecePosition>(myPiecePosition));
     }

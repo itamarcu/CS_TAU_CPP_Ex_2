@@ -41,6 +41,8 @@ int random_number_in_range_inclusive(int from, int to) {
 
 void init_global_rng() {
     auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+//    seed = 1527408719660307000;
+    printf("DEBUG: the random seed is %lld\n", seed);
     global_rng = std::mt19937(seed);
 }
 

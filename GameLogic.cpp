@@ -55,11 +55,11 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
     if (!game.board.grid[sourceRow][sourceColumn]->canMove()) {
         return TriedToMoveUnmovablePiece;
     }
+    if (sourceRow == destinationRow && sourceColumn == destinationColumn) {
+        return TriedToMoveIntoAlly; // tried to not move, actually, but it's the same
+    }
     if (game.board.grid[sourceRow][sourceColumn]->player != game.currentPlayer) {
         return TriedToMoveEnemy;
-    }
-    if (sourceRow == destinationRow && sourceColumn == destinationColumn) {
-        return TriedToMoveIntoAlly;
     }
     if (game.board.grid[destinationRow][destinationColumn] == nullptr) {
         game.board.grid[destinationRow][destinationColumn] =
@@ -67,6 +67,10 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
     } else {
         auto attacking_piece = game.board.grid[sourceRow][sourceColumn];
         auto defending_piece = game.board.grid[destinationRow][destinationColumn];
+
+        if (attacking_piece->player == defending_piece->player) {
+            return TriedToMoveIntoAlly;
+        }
         auto result = actually_fight(
                 game,
                 attacking_piece,
@@ -79,10 +83,10 @@ MoveResult _make_move_part_of_planned_move(Game &game, PlannedMove &plannedMove)
             winner = game.currentPlayer ? 2 : 1;
         game.freshFightResult = std::make_unique<MyFightInfo>(
                 game.currentPlayer ?
-                MyFightInfo(winner, MyPoint(sourceRow, sourceColumn, true),
+                MyFightInfo(winner, MyPoint(destinationRow, destinationColumn, true),
                             GamePiece::chrFromType(defending_piece->type),
                             GamePiece::chrFromType(attacking_piece->type)) :
-                MyFightInfo(winner, MyPoint(sourceRow, sourceColumn, true),
+                MyFightInfo(winner, MyPoint(destinationRow, destinationColumn, true),
                             GamePiece::chrFromType(attacking_piece->type),
                             GamePiece::chrFromType(defending_piece->type)));
     }

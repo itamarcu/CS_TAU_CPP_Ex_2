@@ -112,6 +112,11 @@ void NewGameManager::run_game() {
     p1_algorithm->notifyOnInitialBoard(game.board, setup_fights);
     p2_algorithm->notifyOnInitialBoard(game.board, setup_fights);
 
+    // Check winner
+    if (game.checkWin()) {
+        return;
+    }
+
     int turn_counter = 0;
     int consecutive_turns_without_a_fight = 0;
     while (game.getGameWinner() == GAME_NOT_ENDED) {
@@ -150,32 +155,33 @@ void NewGameManager::run_game() {
         }
 
 
-//        //Debug - print board
-//        std::cout << "--- Turn " << turn_counter << " ---" << std::endl;
-//        for (int y = 0; y < N; y++) {
-//            for (int x = 0; x < M; x++) {
-//                char ch = ' ';
-//                if (game.board.grid[x][y] != nullptr) {
-//                    ch = game.board.grid[x][y]->to_char();
-//                }
-//                std::cout << ch;
-//            }
-//            std::cout << std::endl;
-//        }
-//        int x1 = move->getFrom().getX();
-//        int y1 = move->getFrom().getY();
-//        int x2 = move->getTo().getX();
-//        int y2 = move->getTo().getY();
-//        if (game.board.grid[x1][y1] == nullptr) {
-//            print_line("Player attempted to move an empty space...");
-//        } else {
-//            std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
-//                    " piece " << game.board.grid[x1][y1]->to_char() << " from " << x1 << "," << y1 <<
-//                      " to " << x2 << "," << y2 << std::endl;
-//        }
-////        std::cout.flush(); // might be weird
+        //Debug - print board
+        std::cout << "--- Turn " << turn_counter << " ---" << std::endl;
+        for (int y = 0; y < N; y++) {
+            for (int x = 0; x < M; x++) {
+                char ch = ' ';
+                if (game.board.grid[x][y] != nullptr) {
+                    ch = game.board.grid[x][y]->to_char();
+                }
+                std::cout << ch;
+            }
+            std::cout << std::endl;
+        }
+        int x1 = move->getFrom().getX();
+        int y1 = move->getFrom().getY();
+        int x2 = move->getTo().getX();
+        int y2 = move->getTo().getY();
+        if (game.board.grid[x1][y1] == nullptr) {
+            std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
+                    " NOTHING from " << x1 << "," << y1 <<
+                      " to " << x2 << "," << y2 << std::endl;
+        } else {
+            std::cout << "Player " << bool_to_player(game.currentPlayer) << " attempts to move"
+                    " piece " << game.board.grid[x1][y1]->to_char() << " from " << x1 << "," << y1 <<
+                      " to " << x2 << "," << y2 << std::endl;
+        }
 
-
+        //Make the move
         auto move_result = make_planned_move(game, plannedMove);
 
         // Notify on fight result
@@ -225,6 +231,7 @@ void NewGameManager::run_game() {
         if (game.checkWin()) {
             return;
         }
+
         if (consecutive_turns_without_a_fight >= MAX_CONSECUTIVE_TURNS_WITHOUT_FIGHT) {
             s << "Game ended in a tie - " << MAX_CONSECUTIVE_TURNS_WITHOUT_FIGHT
               << " consecutive moves without a fight.";

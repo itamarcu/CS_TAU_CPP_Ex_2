@@ -40,4 +40,5 @@ int main(int argc, char *argv[]) {
     gm.run_game();
     BoardIO::store_game(game);
     print_line("---Program ended---");
+    std::cout << std::flush; // might be weird
 }
